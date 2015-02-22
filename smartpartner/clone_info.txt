@@ -1,0 +1,43 @@
+/**
+* $Id: clone_info.txt,v 1.2 2007/09/18 14:00:54 marcan Exp $
+* Module: SmartPartner
+* Author: The SmartFactory <www.smartfactory.ca>
+* Licence: GNU
+*/
+
+How can I clone this module ?
+=============================
+
+Cloning this module has never been easier ! Thanks to our friend Sudhaker, you can now painlessly clone this module as many time as you like !
+
+- Locate and edit the file smartpartner/clone.php.
+
+- Locate these lines and change the second part of each line for what you need :
+
+$patterns = array(
+  // first one must be module directory name
+  'smartpartner'  => 'smartclient', 
+  'SMARTPARTNER'  => 'SMARTCLIENT',
+  'SmartPartner'  => 'SmartClient',
+  'Smart Partner' => 'Smart Client',
+  'SPARTNER'      => 'SCLIENT',
+  'Smartpartner'  => 'Smartclient' 
+);
+
+In this example, SmartPartner will be cloned into SmartClient.
+
+- Save and close clone.php.
+
+- Move clone.php file to the root of your web site.
+
+- Be sure to have uploaded the smartpartner folder in the "modules" folder of your site.
+
+- If your site is a local site on your computer, go to yoursite.com/clone.php.
+
+- If your site is on the web, run this command php -q clone.php 
+
+- Delete the file yoursite.com/clone.php
+
+- You can also edit the language constants defined in smartparter/language/ to reflect the new purpose of the module.
+
+- You can also edit the image images/module_logo.png to avoid confusion with the original module.
