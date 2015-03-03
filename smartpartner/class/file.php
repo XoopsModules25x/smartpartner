@@ -52,7 +52,6 @@ class SmartpartnerFile extends XoopsObject
         include_once (SMARTPARTNER_ROOT_PATH . 'class/uploader.php');
         $config =& smartpartner_getModuleConfig();
 
-
         $maxfilesize = $config['maximum_filesize'];
         $maxfilewidth = 100000; //$config['maximum_image_width'];
         $maxfileheight = 100000; //$config['maximum_image_height'];
@@ -64,6 +63,7 @@ class SmartpartnerFile extends XoopsObject
             $allowed_mimetypes = $hMime->checkMimeTypes($post_field);
             if (!$allowed_mimetypes) {
                 $errors[] = _SMARTPARTNER_MESSAGE_WRONG_MIMETYPE;
+
                 return false;
             }
         }
@@ -73,6 +73,7 @@ class SmartpartnerFile extends XoopsObject
             return true;
         } else {
             $errors = array_merge($errors, $uploader->getErrors(false));
+
             return false;
         }
     }
@@ -157,14 +158,17 @@ class SmartpartnerFile extends XoopsObject
                     $this->setVar('name', $this->getNameFromFilename());
                 }
                 $this->setVar('mimetype', $uploader->getMediaType());
+
                 return true;
             } else {
                 $errors = array_merge($errors, $uploader->getErrors(false));
+
                 return false;
             }
 
         } else {
             $errors = array_merge($errors, $uploader->getErrors(false));
+
             return false;
         }
     }
@@ -182,11 +186,13 @@ class SmartpartnerFile extends XoopsObject
                 foreach ($errors as $error) {
                     $this->setErrors($error);
                 }
+
                 return false;
             }
         }
 
         global $smartpartner_file_handler;
+
         return $smartpartner_file_handler->insert($this, $force);
     }
 
@@ -266,6 +272,7 @@ class SmartpartnerFile extends XoopsObject
         $hModConfig =& xoops_gethandler('config');
         $smartpartner_module =& $hModule->getByDirname('smartpartner');
         $smartpartner_config = &$hModConfig->getConfigsByCat(0, $smartpartner_module->getVar('mid'));
+
         return smartpartner_getUploadDir() . $this->filename();
     }
 
@@ -291,6 +298,7 @@ class SmartpartnerFile extends XoopsObject
             include_once(SMARTPARTNER_ROOT_PATH . 'include/media.textsanitizer.php');
         }
         $media_ts = MyTextSanitizerExtension::getInstance();
+
         return $media_ts->_displayFlash($this->getFileUrl());
     }
 
@@ -299,6 +307,7 @@ class SmartpartnerFile extends XoopsObject
         $ret = $this->filename();
         $sep_pos = strpos($ret, '_');
         $ret = substr($ret, $sep_pos + 1, strlen($ret) - $sep_pos);
+
         return $ret;
     }
 }
@@ -318,7 +327,7 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
     /**
      * create a new file
      *
-     * @param bool $isNew flag the new objects as "new"?
+     * @param  bool   $isNew flag the new objects as "new"?
      * @return object SmartpartnerFile
      */
     function &create($isNew = true)
@@ -327,13 +336,14 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         if ($isNew) {
             $file->setNew();
         }
+
         return $file;
     }
 
     /**
      * retrieve an file
      *
-     * @param int $id fileid of the file
+     * @param  int   $id fileid of the file
      * @return mixed reference to the {@link SmartpartnerFile} object, FALSE if failed
      */
     function &get($id)
@@ -348,18 +358,20 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
             if ($numrows == 1) {
                 $file = new SmartpartnerFile();
                 $file->assignVars($this->db->fetchArray($result));
+
                 return $file;
             }
         }
+
         return false;
     }
 
     /**
      * insert a new file in the database
      *
-     * @param object $file reference to the {@link SmartpartnerFile} object
-     * @param bool $force
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     * @param  object $file  reference to the {@link SmartpartnerFile} object
+     * @param  bool   $force
+     * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
      */
     function insert(&$fileObj, $force = false)
     {
@@ -393,6 +405,7 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
 
         if (!$result) {
             $fileObj->setErrors('The query returned an error. ' . $this->db->error());
+
             return false;
         }
 
@@ -401,15 +414,16 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         }
 
         $fileObj->assignVar('fileid', $fileid);
+
         return true;
     }
 
     /**
      * delete a file from the database
      *
-     * @param object $file reference to the file to delete
-     * @param bool $force
-     * @return bool FALSE if failed.
+     * @param  object $file  reference to the file to delete
+     * @param  bool   $force
+     * @return bool   FALSE if failed.
      */
     function delete(&$file, $force = false)
     {
@@ -436,6 +450,7 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -456,15 +471,16 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
                 $result = false;
             }
         }
+
         return $result;
     }
 
     /**
      * retrieve files from the database
      *
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @param bool $id_as_key use the fileid as key for the array?
-     * @return array array of {@link SmartpartnerFile} objects
+     * @param  object $criteria  {@link CriteriaElement} conditions to be met
+     * @param  bool   $id_as_key use the fileid as key for the array?
+     * @return array  array of {@link SmartpartnerFile} objects
      */
     function &getObjects($criteria = null, $id_as_key = false)
     {
@@ -494,15 +510,16 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
             }
             unset($file);
         }
+
         return $ret;
     }
 
     /**
      * retrieve all files
      *
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @param int $id
-     * @return array array of {@link SmartpartnerFile} objects
+     * @param  object $criteria {@link CriteriaElement} conditions to be met
+     * @param  int    $id
+     * @return array  array of {@link SmartpartnerFile} objects
      */
     function &getAllFiles($id = 0, $status = -1, $limit = 0, $start = 0, $sort = 'datesub', $order = 'DESC')
     {
@@ -541,8 +558,8 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
     /**
      * count files matching a condition
      *
-     * @param object $criteria {@link CriteriaElement} to match
-     * @return int count of files
+     * @param  object $criteria {@link CriteriaElement} to match
+     * @return int    count of files
      */
     function getCount($criteria = null)
     {
@@ -555,14 +572,15 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
     /**
      * delete files matching a set of conditions
      *
-     * @param object $criteria {@link CriteriaElement}
-     * @return bool FALSE if deletion failed
+     * @param  object $criteria {@link CriteriaElement}
+     * @return bool   FALSE if deletion failed
      */
     function deleteAll($criteria = null)
     {
@@ -573,17 +591,18 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Change a value for files with a certain criteria
      *
-     * @param   string  $fieldname  Name of the field
-     * @param   string  $fieldvalue Value to write
-     * @param   object  $criteria   {@link CriteriaElement}
+     * @param string $fieldname  Name of the field
+     * @param string $fieldvalue Value to write
+     * @param object $criteria   {@link CriteriaElement}
      *
-     * @return  bool
+     * @return bool
      **/
     function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
@@ -596,9 +615,8 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
+
         return true;
     }
 
 }
-
-?>

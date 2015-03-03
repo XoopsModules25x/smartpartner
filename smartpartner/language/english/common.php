@@ -108,5 +108,3 @@ define("_CO_SPARTNER_PART_PERM_READ", "Partial view");
 define("_CO_SPARTNER_PART_PERM_READ_DSC", "Select groups that will have partial view.");
 define("_SPARTNER_MESSAGE_FILE_ERROR", "Error: Unable to store uploaded file for the following reasons:<br />%s");
 define("_SPARTNER_MESSAGE_WRONG_MIMETYPE", "Error: filetype is not allowed. Please re-submit.");
-
-?>

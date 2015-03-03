@@ -50,7 +50,6 @@ $sortsel = isset($_POST['sortsel']) ? $_POST['sortsel'] : $sortsel;
 $ordersel = isset($_GET['ordersel']) ? $_GET['ordersel'] : 'DESC';
 $ordersel = isset($_POST['ordersel']) ? $_POST['ordersel'] : $ordersel;
 
-
 $module_id = $xoopsModule->getVar('mid');
 
 function pathConfiguration()
@@ -74,13 +73,11 @@ function pathConfiguration()
     echo "<td class='odd'>" . $image_path . "</td>";
     echo "<td class='even' style='text-align: center;'>" . smartpartner_admin_getPathStatus('images/category') . "</td></tr>";
 
-
     echo "</table>";
     echo "<br />";
 
     smartpartner_close_collapsable('configtable', 'configtableicon');
 }
-
 
 function buildTable()
 {
@@ -255,7 +252,6 @@ echo "
 	</table>
 	</form>";
 
-
 // Get number of entries in the selected state
 $statusSelected = ($statussel == 0) ? _SPARTNER_STATUS_ALL : $statussel;
 
@@ -346,5 +342,3 @@ echo "</div>";
 
 smart_modFooter();
 xoops_cp_footer();
-
-?>

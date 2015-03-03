@@ -7,7 +7,6 @@
  * Licence: GNU
  */
 
-
 /**
  *Ceci nous produira un tableau de forme:
  *
@@ -39,6 +38,7 @@ function get_partners_array($categoryid)
             $partners[] = $partner;
         }
     }
+
     return $partners;
 }
 
@@ -63,6 +63,7 @@ function get_subcats($every_categories_array, $categoryid, $level)
             $subcatArray[] = get_cat_content($every_categories_array, $subcatObj, $level);
         }
     }
+
     return $subcatArray;
 }
 
@@ -87,6 +88,7 @@ function get_cat_content($every_categories_array, $categoryObj, $level)
     $category['partners'] = get_partners_array($categoryObj->categoryid());
     $category['image_url'] = $categoryObj->getImageUrl(true);
     $category['subcats'] = get_subcats($every_categories_array, $categoryObj->categoryid(), $level);
+
     return $category;
 }
 
@@ -127,7 +129,6 @@ if (!$view_category_id) {
             $partnersArray[] = get_cat_content($every_categories_array, $categoryObj, 0);
         }
     }
-
 
     //get orphan last if preference says so
     if (!$xoopsModuleConfig['orphan_first']) {
@@ -179,4 +180,3 @@ if (!$xoopsModuleConfig['hide_module_name']) {
     $xoopsTpl->assign('lang_partnerstitle', $myts->displayTarea($xoopsModule->getVar('name')));
 }
 include_once XOOPS_ROOT_PATH . '/footer.php';
-?>

@@ -46,12 +46,12 @@ class SmartpartnerKeyhighlighter
      *
      * This is the main constructor of keyhighlighter class. <br />
      * It's the only public method of the class.
-     * @param string $keywords the keywords you want to highlight
-     * @param boolean $singlewords specify if it has to highlight also the single words.
+     * @param string   $keywords         the keywords you want to highlight
+     * @param boolean  $singlewords      specify if it has to highlight also the single words.
      * @param callback $replace_callback a custom callback for keyword highlight.
-     * <code>
-     * <?php
-     * require ('keyhighlighter.class.php');
+     *                                   <code>
+     *                                   <?php
+     *                                   require ('keyhighlighter.class.php');
      *
      * function my_highlighter ($matches) {
      *     return '<span style="font-weight: bolder; color: #FF0000;">' . $matches[0] . '</span>';
@@ -108,8 +108,7 @@ class SmartpartnerKeyhighlighter
         $this->preg_keywords = preg_replace('/[^\w ]/si', '', $this->keywords);
         $buffer = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(&$this, 'replace'), $buffer);
         $buffer = substr($buffer, 1, -1);
+
         return $buffer;
     }
 }
-
-?>

@@ -156,5 +156,3 @@ if (false != $error) {
     echo '</tr></table>';
     xoops_cp_footer();
 }
-
-?>

@@ -96,7 +96,6 @@ switch ($op) {
             echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-weight: bold; font-size: small; display: block; \">" . _AM_SPARTNER_IMPORT_NO_MODULE . "</span>";
         }
 
-
         // End of collapsable bar
         smartpartner_close_collapsable('bottomtable', 'bottomtableicon');
 
@@ -105,5 +104,3 @@ switch ($op) {
 
 smart_modFooter();
 xoops_cp_footer();
-
-?>

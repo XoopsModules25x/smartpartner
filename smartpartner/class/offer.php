@@ -45,7 +45,6 @@ class SmartpartnerOffer extends SmartObject
         $this->initVar('url', XOBJ_DTYPE_TXTBOX, '', false, 255, '', false, _CO_SPARTNER_OFFER_URL, _CO_SPARTNER_OFFER_URL_DSC, true);
         $this->initVar('image', XOBJ_DTYPE_TXTBOX, '', false, null, '', false, _CO_SPARTNER_OFFER_IMAGE, _CO_SPARTNER_OFFER_IMAGE_DSC);
 
-
         $this->initVar('date_sub', XOBJ_DTYPE_INT, 0, false, null, '', false, _CO_SPARTNER_OFFER_DATESUB, _CO_SPARTNER_OFFER_DATESUB_DSC, true);
         $this->initVar('date_pub', XOBJ_DTYPE_INT, time() - 1000, false, null, '', false, _CO_SPARTNER_OFFER_DATE_START, _CO_SPARTNER_OFFER_DATE_START_DSC, true);
         $this->initVar('date_end', XOBJ_DTYPE_INT, (time() + 30 * 24 * 3600), false, null, '', false, _CO_SPARTNER_OFFER_DATE_END, _CO_SPARTNER_OFFER_DATE_END_DSC, true);
@@ -53,7 +52,6 @@ class SmartpartnerOffer extends SmartObject
         $this->initVar('status', XOBJ_DTYPE_INT, _SPARTNER_STATUS_ONLINE, false, null, '', false, _CO_SPARTNER_OFFER_STATUS, _CO_SPARTNER_OFFER_STATUS_DSC, true);
         $this->initCommonVar('weight');
         $this->initCommonVar('dohtml', false);
-
 
         $this->setControl('image', array('name' => 'image'));
 
@@ -70,12 +68,12 @@ class SmartpartnerOffer extends SmartObject
                                              'module' => 'smartpartner'));
     }
 
-
     function getVar($key, $format = 's')
     {
         if ($format == 's' && in_array($key, array('partnerid', 'status'))) {
             return call_user_func(array($this, $key));
         }
+
         return parent::getVar($key, $format);
     }
 
@@ -87,6 +85,7 @@ class SmartpartnerOffer extends SmartObject
         }
         $ret = $this->getVar('partnerid', 'e');
         $partnerObj = $smartpartner_partner_handler->get($ret);
+
         return $partnerObj->getVar('title');
     }
 
@@ -94,6 +93,7 @@ class SmartpartnerOffer extends SmartObject
     {
         global $statusArray;
         $ret = $this->getVar('status', 'e');
+
         return $statusArray [$ret];
     }
 
@@ -136,6 +136,7 @@ class SmartpartnerOffer extends SmartObject
             $ret['partnerid'] = $this->getVar('partnerid', 'e');
         }
         $ret['description'] = $myts->undoHtmlSpecialChars($ret['description']);
+
         return $ret;
     }
 
@@ -152,6 +153,7 @@ class SmartpartnerOfferHandler extends SmartPersistableObjectHandler
     function getStatus()
     {
         global $statusArray;
+
         return $statusArray;
     }
 
@@ -245,6 +247,7 @@ class SmartpartnerOfferHandler extends SmartPersistableObjectHandler
                 $hierachizedArray[$id]['subcats'] = $this->hierarchize($categoriesArray, $cat['categoryid']);
             }
         }
+
         return $hierachizedArray;
     }
 
@@ -274,15 +277,14 @@ class SmartpartnerOfferHandler extends SmartPersistableObjectHandler
     function getPartnerList()
     {
         global $smartpartner_partner_handler;
+
         return $smartpartner_partner_handler->getList();
     }
-
 
     function getstatusList()
     {
         global $statusArray;
+
         return $statusArray;
     }
 }
-
-?>

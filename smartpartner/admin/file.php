@@ -117,7 +117,6 @@ function editfile($showmenu = false, $fileid = 0, $id = 0)
         smartpartner_close_collapsable('addfile', 'addfileicon');
     }
 
-
 }
 
 $false = false;
@@ -279,5 +278,3 @@ switch ($op) {
 smart_modFooter();
 
 xoops_cp_footer();
-
-?>

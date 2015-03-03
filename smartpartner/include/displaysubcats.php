@@ -13,7 +13,6 @@ $sc_title = _AM_SPARTNER_SUBCAT_CAT;
 $sc_info = _AM_SPARTNER_SUBCAT_CAT_DSC;
 $sel_cat = $categoryid;
 
-
 smartpartner_collapsableBar('subcatstable', 'subcatsicon', $sc_title, $sc_info);
 
 // Get the total number of sub-categories
@@ -52,6 +51,3 @@ if ($totalsubs > 0) {
 echo "</table>\n";
 echo "<br />\n";
 smartpartner_close_collapsable('subcatstable', 'subcatsicon');
-
-
-?>

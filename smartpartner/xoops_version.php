@@ -230,7 +230,6 @@ $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 $modversion['config'][$i]['category'] = 'permissions';
 
-
 $i++;
 $modversion['config'][$i]['name'] = 'useimagenavpage';
 $modversion['config'][$i]['title'] = '_MI_SPARTNER_USEIMAGENAVPAGE';
@@ -499,6 +498,3 @@ $modversion['notification']['event'][4]['caption'] = _MI_SPARTNER_GLOBAL_OFFER_N
 $modversion['notification']['event'][4]['description'] = _MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_DSC;
 $modversion['notification']['event'][4]['mail_template'] = 'global_offer_new';
 $modversion['notification']['event'][4]['mail_subject'] = _MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_SBJ;
-
-
-?>

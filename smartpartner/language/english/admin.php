@@ -213,7 +213,6 @@ define("_AM_SPARTNER_WEIGHT", _CO_SPARTNER_WEIGHT);
 define("_AM_SPARTNER_WEIGHT_DSC", _CO_SPARTNER_WEIGHT_DSC);
 define("_AM_SPARTNER_YES","Yes");
 
-
 //Redirect messages
 define("_AM_SPARTNER_NOTSET_ACTIVE_SUCCESS","The partner has been created.");
 define("_AM_SPARTNER_NOTSET_INACTIVE_SUCCESS","The partner has been created and deactivated.");
@@ -227,7 +226,6 @@ define("_AM_SPARTNER_INACTIVE_INACTIVE_SUCCESS","The inactive partner has been u
 define("_AM_SPARTNER_REJECTED_ACTIVE_SUCCESS","The rejected  partner has been activated!");
 define("_AM_SPARTNER_REJECTED_INACTIVE_SUCCESS","The rejected partner has been deactivated.");
 define("_AM_SPARTNER_REJECTED_REJECTED_SUCCESS","The rejected partner has been updated.");
-
 
 define("_AM_SPARTNER_CATEGORY_EDIT","Edit category");
 define("_AM_SPARTNER_CATEGORY_DELETE","Delete category");
@@ -293,5 +291,3 @@ define("_AM_SPARTNER_SHOW_SUMMARY","Show summary on partner page");
 define("_AM_SPARTNER_SHOW_SUMMARY_DSC","Note: if any users have partial view permissions, you should set this to 'yes.' Otherwise a partner detail page displayed in partial view mode will have no info at all other than the logo and name.");
 define("_SMARTPARTNER_MESSAGE_FILE_ERROR","Error: Unable to store uploaded file for the following reasons:<br />%s");
 define("_SMARTPARTNER_MESSAGE_WRONG_MIMETYPE","Error: filetype is not allowed. Please re-submit.");
-
-?>

@@ -116,7 +116,6 @@ function editpartner($showmenu = false, $id = 0)
                 break;
         }
 
-
         If ($showmenu) {
             smartpartner_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
         }
@@ -194,7 +193,6 @@ function editpartner($showmenu = false, $id = 0)
     $showsum_radio->setDescription(_AM_SPARTNER_SHOW_SUMMARY_DSC);
     $sform -> addElement($showsum_radio);
 
-
     // DESCRIPTION
     $description_text = new XoopsFormDhtmlTextArea(_AM_SPARTNER_DESCRIPTION, 'description', $partnerObj->description(0, 'e'), 15, 60);
     $description_text->setDescription(_AM_SPARTNER_DESCRIPTION_DSC);
@@ -270,7 +268,6 @@ function editpartner($showmenu = false, $id = 0)
     $part_view_select = new XoopsFormSelectGroup(_CO_SPARTNER_PART_PERM_READ, 'partial_view', true, $partGrantedGroups, 5, true);
     $part_view_select->setDescription(_CO_SPARTNER_PART_PERM_READ_DSC);
     $sform->addElement($part_view_select);
-
 
     // Partner id
     $sform->addElement(new XoopsFormHidden('id', $partnerObj->id()));
@@ -495,7 +492,6 @@ switch ($op) {
         echo "<input type='button' name='button' onclick=\"location='partner.php?op=mod'\" value='" . _AM_SPARTNER_PARTNER_CREATE . "'>&nbsp;&nbsp;";
         echo "</div></form>";
 
-
         include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
         include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
@@ -549,5 +545,3 @@ switch ($op) {
 }
 smart_modFooter();
 xoops_cp_footer();
-
-?>

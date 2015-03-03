@@ -14,7 +14,6 @@ function b_random_partner_show($options)
     // Creating the partner handler object
     $partner_handler =& smartpartner_gethandler('partner');
 
-
     // Randomize
     $partnersObj =& $partner_handler->getPartners(0, 0, _SPARTNER_STATUS_ACTIVE);
     If (count($partnersObj) > 0) {
@@ -22,7 +21,6 @@ function b_random_partner_show($options)
         $key_rand = array_rand($key_arr, 1);
         $partnerObj = $partnersObj[$key_rand];
     }
-
 
     $block = array();
     If ($partnerObj) {
@@ -42,17 +40,16 @@ function b_random_partner_show($options)
         $partner['img_attr'] = $image_info[3];
         $partner['extendedInfo'] = $partnerObj->extentedInfo();
 
-
         if ($options[0] == 1) {
             $block['fadeImage'] = 'style="filter:alpha(opacity=20);" onmouseover="nereidFade(this,100,30,5)" onmouseout="nereidFade(this,50,30,5)"';
         }
-
 
         $block['see_all'] = $options[2];
         $block['lang_see_all'] = _MB_SPARTNER_LANG_SEE_ALL;
         $block['smartpartner_url'] = SMARTPARTNER_URL;
 
     }
+
     return $block;
 }
 
@@ -159,9 +156,7 @@ function b_random_partner_edit($options)
     }
     $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />" . _YES . "</td></tr>";
 
-
     $form .= "</table>";
+
     return $form;
 }
-
-?>

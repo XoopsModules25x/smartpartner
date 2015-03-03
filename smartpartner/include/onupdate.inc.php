@@ -11,7 +11,6 @@ if (!empty($_POST['fct']) && !empty($_POST['op']) && $_POST['fct'] == 'modulesad
     if ($ref == '' || strpos($ref, XOOPS_URL . '/modules/system/admin.php') === 0) {
         /* module specific part */
 
-
         /* General part */
 
         // Keep the values of block's options when module is updated (by nobunobu)
@@ -215,6 +214,3 @@ function xoops_module_install_smartpartner($module)
 
     return true;
 }
-
-
-?>

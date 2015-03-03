@@ -13,7 +13,6 @@ if (!defined("XOOPS_ROOT_PATH")) {
 include_once XOOPS_ROOT_PATH . "/modules/smartobject/class/smartobject.php";
 include_once XOOPS_ROOT_PATH . "/modules/smartobject/class/smartobjecthandler.php";
 
-
 // Partners status
 define("_SPARTNER_STATUS_NOTSET", -1);
 define("_SPARTNER_STATUS_ALL", 0);
@@ -158,6 +157,7 @@ class SmartpartnerPartner extends SmartObject
                 }
             }
         }
+
         return $ret;
     }
 
@@ -261,7 +261,6 @@ class SmartpartnerPartner extends SmartObject
             return false;
     }
 
-
     function getImageLink()
     {
         $ret = "<a href='rrvpartner.php?id=" . $this->id() . "' target='_blank'>";
@@ -270,6 +269,7 @@ class SmartpartnerPartner extends SmartObject
         } else {
             $ret .= "<img src='" . $this->image_url() . "' alt='" . $this->url() . "' border='0' /></a>";
         }
+
         return $ret;
 
     }
@@ -295,6 +295,7 @@ class SmartpartnerPartner extends SmartObject
 
             case _SPARTNER_STATUS_NOTSET :
             default;
+
                 return _CO_SPARTNER_NOTSET;
                 break;
         }
@@ -320,12 +321,14 @@ class SmartpartnerPartner extends SmartObject
         } else {
             $this->_extendedInfo = true;
         }
+
         return $this->_extendedInfo;
     }
 
     function store($force = true)
     {
         $smartpartner_partner_handler = new SmartpartnerPartnerHandler($this->db);
+
         return $smartpartner_partner_handler->insert($this, $force);
     }
 
@@ -378,7 +381,6 @@ class SmartpartnerPartner extends SmartObject
                     $notification_handler->triggerEvent('global_partner', 0, 'new_partner', $tags);
                     break;
 
-
                 case -1 :
                 default:
                     break;
@@ -405,7 +407,6 @@ class SmartpartnerPartner extends SmartObject
                         break;
                 }
                 break;
-
 
             case _SPARTNER_STATUS_SUBMITTED :
                 switch ($new_status) {
@@ -475,6 +476,7 @@ class SmartpartnerPartner extends SmartObject
                 }
                 break;
         }
+
         return $redirect_msgs;
     }
 
@@ -518,6 +520,7 @@ class SmartpartnerPartner extends SmartObject
                 );
                 break;
         }
+
         return $ret;
     }
 
@@ -530,6 +533,7 @@ class SmartpartnerPartner extends SmartObject
     function getFiles()
     {
         global $smartpartner_file_handler;
+
         return $smartpartner_file_handler->getAllFiles($this->id(), _SPARTNER_STATUS_FILE_ACTIVE);
     }
 
@@ -615,7 +619,6 @@ class SmartpartnerPartner extends SmartObject
         return $partner;
     }
 
-
 }
 
 /**
@@ -630,11 +633,10 @@ class SmartpartnerPartner extends SmartObject
 class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
 {
 
-
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoops_db object
+     * @param object $db reference to a xoops_db object
      */
 
     function SmartpartnerPartnerHandler($db)
@@ -646,11 +648,10 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
 
     }
 
-
     /**
      * Singleton - prevent multiple instances of this class
      *
-     * @param objecs &$db {@link XoopsHandlerFactory}
+     * @param  objecs &$db {@link XoopsHandlerFactory}
      * @return object {@link SmartpartnerCategoryHandler}
      * @access public
      */
@@ -660,6 +661,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         if (!isset($instance)) {
             $instance = new SmartpartnerCategoryHandler($db);
         }
+
         return $instance;
     }
 
@@ -669,13 +671,14 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         if ($isNew) {
             $partner->setNew();
         }
+
         return $partner;
     }
 
     /**
      * retrieve a Partner
      *
-     * @param int $id partnerid of the user
+     * @param  int   $id partnerid of the user
      * @return mixed reference to the {@link SmartpartnerPartner} object, FALSE if failed
      */
     function &get($id)
@@ -695,19 +698,21 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
                     $smartpartner_partner_cat_link_handler =& smartpartner_gethandler('partner_cat_link');
                 }
                 $partner->setVar('categoryid', $smartpartner_partner_cat_link_handler->getParentIds($partner->getVar('id')));
+
                 return $partner;
             }
         }
         $ret = false;
+
         return $ret;
     }
 
     /**
      * insert a new Partner in the database
      *
-     * @param object $partner reference to the {@link SmartpartnerPartner} object
-     * @param bool $force
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     * @param  object $partner reference to the {@link SmartpartnerPartner} object
+     * @param  bool   $force
+     * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
      */
     function insert(&$partner, $force = false)
     {
@@ -772,15 +777,16 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             $smartpermissions_handler = new SmartobjectPermissionHandler($this);
             $smartpermissions_handler->storeAllPermissionsForId($partner->id());
         }
+
         return true;
     }
 
     /**
      * delete a Partner from the database
      *
-     * @param object $partner reference to the Partner to delete
-     * @param bool $force
-     * @return bool FALSE if failed.
+     * @param  object $partner reference to the Partner to delete
+     * @param  bool   $force
+     * @return bool   FALSE if failed.
      */
     function delete(&$partner, $force = false)
     {
@@ -821,9 +827,9 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * retrieve Partners from the database
      *
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @param bool $id_as_key use the partnerid as key for the array?
-     * @return array array of {@link SmartpartnerPartner} objects
+     * @param  object $criteria  {@link CriteriaElement} conditions to be met
+     * @param  bool   $id_as_key use the partnerid as key for the array?
+     * @return array  array of {@link SmartpartnerPartner} objects
      */
     function &getObjects($criteria = null, $id_as_key = false)
     {
@@ -869,14 +875,15 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             $partner->setVar('categoryid', $smartpartner_partner_cat_link_handler->getParentIds($partner->getVar('id')));
             unset($partner);
         }
+
         return $ret;
     }
 
     /**
      * count Partners matching a condition
      *
-     * @param object $criteria {@link CriteriaElement} to match
-     * @return int count of partners
+     * @param  object $criteria {@link CriteriaElement} to match
+     * @return int    count of partners
      */
     function getCount($criteria = null)
     {
@@ -894,6 +901,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -909,9 +917,9 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         If (isset($criteriaStatus)) {
             $criteria->add($criteriaStatus);
         }
+
         return $this->getCount($criteria);
     }
-
 
     function &getObjectsForSearch($queryarray = array(), $andor = 'AND', $limit = 0, $offset = 0, $userid = 0)
     {
@@ -975,6 +983,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             $ret[] = $item;
             unset($item);
         }
+
         return $ret;
     }
 
@@ -998,7 +1007,6 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
 
         return $ret;
     }
-
 
     function getPartnersForIndex($categoryid = 0, $status = _SPARTNER_STATUS_ACTIVE, $sort = 'title', $order = 'ASC', $asobject = true)
     {
@@ -1038,16 +1046,16 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
                 $ret =& $partner[0];
             }
         }
+
         return $ret;
 
     }
 
-
     /**
      * delete Partners matching a set of conditions
      *
-     * @param object $criteria {@link CriteriaElement}
-     * @return bool FALSE if deletion failed
+     * @param  object $criteria {@link CriteriaElement}
+     * @return bool   FALSE if deletion failed
      */
     function deleteAll($criteria = null)
     {
@@ -1058,17 +1066,18 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Change a value for a Partner with a certain criteria
      *
-     * @param   string  $fieldname  Name of the field
-     * @param   string  $fieldvalue Value to write
-     * @param   object  $criteria   {@link CriteriaElement}
+     * @param string $fieldname  Name of the field
+     * @param string $fieldvalue Value to write
+     * @param object $criteria   {@link CriteriaElement}
      *
-     * @return  bool
+     * @return bool
      **/
     function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
@@ -1080,6 +1089,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -1112,7 +1122,6 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             $ids = implode(', ', $key_rand);
             echo $ids;
 
-
             return $ret;
         } else {
             return $ret;
@@ -1121,123 +1130,121 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     }
 
 /*	function getFaqsFromSearch($queryarray = array(), $andor = 'AND', $limit = 0, $offset = 0, $userid = 0)
-	{
+    {
 
-	Global $xoopsUser;
+    Global $xoopsUser;
 
-	$ret = array();
+    $ret = array();
 
-	$hModule =& xoops_gethandler('module');
-	$hModConfig =& xoops_gethandler('config');
-	$smartModule =& $hModule->getByDirname('smartfaq');
-	$module_id = $smartModule->getVar('mid');
+    $hModule =& xoops_gethandler('module');
+    $hModConfig =& xoops_gethandler('config');
+    $smartModule =& $hModule->getByDirname('smartfaq');
+    $module_id = $smartModule->getVar('mid');
 
-	$gperm_handler = &xoops_gethandler('groupperm');
-	$groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;
-	$userIsAdmin = sf_userIsAdmin();
-
-
-	if ($userid != 0) {
-		$criteriaUser = new CriteriaCompo();
-		$criteriaUser->add(new Criteria('faq.uid', $userid), 'OR');
-		$criteriaUser->add(new Criteria('answer.uid', $userid), 'OR');
-	}
-
-	If ($queryarray) {
-		$criteriaKeywords = new CriteriaCompo();
-		for ($i = 0; $i < count($queryarray); $i++) {
-			$criteriaKeyword = new CriteriaCompo();
-			$criteriaKeyword->add(new Criteria('faq.question', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
-			$criteriaKeyword->add(new Criteria('answer.answer', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
-			$criteriaKeywords->add($criteriaKeyword, $andor);
-		}
-	}
-
-	// Categories for which user has access
-	if (!$userIsAdmin) {
-		$categoriesGranted = $gperm_handler->getItemIds('category_read', $groups, $module_id);
-		$grantedCategories = new Criteria('faq.categoryid', "(".implode(',', $categoriesGranted).")", 'IN');
-	}
-	// FAQs for which user has access
-	if (!$userIsAdmin) {
-		$faqsGranted = $gperm_handler->getItemIds('item_read', $groups, $module_id);
-		$grantedFaq = new Criteria('faq.faqid', "(".implode(',', $faqsGranted).")", 'IN');
-	}
-
-	$criteriaPermissions = new CriteriaCompo();
-	if (!$userIsAdmin) {
-		$criteriaPermissions->add($grantedCategories, 'AND');
-		$criteriaPermissions->add($grantedFaq, 'AND');
-	}
-
-	$criteriaAnswersStatus = new CriteriaCompo();
-	$criteriaAnswersStatus->add(new Criteria('answer.status', _SF_AN_STATUS_APPROVED));
-
-	$criteriaFasStatus = new CriteriaCompo();
-	$criteriaFasStatus->add(new Criteria('faq.status', _SF_STATUS_OPENED), 'OR');
-	$criteriaFasStatus->add(new Criteria('faq.status', _SF_STATUS_PUBLISHED), 'OR');
-
-	$criteria = new CriteriaCompo();
-	If (!empty($criteriaUser)) {
-		$criteria->add($criteriaUser, 'AND');
-	}
-
-	If (!empty($criteriaKeywords)) {
-		$criteria->add($criteriaKeywords, 'AND');
-	}
-
-	If (!empty($criteriaPermissions) && (!$userIsAdmin)) {
-		$criteria->add($criteriaPermissions);
-	}
-
-	If (!empty($criteriaAnswersStatus)) {
-		$criteria->add($criteriaAnswersStatus, 'AND');
-	}
-
-	If (!empty($criteriaFasStatus)) {
-		$criteria->add($criteriaFasStatus, 'AND');
-	}
-
-	$criteria->setLimit($limit);
-	$criteria->setStart($offset);
-	$criteria->setSort('faq.datesub');
-	$criteria->setOrder('DESC');
+    $gperm_handler = &xoops_gethandler('groupperm');
+    $groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;
+    $userIsAdmin = sf_userIsAdmin();
 
 
-	$sql = 'SELECT faq.faqid FROM '.$this->db->prefix('smartfaq_faq') . ' as faq INNER JOIN '.$this->db->prefix('smartfaq_answers') . ' as answer ON faq.faqid = answer.faqid';
+    if ($userid != 0) {
+        $criteriaUser = new CriteriaCompo();
+        $criteriaUser->add(new Criteria('faq.uid', $userid), 'OR');
+        $criteriaUser->add(new Criteria('answer.uid', $userid), 'OR');
+    }
 
-	if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-		$whereClause = $criteria->renderWhere();
+    If ($queryarray) {
+        $criteriaKeywords = new CriteriaCompo();
+        for ($i = 0; $i < count($queryarray); $i++) {
+            $criteriaKeyword = new CriteriaCompo();
+            $criteriaKeyword->add(new Criteria('faq.question', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
+            $criteriaKeyword->add(new Criteria('answer.answer', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
+            $criteriaKeywords->add($criteriaKeyword, $andor);
+        }
+    }
 
-		If ($whereClause != 'WHERE ()') {
-			$sql .= ' '.$criteria->renderWhere();
-			if ($criteria->getSort() != '') {
-				$sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
-			}
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
-		}
-	}
+    // Categories for which user has access
+    if (!$userIsAdmin) {
+        $categoriesGranted = $gperm_handler->getItemIds('category_read', $groups, $module_id);
+        $grantedCategories = new Criteria('faq.categoryid', "(".implode(',', $categoriesGranted).")", 'IN');
+    }
+    // FAQs for which user has access
+    if (!$userIsAdmin) {
+        $faqsGranted = $gperm_handler->getItemIds('item_read', $groups, $module_id);
+        $grantedFaq = new Criteria('faq.faqid', "(".implode(',', $faqsGranted).")", 'IN');
+    }
 
-	//echo "<br />" . $sql . "<br />";
+    $criteriaPermissions = new CriteriaCompo();
+    if (!$userIsAdmin) {
+        $criteriaPermissions->add($grantedCategories, 'AND');
+        $criteriaPermissions->add($grantedFaq, 'AND');
+    }
 
-	$result = $this->db->query($sql, $limit, $start);
-	if (!$result) {
-		echo "- query did not work -";
-		return $ret;
-	}
+    $criteriaAnswersStatus = new CriteriaCompo();
+    $criteriaAnswersStatus->add(new Criteria('answer.status', _SF_AN_STATUS_APPROVED));
 
-	If (count($result) == 0) {
-		return $ret;
-	}
+    $criteriaFasStatus = new CriteriaCompo();
+    $criteriaFasStatus->add(new Criteria('faq.status', _SF_STATUS_OPENED), 'OR');
+    $criteriaFasStatus->add(new Criteria('faq.status', _SF_STATUS_PUBLISHED), 'OR');
 
-	while ($myrow = $this->db->fetchArray($result)) {
-		$faq = new sfFaq($myrow['faqid']);
-		$ret[] =& $faq;
-		unset($faq);
-	}
-	return $ret;
-	}*/
+    $criteria = new CriteriaCompo();
+    If (!empty($criteriaUser)) {
+        $criteria->add($criteriaUser, 'AND');
+    }
+
+    If (!empty($criteriaKeywords)) {
+        $criteria->add($criteriaKeywords, 'AND');
+    }
+
+    If (!empty($criteriaPermissions) && (!$userIsAdmin)) {
+        $criteria->add($criteriaPermissions);
+    }
+
+    If (!empty($criteriaAnswersStatus)) {
+        $criteria->add($criteriaAnswersStatus, 'AND');
+    }
+
+    If (!empty($criteriaFasStatus)) {
+        $criteria->add($criteriaFasStatus, 'AND');
+    }
+
+    $criteria->setLimit($limit);
+    $criteria->setStart($offset);
+    $criteria->setSort('faq.datesub');
+    $criteria->setOrder('DESC');
+
+
+    $sql = 'SELECT faq.faqid FROM '.$this->db->prefix('smartfaq_faq') . ' as faq INNER JOIN '.$this->db->prefix('smartfaq_answers') . ' as answer ON faq.faqid = answer.faqid';
+
+    if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        $whereClause = $criteria->renderWhere();
+
+        If ($whereClause != 'WHERE ()') {
+            $sql .= ' '.$criteria->renderWhere();
+            if ($criteria->getSort() != '') {
+                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+            }
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
+        }
+    }
+
+    //echo "<br />" . $sql . "<br />";
+
+    $result = $this->db->query($sql, $limit, $start);
+    if (!$result) {
+        echo "- query did not work -";
+        return $ret;
+    }
+
+    If (count($result) == 0) {
+        return $ret;
+    }
+
+    while ($myrow = $this->db->fetchArray($result)) {
+        $faq = new sfFaq($myrow['faqid']);
+        $ret[] =& $faq;
+        unset($faq);
+    }
+    return $ret;
+    }*/
 }
-
-?>

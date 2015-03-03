@@ -30,7 +30,6 @@ if (!class_exists("smartpartner_PersistableObjectHandler")) {
     include_once XOOPS_ROOT_PATH . "/modules/smartpartner/class/object.php";
 }
 
-
 class SmartpartnerCategory extends XoopsObject
 {
 
@@ -63,6 +62,7 @@ class SmartpartnerCategory extends XoopsObject
             $myts = &MyTextSanitizer::getInstance();
             $ret = $myts->displayTarea($ret);
         }
+
         return $ret;
     }
 
@@ -122,6 +122,7 @@ class SmartpartnerCategory extends XoopsObject
             $parentid = $parentObj->parentid();
             $ret = $parentObj->getCategoryPath($withAllLink) . " > " . $ret;
         }
+
         return $ret;
     }
 
@@ -183,6 +184,7 @@ class SmartpartnerCategory extends XoopsObject
         } else {
             $category['image_path'] = '';
         }
+
         return $category;
     }
 }
@@ -204,7 +206,6 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
             return true;
         }
         return false;*/
-
 
         if (strtolower(get_class($category)) != 'smartpartnercategory') {
             return false;
@@ -240,6 +241,7 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -257,6 +259,7 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
         $criteria->setStart($start);
         $criteria->setLimit($limit);
         $ret = $this->getObjects($criteria, $id_as_key);
+
         return $ret;
     }
 
@@ -269,8 +272,7 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
         If (isset($parentid) && ($parentid != -1)) {
             $criteria->add(new criteria('parentid', $parentid));
         }
+
         return $this->getCount($criteria);
     }
 }
-
-?>

@@ -48,7 +48,6 @@ if ($op == 'start') {
 if ($op == 'go') {
     include_once("admin_header.php");
 
-
     smartpartner_xoops_cp_header();
     smartpartner_adminMenu(-1, _AM_SPARTNER_IMPORT);
 
@@ -56,7 +55,6 @@ if ($op == 'go') {
     $cnt_imported_partner = 0;
 
     $smartpartner_partner_handler =& smartpartner_gethandler('partner');
-
 
     $resultPartners = $xoopsDB->query("select * from " . $xoopsDB->prefix("partners") . " ");
     while ($arrPartners = $xoopsDB->fetchArray($resultPartners))
@@ -100,4 +98,3 @@ echo '</div>';
 smart_modFooter();
 xoops_cp_footer();
 exit ();
-?>

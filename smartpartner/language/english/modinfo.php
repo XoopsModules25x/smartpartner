@@ -56,7 +56,6 @@ define('_MI_SPARTNER_BLOCK_SCROLLING_PARTNER_DESC','Random partner images scroll
 define('_MI_SPARTNER_BLOCK_CATEGORIES_LIST','Categories list');
 define('_MI_SPARTNER_BLOCK_CATEGORIES_LIST_DESC','Block listing categories.');
 
-
 define('_MI_SPARTNER_PAGE_PARTNER','Partners pages');
 define('_MI_SPARTNER_PAGE_INDEX','Index page');
 
@@ -142,7 +141,6 @@ define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_CAP","Notify me when any new offer 
 define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_DSC","");
 define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_SBJ","[{X_SITENAME}] {X_MODULE} auto-notify : New offer published");
 
-
 // About.php constants
 define('_MI_SPARTNER_AUTHOR_INFO',"Developers");
 define('_MI_SPARTNER_DEVELOPER_LEAD',"Lead developer(s)");
@@ -215,7 +213,3 @@ define("_MI_SPARTNER_DEF_FULL","Default full view");
 define("_MI_SPARTNER_DEF_FULL_DSC","");
 define("_MI_SPARTNER_DEF_PART","Default partial view");
 define("_MI_SPARTNER_DEF_PART_DSC","");
-
-
-
-?>

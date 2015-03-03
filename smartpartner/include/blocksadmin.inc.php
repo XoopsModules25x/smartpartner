@@ -232,7 +232,6 @@ if ($op == 'order') {
     exit();
 }
 
-
 if ($op == 'order2') {
     if (!$xoopsGTicket->check(true, 'myblocksadmin')) {
         redirect_header(XOOPS_URL . '/', 3, $xoopsGTicket->getErrors());
@@ -327,7 +326,6 @@ if ($op == 'update') {
     redirect_header('myblocksadmin.php', 1, $msg);
 }
 
-
 if ($op == 'delete_ok') {
     //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
     //  exit('Invalid Referer');
@@ -400,7 +398,6 @@ if ($op == 'edit') {
     exit();
 }
 
-
 if ($op == 'clone') {
     xoops_cp_header();
     $myblock = new XoopsBlock($bid);
@@ -421,7 +418,6 @@ if ($op == 'clone') {
     xoops_cp_footer();
     exit();
 }
-
 
 if ($op == 'clone_ok') {
     // Ticket Check
@@ -472,15 +468,15 @@ if ($op == 'clone_ok') {
         exit();
     }
 /*	if ($cblock->getVar('template') != '') {
-		$tplfile_handler =& xoops_gethandler('tplfile');
-		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $bid);
-		if (count($btemplate) > 0) {
-			$tplclone =& $btemplate[0]->clone();
-			$tplclone->setVar('tpl_id', 0);
-			$tplclone->setVar('tpl_refid', $newid);
-			$tplman->insert($tplclone);
-		}
-	} */
+        $tplfile_handler =& xoops_gethandler('tplfile');
+        $btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $bid);
+        if (count($btemplate) > 0) {
+            $tplclone =& $btemplate[0]->clone();
+            $tplclone->setVar('tpl_id', 0);
+            $tplclone->setVar('tpl_refid', $newid);
+            $tplman->insert($tplclone);
+        }
+    } */
     $db =& Database::getInstance();
     $bmodule = (isset($_POST['bmodule']) && is_array($_POST['bmodule'])) ? $_POST['bmodule'] : array(-1); // GIJ +
     foreach ($bmodule as $bmid) {
@@ -489,12 +485,12 @@ if ($op == 'clone_ok') {
     }
 
 /*	global $xoopsUser;
-	$groups =& $xoopsUser->getGroups();
-	$count = count($groups);
-	for ($i = 0; $i < $count; $i++) {
-		$sql = "INSERT INTO ".$db->prefix('group_permission')." (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (".$groups[$i].", ".$newid.", 1, 'block_read')";
-		$db->query($sql);
-	}
+    $groups =& $xoopsUser->getGroups();
+    $count = count($groups);
+    for ($i = 0; $i < $count; $i++) {
+        $sql = "INSERT INTO ".$db->prefix('group_permission')." (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (".$groups[$i].", ".$newid.", 1, 'block_read')";
+        $db->query($sql);
+    }
 */
 
     $sql = "SELECT gperm_groupid FROM " . $db->prefix('group_permission') . " WHERE gperm_name='block_read' AND gperm_modid='1' AND gperm_itemid='$bid'";
@@ -580,7 +576,6 @@ function myblocksadmin_update_block($bid, $bside, $bweight, $bvisible, $btitle, 
     return $msg; // GIJ +
 }
 
-
 // update block instance for 2.2
 function myblocksadmin_update_blockinstance($id, $bside, $bweight, $bvisible, $btitle, $bcontent, $bctype, $bcachetime, $bmodule, $options = array(), $bid = null)
 {
@@ -617,8 +612,10 @@ function myblocksadmin_update_blockinstance($id, $bside, $bweight, $bvisible, $b
             $pageid = $page[1];
             $GLOBALS['xoopsDB']->query("INSERT INTO " . $GLOBALS['xoopsDB']->prefix('block_module_link') . " VALUES (" . $instance->getVar('instanceid') . ", " . intval($mid) . ", " . intval($pageid) . ")");
         }
+
         return _MD_AM_DBUPDATED;
     }
+
     return 'Failed update of block instance. ID:' . $id;
 
     /*		// NAME for CUSTOM BLOCK
@@ -661,5 +658,4 @@ function myblocksadmin_update_blockinstance($id, $bside, $bweight, $bvisible, $b
 }
 
 // TODO  edit2, delete2, customblocks
-
-?>
+;

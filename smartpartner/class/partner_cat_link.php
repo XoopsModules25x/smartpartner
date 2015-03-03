@@ -60,8 +60,7 @@ class SmartpartnerPartner_cat_linkHandler extends SmartPersistableObjectHandler
         foreach ($links as $link) {
             $parent_array[] = $link->getVar('categoryid');
         }
+
         return implode('|', $parent_array);
     }
 }
-
-?>

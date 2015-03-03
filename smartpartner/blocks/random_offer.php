@@ -35,10 +35,8 @@ function b_random_offer_show($options)
             $offerObj = $offersObj[$key_rand];
         }
 
-
         $block = array();
         if (isset($offerObj) && is_object($offerObj)) {
-
 
             $block['offers'][] = $offerObj->toArray('e');
 
@@ -50,13 +48,13 @@ function b_random_offer_show($options)
                 $block['fadeImage'] = 'style="filter:alpha(opacity=20);" onmouseover="nereidFade(this,100,30,5)" onmouseout="nereidFade(this,50,30,5)"';
             }
 
-
             $block['see_all'] = $options[2];
             $block['lang_see_all'] = _MB_SPARTNER_LANG_SEE_ALL_OFFERS;
             $block['smartpartner_url'] = SMARTPARTNER_URL;
 
         }
     }
+
     return $block;
 }
 
@@ -163,9 +161,7 @@ function b_random_offer_edit($options)
     }
     $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />" . _YES . "</td></tr>";
 
-
     $form .= "</table>";
+
     return $form;
 }
-
-?>

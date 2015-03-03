@@ -16,5 +16,3 @@ if (!defined("SMARTPARTNER_DIRNAME")) {
 
 include XOOPS_ROOT_PATH . '/modules/' . SMARTPARTNER_DIRNAME . '/include/common.php';
 include XOOPS_ROOT_PATH . "/class/pagenav.php";
-
-?>

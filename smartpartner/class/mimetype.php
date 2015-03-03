@@ -53,7 +53,7 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
     /**
      * Name of child class
      *
-     * @var    string
+     * @var string
      * @access    private
      */
     var $classname = 'smartpartnermimetype';
@@ -78,8 +78,8 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
 
     /**
      * retrieve a mimetype object from the database
-     * @param    int    $id    ID of mimetype
-     * @return    object    {@link smartpartnerMimetype}
+     * @param  int    $id ID of mimetype
+     * @return object {@link smartpartnerMimetype}
      * @access    public
      */
     function &get($id)
@@ -93,17 +93,19 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
             $numrows = $this->_db->getRowsNum($result);
             if ($numrows == 1) {
                 $obj = new $this->classname($this->_db->fetchArray($result));
+
                 return $obj;
             }
         }
+
         return false;
     }
 
     /**
      * retrieve objects from the database
      *
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @return array array of {@link smartpartnerMimetype} objects
+     * @param  object $criteria {@link CriteriaElement} conditions to be met
+     * @return array  array of {@link smartpartnerMimetype} objects
      * @access    public
      */
     function &getObjects($criteria = null)
@@ -128,6 +130,7 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
             $ret[] =& $obj;
             unset($obj);
         }
+
         return $ret;
 
     }
@@ -173,6 +176,7 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
         foreach (explode('|', $xoopsModuleConfig['allowed_ext']) as $ext) {
             $allowed_mimetypes[] = array('type' => $mymetypesArray[$ext], 'ext' => $ext);
         }
+
         return $allowed_mimetypes;
     }
 
@@ -200,13 +204,14 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
                 $allowed_mimetypes = false;
             }
         }
+
         return $allowed_mimetypes;
     }
 
     /**
      * Create a "select" SQL query
-     * @param object $criteria {@link CriteriaElement} to match
-     * @return    string SQL query
+     * @param  object $criteria {@link CriteriaElement} to match
+     * @return string SQL query
      * @access    private
      */
     function _selectQuery($criteria = null, $join = false)
@@ -223,6 +228,7 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
         }
+
         return $sql;
     }
 
@@ -236,6 +242,7 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
         $sql = sprintf("INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
                (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
                        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+
         return $sql;
     }
 
@@ -249,14 +256,15 @@ class smartpartnerMimetypeHandler extends smartpartnerBaseObjectHandler
         $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
                mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
                        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+
         return $sql;
     }
 
     function _deleteQuery(&$obj)
     {
         $sql = sprintf('DELETE FROM %s WHERE mime_id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('mime_id'));
+
         return $sql;
     }
 } // end class
-
-?>
+;

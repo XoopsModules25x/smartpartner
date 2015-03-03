@@ -6,7 +6,6 @@
  * Licence: GNU
  */
 
-
 if (empty($seoOp)) {
     // SEO mode is path-info
     /*
@@ -52,5 +51,3 @@ if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
 }
 
 exit;
-
-?>
