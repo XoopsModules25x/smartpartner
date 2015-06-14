@@ -89,6 +89,7 @@ if (!class_exists('XoopsGTicket')) {
             if (empty($_SESSION['XOOPS_G_STUBS']) || !is_array($_SESSION['XOOPS_G_STUBS'])) {
                 $this->clear();
                 $this->_errors[] = 'Invalid Session';
+
                 return false;
             }
 
@@ -103,6 +104,7 @@ if (!class_exists('XoopsGTicket')) {
             if (empty($ticket)) {
                 $this->clear();
                 $this->_errors[] = 'Irregular post found';
+
                 return false;
             }
 
@@ -131,6 +133,7 @@ if (!class_exists('XoopsGTicket')) {
                 $this->clear();
                 if (empty($timeout_flag)) $this->_errors[] = 'Invalid Session';
                 else $this->_errors[] = 'Time out';
+
                 return false;
             }
 
@@ -148,6 +151,7 @@ if (!class_exists('XoopsGTicket')) {
             if (empty($area_check) && empty($referer_check)) { // loose
                 $this->clear();
                 $this->_errors[] = 'Invalid area or referer';
+
                 return false;
             }
 
@@ -155,13 +159,11 @@ if (!class_exists('XoopsGTicket')) {
             return true;
         }
 
-
         // clear all stubs
         function clear()
         {
             $_SESSION['XOOPS_G_STUBS'] = array();
         }
-
 
         // Ticket Using
         function using()
@@ -172,7 +174,6 @@ if (!class_exists('XoopsGTicket')) {
                 return false;
             }
         }
-
 
         // return errors
         function getErrors($ashtml = true)
@@ -185,6 +186,7 @@ if (!class_exists('XoopsGTicket')) {
             } else {
                 $ret = $this->_errors;
             }
+
             return $ret;
         }
 
@@ -213,9 +215,8 @@ if (!function_exists('admin_refcheck')) {
         if (strpos($ref, $cr) !== 0) {
             return false;
         }
+
         return true;
     }
 
 }
-
-?>

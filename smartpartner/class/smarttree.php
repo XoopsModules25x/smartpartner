@@ -48,7 +48,6 @@ class SmartTree
         $this->pid = $pid_name;
     }
 
-
     // returns an array of first child objects for a given id($sel_id)
     function getFirstChild($sel_id, $order = "")
     {
@@ -65,6 +64,7 @@ class SmartTree
         while ($myrow = $this->db->fetchArray($result)) {
             array_push($arr, $myrow);
         }
+
         return $arr;
     }
 
@@ -80,6 +80,7 @@ class SmartTree
         while (list($id) = $this->db->fetchRow($result)) {
             array_push($idarray, $id);
         }
+
         return $idarray;
     }
 
@@ -99,6 +100,7 @@ class SmartTree
             array_push($idarray, $r_id);
             $idarray = $this->getAllChildId($r_id, $order, $idarray);
         }
+
         return $idarray;
     }
 
@@ -116,6 +118,7 @@ class SmartTree
         }
         array_push($idarray, $r_id);
         $idarray = $this->getAllParentId($r_id, $order, $idarray);
+
         return $idarray;
     }
 
@@ -135,6 +138,7 @@ class SmartTree
             return $path;
         }
         $path = $this->getPathFromId($parentid, $title, $path);
+
         return $path;
     }
 
@@ -237,6 +241,7 @@ class SmartTree
             return $path;
         }
         $path = $this->getNicePathFromId($parentid, $title, $funcURL, $path);
+
         return $path;
     }
 
@@ -254,6 +259,7 @@ class SmartTree
             return $path;
         }
         $path = $this->getIdPathFromId($parentid, $path);
+
         return $path;
     }
 
@@ -272,6 +278,7 @@ class SmartTree
             array_push($parray, $row);
             $parray = $this->getAllChild($row[$this->id], $order, $parray);
         }
+
         return $parray;
     }
 
@@ -291,8 +298,7 @@ class SmartTree
             array_push($parray, $row);
             $parray = $this->getChildTreeArray($row[$this->id], $order, $parray, $row['prefix']);
         }
+
         return $parray;
     }
 }
-
-?>

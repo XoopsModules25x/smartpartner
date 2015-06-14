@@ -76,12 +76,10 @@ function b_partners_list_show($options)
             $block['fadeImage'] = 'style="filter:alpha(opacity=20);" onmouseover="nereidFade(this,100,30,5)" onmouseout="nereidFade(this,50,30,5)"';
         }
 
-
         $block['see_all'] = $options[6];
         $block['lang_see_all'] = _MB_SPARTNER_LANG_SEE_ALL;
         $block['smartpartner_url'] = SMARTPARTNER_URL;
     }
-
 
     return $block;
 }
@@ -189,9 +187,7 @@ function b_partners_list_edit($options)
      }
      $form .= "<input type='radio' name='options[7]' value='1'".$chk." />"._YES."</td></tr>";*/
 
-
     $form .= "</table>";
+
     return $form;
 }
-
-?>

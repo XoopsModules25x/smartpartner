@@ -45,6 +45,7 @@ function smartpartner_metagen_html2text($document)
                      "chr(\\1)");
 
     $text = preg_replace($search, $replace, $document);
+
     return $text;
 }
 
@@ -85,6 +86,7 @@ function smartpartner_findMetaKeywords($text, $minChar)
             }
         }
     }
+
     return $keywords;
 }
 
@@ -168,7 +170,4 @@ function smartpartner_createMetaTags($title, $categoryPath = '', $description = 
     }
     $xoopsTpl->assign('xoops_pagetitle', $ret);
 
-
 }
-
-?>

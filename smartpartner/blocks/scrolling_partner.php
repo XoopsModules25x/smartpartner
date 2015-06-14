@@ -77,9 +77,7 @@ function b_scrolling_partner_edit($options)
     $form .= "<tr><td>" . _MB_SPARTNER_BBG . "</td><td>";
     $form .= "<input type='text' name='options[5]' size='16' value='" . $options[5] . "' /></td></tr>";
 
-
     $form .= "</table>";
+
     return $form;
 }
-
-?>

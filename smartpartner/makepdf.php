@@ -127,5 +127,3 @@ $pdf->WriteHTML($pdf_data['content'], $pdf_config['scale']);
 
 //$pdf->Output($pdf_data['filename'],'');
 $pdf->Output();
-
-?>

@@ -12,4 +12,3 @@ error_reporting(E_ALL);
 
 include "../include/common.php";
 smart_loadCommonLanguageFile();
-?>

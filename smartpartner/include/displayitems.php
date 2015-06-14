@@ -9,7 +9,6 @@
 
 /* THIS FILE COMES FROM SMARTSECTION AND NEEDS TO EDITED TO WORK... */
 
-
 global $xoopsUser, $xoopsUser, $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $xoopsModule, $smartpartner_item_handler;
 $startitem = isset($_GET['startitem']) ? intval($_GET['startitem']) : 0;
 
@@ -65,5 +64,3 @@ $pagenav = new XoopsPageNav($totalitems, $xoopsModuleConfig['perpage'], $startit
 echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
 echo "<input type='button' name='button' onclick=\"location='item.php?op=mod&categoryid=" . $sel_cat . "'\" value='" . _AM_SPARTNER_CREATEITEM . "'>&nbsp;&nbsp;";
 echo "</div>";
-
-?>

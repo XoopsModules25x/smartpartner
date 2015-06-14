@@ -1,4 +1,4 @@
-<?php 
+<?php
 // $Id: uploader.php,v 1.1 2007/09/18 14:00:57 marcan Exp $
 // ------------------------------------------------------------------------ //
 // XOOPS - PHP Content Management System                      //
@@ -110,11 +110,11 @@ class XoopsMediaUploader
      * Constructor
      *
      * @param string $uploadDir
-     * @param array $allowedMimeTypes
-     * @param int $maxFileSize
-     * @param int $maxWidth
-     * @param int $maxHeight
-     * @param int $cmodvalue
+     * @param array  $allowedMimeTypes
+     * @param int    $maxFileSize
+     * @param int    $maxWidth
+     * @param int    $maxHeight
+     * @param int    $cmodvalue
      */
     function XoopsMediaUploader($uploadDir, $allowedMimeTypes = 0, $maxFileSize, $maxWidth = 0, $maxHeight = 0)
     {
@@ -139,8 +139,8 @@ class XoopsMediaUploader
     /**
      * Fetch the uploaded file
      *
-     * @param string $media_name Name of the file field
-     * @param int $index Index of the file (if more than one uploaded under that name)
+     * @param  string $media_name Name of the file field
+     * @param  int    $index      Index of the file (if more than one uploaded under that name)
      * @global $HTTP_POST_FILES
      * @return bool
      */
@@ -150,6 +150,7 @@ class XoopsMediaUploader
 
         if (!isset($_FILES[$media_name])) {
             $this->setErrors('You either did not choose a file to upload or the server has insufficient read/writes to upload this file.!');
+
             return false;
         } elseif (is_array($_FILES[$media_name]['name']) && isset($index))
         {
@@ -176,15 +177,18 @@ class XoopsMediaUploader
 
         if (intval($this->mediaSize) < 0) {
             $this->setErrors('Invalid File Size');
+
             return false;
         }
         if ($this->mediaName == '') {
             $this->setErrors('Filename Is Empty');
+
             return false;
         }
 
         if ($this->mediaTmpName == 'none') {
             $this->setErrors('No file uploaded, this is a error');
+
             return false;
         }
 
@@ -209,7 +213,6 @@ class XoopsMediaUploader
             $this->setErrors('MIME type not allowed: ' . $this->mediaType);
         }
 
-
         if (!is_uploaded_file($this->mediaTmpName)) {
             switch ($this->mediaError)
             {
@@ -220,7 +223,7 @@ class XoopsMediaUploader
                     //if ($this->noadmin_sizecheck)
                     //{
                     //    return true;
-                    //} 
+                    //}
                     $this->setErrors('The file you are trying to upload is too big. Error: 1');
                     break;
                 case 2: // uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the html form
@@ -236,8 +239,10 @@ class XoopsMediaUploader
                     $this->setErrors('No file selected for upload. Error: 5');
                     break;
             }
+
             return false;
         }
+
         return true;
     }
 
@@ -330,6 +335,7 @@ class XoopsMediaUploader
     {
         if ($this->uploadDir == '') {
             $this->setErrors('Upload directory not set');
+
             return false;
         }
 
@@ -365,6 +371,7 @@ class XoopsMediaUploader
         if (count($this->errors) > 0) {
             return false;
         }
+
         return true;
     }
 
@@ -393,12 +400,14 @@ class XoopsMediaUploader
         $this->savedDestination = $this->uploadDir . $this->savedFileName;
         if (is_file($this->savedDestination) && !!is_dir($this->savedDestination)) {
             $this->setErrors('File ' . $this->mediaName . ' already exists on the server. Please rename this file and try again.<br />');
+
             return false;
         }
         if (!move_uploaded_file($this->mediaTmpName, $this->savedDestination)) {
             return false;
         }
         @chmod($this->savedDestination, $chmod);
+
         return true;
     }
 
@@ -415,6 +424,7 @@ class XoopsMediaUploader
         if ($this->mediaSize > $this->maxFileSize) {
             return false;
         }
+
         return true;
     }
 
@@ -431,6 +441,7 @@ class XoopsMediaUploader
         if ($dimension > $this->maxWidth) {
             return false;
         }
+
         return true;
     }
 
@@ -447,6 +458,7 @@ class XoopsMediaUploader
         if ($dimension > $this->maxWidth) {
             return false;
         }
+
         return true;
     }
 
@@ -481,7 +493,7 @@ class XoopsMediaUploader
     /**
      * Get generated errors
      *
-     * @param bool $ashtml Format using HTML?
+     * @param  bool  $ashtml Format using HTML?
      * @return array |string    Array of array messages OR HTML string
      */
     function &getErrors($ashtml = true)
@@ -499,9 +511,8 @@ class XoopsMediaUploader
                     $ret .= $error . '<br />';
                 }
             }
+
             return $ret;
         }
     }
 }
-
-?>

@@ -49,5 +49,3 @@ function smartpartner_seo_genUrl($op, $id, $title = "")
         }
     }
 }
-
-?>

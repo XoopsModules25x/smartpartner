@@ -5,7 +5,6 @@
  * @author Harry Fuecks (PHP Anthology Volume II)
  */
 
-
 class SmartpartnerSession
 {
 
@@ -59,7 +58,6 @@ class SmartpartnerSession
         unset($_SESSION[$name]);
     }
 
-
     /**
      * Destroys the whole session
      * @return void
@@ -78,8 +76,7 @@ class SmartpartnerSession
         if (!isset($_sess)) {
             $_sess = new SmartpartnerSession();
         }
+
         return $_sess;
     }
 }
-
-?>

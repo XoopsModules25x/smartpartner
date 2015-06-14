@@ -70,7 +70,6 @@ switch ($op) {
         $offerObj = $controller->storeSmartObject();
         $fct = isset($_POST['fct']) ? $_POST['fct'] : '';
 
-
         if ($offerObj->hasError()) {
             redirect_header($smart_previous_page, 3, _CO_SOBJECT_SAVE_ERROR . $offerObj->getHtmlErrors());
         } else {
@@ -105,7 +104,6 @@ switch ($op) {
 
         smart_collapsableBar('createdoffers', _AM_SPARTNER_OFFERS, _AM_SPARTNER_OFFERS_DSC);
 
-
         include_once XOOPS_ROOT_PATH . "/modules/smartobject/class/smartobjecttable.php";
         $objectTable = new SmartObjectTable($smartpartner_offer_handler);
         $objectTable->addFilter('partnerid', 'getPartnerList');
@@ -124,5 +122,3 @@ switch ($op) {
 
 smart_modFooter();
 xoops_cp_footer();
-
-?>

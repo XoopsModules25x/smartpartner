@@ -46,6 +46,7 @@ function smartpartner_TableExists($table)
         }
     }
     $xoopsDB->freeRecordSet($ret);
+
     return ($bRetVal);
 }
 
@@ -69,6 +70,7 @@ function smartpartner_GetMeta($key)
         list($value) = $xoopsDB->fetchRow($ret);
 
     }
+
     return $value;
 }
 
@@ -94,6 +96,7 @@ function smartpartner_SetMeta($key, $value)
     if (!$ret) {
         return false;
     }
+
     return true;
 }
 
@@ -105,6 +108,7 @@ function smartpartner_highlighter($matches)
     if (substr($color, 0, 1) != '#') {
         $color = '#' . $color;
     }
+
     return '<span style="font-weight: bolder; background-color: ' . $color . ';">' . $matches[0] . '</span>';
 }
 
@@ -152,6 +156,7 @@ function smartpartner_copyr($source, $dest)
 
     // Clean up
     $dir->close();
+
     return true;
 }
 
@@ -187,6 +192,7 @@ function &smartpartner_getModuleInfo()
             $smartModule = $hModule->getByDirname(SMARTPARTNER_DIRNAME);
         }
     }
+
     return $smartModule;
 }
 
@@ -205,9 +211,9 @@ function &smartpartner_getModuleConfig()
             $smartConfig = $hModConfig->getConfigsByCat(0, $smartModule->getVar('mid'));
         }
     }
+
     return $smartConfig;
 }
-
 
 function smartpartner_imageResize($src, $maxWidth, $maxHeight)
 {
@@ -232,6 +238,7 @@ function smartpartner_imageResize($src, $maxWidth, $maxHeight)
 
         $attr = " width='$width' height='$height'";
     }
+
     return array($width, $height, $type, $attr);
 }
 
@@ -252,9 +259,9 @@ function &smartpartner_gethandler($name, $optional = false)
         trigger_error('Class <b>' . $class . '</b> does not exist<br />Handler Name: ' . $name . ' | Module path : ' . SMARTPARTNER_ROOT_PATH, E_USER_ERROR);
     }
     $ret = isset($handlers[$name]) ? $handlers[$name] : false;
+
     return $ret;
 }
-
 
 /**
  * Checks if a user is admin of SmartPartner
@@ -275,13 +282,12 @@ function smartpartner_userIsAdmin()
         $groups = $xoopsUser->getGroups();
         $result = (in_array(XOOPS_GROUP_ADMIN, $groups)) || ($xoopsUser->isAdmin($module_id));
     }
+
     return $result;
 }
 
-
 function smartpartner_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-
 
     /* Nice buttons styles */
     echo "
@@ -430,6 +436,7 @@ function smartpartner_getCurrentUrls()
 function smartpartner_getCurrentPage()
 {
     $urls = smartpartner_getCurrentUrls();
+
     return $urls['full'];
 }
 
@@ -518,7 +525,6 @@ function smartpartner_admin_chmod($target, $mode = 0777)
     return @chmod($target, $mode);
 }
 
-
 function smartpartner_getUploadDir($local = true, $item = false)
 {
     if ($item) {
@@ -548,7 +554,6 @@ function smartpartner_getImageDir($item = '', $local = true)
 
     return smartpartner_getUploadDir($local, $item);
 }
-
 
 function smartpartner_formatErrors($errors = array())
 {
@@ -600,7 +605,7 @@ function smartpartner_upload_file($another = false, $withRedirect = true, &$item
     }
     $mimetypes =& $hMime->getObjects($crit);
     // TODO : display the available mimetypes to the user
-	*/
+    */
     if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
         if (!$ret = $fileObj->checkUpload('userfile', $allowed_mimetypes, $errors)) {
             $errorstxt = implode('<br />', $errors);

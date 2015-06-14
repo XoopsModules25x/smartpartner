@@ -5,7 +5,6 @@ if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
-
 // Keep Block option values when update (by nobunobu)
 global $xoopsDB;
 $query = "SELECT mid FROM " . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
@@ -94,5 +93,3 @@ if (!empty($msgs) && empty($myblocksadmin_parsed_updateblock)) {
     $msgs = array_merge($msgs, $local_msgs);
     $myblocksadmin_parsed_updateblock = true;
 }
-
-?>

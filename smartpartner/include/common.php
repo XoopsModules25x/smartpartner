@@ -10,7 +10,6 @@ if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
-
 // This must contain the name of the folder in which reside SmartPartner
 if (!defined("SMARTPARTNER_DIRNAME")) {
     define("SMARTPARTNER_DIRNAME", 'smartpartner');
@@ -45,7 +44,6 @@ $smartpartner_moduleName = $smartModule->getVar('name');
 // Creating the SmartModule config Object
 $smartConfig =& smartpartner_getModuleConfig();
 
-
 // Creating the partner handler object
 $smartpartner_partner_handler =& smartpartner_gethandler('partner');
 
@@ -68,4 +66,3 @@ $statusArray = array(
     _SPARTNER_STATUS_ONLINE => _CO_SPARTNER_STATUS_ONLINE
 );
 include_once(SMARTPARTNER_ROOT_PATH . "class/smarttree.php");
-?>

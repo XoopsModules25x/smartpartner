@@ -63,5 +63,3 @@ define("_MD_SPARTNER_URL_DSC","Your web site");
 define("_MD_SPARTNER_DESCRIPTION_DSC","Description of your organisation");
 define("_MD_SPARTNER_BACKTOINDEX","Back to partners index");
 define("_MD_SPARTNER_OFFER_INTRO","Offer list");
-
-?>

@@ -30,4 +30,3 @@ if ($partnerObj->url()) {
 } else {
     redirect_header("index.php", 1, _XP_NOPART);
 }
-?>

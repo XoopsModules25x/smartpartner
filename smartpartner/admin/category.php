@@ -111,7 +111,6 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
 
     $module_id = $xoopsModule->getVar('mid');
 
-
     // Parent Category
     ob_start();
     $mytree -> makeMySelBox("name", "weight", $categoryObj->parentid(), 1, 'parentid');
@@ -173,13 +172,11 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
      */
     $sform -> addElement(new XoopsFormHidden('categoryid', $categoryid));
 
-
     //$parentid = $categoryObj->parentid('s');
 
     //$sform -> addElement( new XoopsFormHidden( 'parentid', $parentid ) );
 
     $sform -> addElement(new XoopsFormHidden('nb_sub_yet', $nb_subcats));
-
 
     // Action buttons tray
     $button_tray = new XoopsFormElementTray('', '');
@@ -473,5 +470,3 @@ switch ($op) {
 
 smart_modFooter();
 xoops_cp_footer();
-
-?>

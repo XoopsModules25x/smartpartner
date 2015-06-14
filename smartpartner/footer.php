@@ -15,6 +15,3 @@ $isAdmin = smartpartner_userIsAdmin();
 $xoopsTpl->assign("isAdmin", $isAdmin);
 
 $xoopsTpl->assign("ref_smartpartner", "SmartPartner is developed by The SmartFactory (http://www.smartfactory.ca), a division of INBOX International (http://inboxinternational.com)");
-
-
-?>

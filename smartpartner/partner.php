@@ -142,11 +142,9 @@ smartpartner_createMetaTags($partnerObj->title(), '', $partnerObj->summary());
 
 //code to include smartie
 /*if (file_exists(XOOPS_ROOT_PATH . '/modules/smarttie/smarttie_links.php')) {
-	include_once XOOPS_ROOT_PATH . '/modules/smarttie/smarttie_links.php';
-	$xoopsTpl->assign('smarttie',1);
+    include_once XOOPS_ROOT_PATH . '/modules/smarttie/smarttie_links.php';
+    $xoopsTpl->assign('smarttie',1);
 }*/
 //end code for smarttie
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
-
-?>

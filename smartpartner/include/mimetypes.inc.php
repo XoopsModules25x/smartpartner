@@ -230,7 +230,3 @@ return array(
 
     "csv" => "text/csv",
 );
-
-
-
-?>

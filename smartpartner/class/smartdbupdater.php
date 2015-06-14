@@ -26,6 +26,7 @@ function smart_TableExists($table)
         }
     }
     $xoopsDB->freeRecordSet($ret);
+
     return ($bRetVal);
 }
 
@@ -133,6 +134,7 @@ class SmartDbTable
     function name()
     {
         global $xoopsDB;
+
         return $xoopsDB->prefix($this->_name);
     }
 
@@ -160,20 +162,21 @@ class SmartDbTable
                 $fields[$existing_field['Field']] .= " " . $existing_field['Extra'];
             }
         }
+
         return $fields;
     }
 
     function fieldExists($field)
     {
         $existingFields = $this->getExistingFieldsArray();
+
         return isset($existingFields[$field]);
     }
-
 
     /**
      * Set the table structure
      *
-     * @param  string $structure table structure
+     * @param string $structure table structure
      *
      */
     function setStructure($structure)
@@ -241,7 +244,7 @@ class SmartDbTable
     /**
      * Add a field to be added
      *
-     * @param string $name name of the field
+     * @param string $name       name of the field
      * @param string $properties properties of the field
      *
      */
@@ -257,8 +260,8 @@ class SmartDbTable
      * Invert values 0 to 1 and 1 to 0
      *
      * @param string $name name of the field
-     * @param string $old old propertie
-     * @param string $new new propertie
+     * @param string $old  old propertie
+     * @param string $new  new propertie
      *
      */ //felix
     function addUpdatedWhere($name, $newValue, $oldValue)
@@ -272,7 +275,7 @@ class SmartDbTable
     /**
      * Add new field of a record to be added
      *
-     * @param string $name name of the field
+     * @param string $name       name of the field
      * @param string $properties properties of the field
      *
      */
@@ -297,7 +300,7 @@ class SmartDbTable
     /**
      * Add field for which the value will be updated
      *
-     * @param string $name name of the field
+     * @param string $name  name of the field
      * @param string $value value to be set
      *
      */
@@ -408,9 +411,11 @@ class SmartDbTable
         $ret = $xoopsDB->query($query);
         if (!$ret) {
             echo "&nbsp;&nbsp;" . sprintf(_SDU_MSG_DROP_TABLE_ERR, $this->name()) . "<br />";
+
             return false;
         } else {
             echo "&nbsp;&nbsp;" . sprintf(_SDU_MSG_DROP_TABLE, $this->name()) . "<br />";
+
             return true;
         }
     }
@@ -541,6 +546,7 @@ class SmartDbTable
                 echo "&nbsp;&nbsp;" . sprintf(_SDU_MSG_DROPFIELD, $dropedField, $this->name()) . "<br />";
             }
         }
+
         return $ret;
     }
 }
@@ -566,9 +572,9 @@ class SmartobjectDbupdater
     /**
      * Use to execute a general query
      *
-     * @param string $query query that will be executed
+     * @param string $query   query that will be executed
      * @param string $goodmsg message displayed on success
-     * @param string $badmsg message displayed on error
+     * @param string $badmsg  message displayed on error
      *
      * @return bool true if success, false if an error occured
      *
@@ -579,9 +585,11 @@ class SmartobjectDbupdater
         $ret = $xoopsDB->query($query);
         if (!$ret) {
             echo "&nbsp;&nbsp;$badmsg<br />";
+
             return false;
         } else {
             echo "&nbsp;&nbsp;$goodmsg<br />";
+
             return true;
         }
     }
@@ -590,7 +598,7 @@ class SmartobjectDbupdater
      * Use to rename a table
      *
      * @param string $from name of the table to rename
-     * @param string $to new name of the renamed table
+     * @param string $to   new name of the renamed table
      *
      * @return bool true if success, false if an error occured
      */
@@ -605,9 +613,11 @@ class SmartobjectDbupdater
         $ret = $xoopsDB->query($query);
         if (!$ret) {
             echo "&nbsp;&nbsp;" . sprintf(_SDU_MSG_RENAME_TABLE_ERR, $from) . "<br />";
+
             return false;
         } else {
             echo "&nbsp;&nbsp;" . sprintf(_SDU_MSG_RENAME_TABLE, $from, $to) . "<br />";
+
             return true;
         }
     }
@@ -657,7 +667,6 @@ class SmartobjectDbupdater
             $ret = $table->updateFieldsValues($table) && $ret;
         }
 
-
         // if table has droped field, alter the table
         if ($table->getDropedFields()) {
             $ret = $table->dropFields($table) && $ret;
@@ -671,5 +680,3 @@ class SmartobjectDbupdater
         return $ret;
     }
 }
-
-?>

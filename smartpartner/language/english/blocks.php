@@ -43,4 +43,3 @@ define('_MB_SPARTNER_YES','Yes');
 define('_MB_SPARTNER_NO','No');
 define('_MB_SPARTNER_LANG_SEE_ALL_OFFERS',"See all offers...");
 define('_MB_SPARTNER_SHOW_CURR_SUBS','Display subcats of current category');
-?>

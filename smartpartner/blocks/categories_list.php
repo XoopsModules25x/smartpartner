@@ -21,6 +21,7 @@ function get_content($cat_id, $catsObj, $displaysubs)
         }
         $i++;
     }
+
     return $content;
 
 }
@@ -114,7 +115,6 @@ function b_categories_list_edit($options)
 
     $form .= "</select></td></tr>";
     $form .= "</table>";
+
     return $form;
 }
-
-?>

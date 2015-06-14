@@ -7,7 +7,6 @@
  * Licence: GNU
  */
 
-
 $adminmenu[0]['title'] = _MI_SPARTNER_ADMENU1;
 $adminmenu[0]['link'] = "admin/index.php";
 
@@ -36,5 +35,3 @@ if (isset($xoopsModule)) {
     $headermenu[4]['title'] = _AM_SPARTNER_ABOUT;
     $headermenu[4]['link'] = SMARTPARTNER_URL . "admin/about.php";
 }
-
-?>
