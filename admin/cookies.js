@@ -15,13 +15,12 @@
  * [secure]   Boolean value indicating if the cookie transmission requires a
  *              secure transmission
  */
-function setCookie(name, value, expires, path, domain, secure)
-{
+function setCookie(name, value, expires, path, domain, secure) {
     document.cookie = name + "=" + escape(value) +
-                      ((expires) ? "; expires=" + expires.toGMTString() : "") +
-                      ((path) ? "; path=" + path : "") +
-                      ((domain) ? "; domain=" + domain : "") +
-                      ((secure) ? "; secure" : "");
+        ((expires) ? "; expires=" + expires.toGMTString() : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? "; secure" : "");
 }
 
 /**
@@ -32,8 +31,7 @@ function setCookie(name, value, expires, path, domain, secure)
  * Returns a string containing value of specified cookie,
  *   or null if cookie does not exist.
  */
-function getCookie(name)
-{
+function getCookie(name) {
     var dc = document.cookie;
     var prefix = name + "=";
     var begin = dc.indexOf("; " + prefix);
@@ -58,12 +56,11 @@ function getCookie(name)
  * [path]    path of the cookie (must be same as path used to create cookie)
  * [domain]  domain of the cookie (must be same as domain used to create cookie)
  */
-function deleteCookie(name, path, domain)
-{
+function deleteCookie(name, path, domain) {
     if (getCookie(name)) {
         document.cookie = name + "=" +
-                          ((path) ? "; path=" + path : "") +
-                          ((domain) ? "; domain=" + domain : "") +
-                          "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+            ((path) ? "; path=" + path : "") +
+            ((domain) ? "; domain=" + domain : "") +
+            "; expires=Thu, 01-Jan-70 00:00:01 GMT";
     }
 }

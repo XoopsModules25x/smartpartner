@@ -1,10 +1,10 @@
 Hello {X_UNAME},
 
-{PARTNER_NAME} published a new offer in the {MODULE_NAME} module of {X_SITENAME} :
+{PARTNER_NAME} published a new offer in the {MODULE_NAME} module of {X_SITENAME}:
 
 {OFFER_NAME}
 
-You can review this item here :
+You can review this item here:
 {OFFER_URL}
 
 -----------

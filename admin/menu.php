@@ -1,37 +1,57 @@
 <?php
 
 /**
- * $Id: menu.php 9889 2012-07-16 12:08:42Z beckmi $
+ *
  * Module: SmartPartner
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
 
-$adminmenu[0]['title'] = _MI_SPARTNER_ADMENU1;
-$adminmenu[0]['link'] = "admin/index.php";
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$adminmenu[1]['title'] = _MI_SPARTNER_CATEGORIES;
-$adminmenu[1]['link'] = "admin/category.php";
+$path = dirname(dirname(dirname(__DIR__)));
+include_once $path . '/mainfile.php';
 
-$adminmenu[2]['title'] = _MI_SPARTNER_ADMENU2;
-$adminmenu[2]['link'] = "admin/partner.php";
+$dirname         = basename(dirname(__DIR__));
+$moduleHandler   = xoops_getHandler('module');
+$module          = $moduleHandler->getByDirname($dirname);
+$pathIcon32      = $module->getInfo('icons32');
+$pathModuleAdmin = $module->getInfo('dirmoduleadmin');
+$pathLanguage    = $path . $pathModuleAdmin;
 
-$adminmenu[3]['title'] = _MI_SPARTNER_ADMENU3;
-$adminmenu[3]['link'] = "admin/offer.php";
-
-if (isset($xoopsModule)) {
-    $headermenu[0]['title'] = _PREFERENCES;
-    $headermenu[0]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');
-
-    $headermenu[1]['title'] = _AM_SPARTNER_GOMOD;
-    $headermenu[1]['link'] = SMARTPARTNER_URL;
-
-    $headermenu[2]['title'] = _AM_SPARTNER_UPDATE_MODULE;
-    $headermenu[2]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
-
-    $headermenu[3]['title'] = _AM_SPARTNER_IMPORT;
-    $headermenu[3]['link'] = SMARTPARTNER_URL . "admin/import.php";
-
-    $headermenu[4]['title'] = _AM_SPARTNER_ABOUT;
-    $headermenu[4]['link'] = SMARTPARTNER_URL . "admin/about.php";
+if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
+    $fileinc = $pathLanguage . '/language/english/main.php';
 }
+
+include_once $fileinc;
+
+$adminmenu              = array();
+$i                      = 0;
+$adminmenu[$i]['title'] = _AM_MODULEADMIN_HOME;
+$adminmenu[$i]['link']  = 'admin/index.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
+++$i;
+$adminmenu[$i]['title'] = _MI_SPARTNER_ADMENU1;
+$adminmenu[$i]['link']  = 'admin/main.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/manage.png';
+
+++$i;
+$adminmenu[$i]['title'] = _MI_SPARTNER_CATEGORIES;
+$adminmenu[$i]['link']  = 'admin/category.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/category.png';
+++$i;
+$adminmenu[$i]['title'] = _MI_SPARTNER_ADMENU2;
+$adminmenu[$i]['link']  = 'admin/partner.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/users.png';
+++$i;
+$adminmenu[$i]['title'] = _MI_SPARTNER_ADMENU3;
+$adminmenu[$i]['link']  = 'admin/offer.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/cash_stack.png';
+++$i;
+$adminmenu[$i]['title'] = _MI_SPARTNER_IMPORT;
+$adminmenu[$i]['link']  = 'admin/import.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/compfile.png';
+++$i;
+$adminmenu[$i]['title'] = _AM_MODULEADMIN_ABOUT;
+$adminmenu[$i]['link']  = 'admin/about.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';

@@ -1,44 +1,43 @@
 <?php
 
 /**
- * $Id: join.php 9889 2012-07-16 12:08:42Z beckmi $
+ *
  * Module: SmartPartner
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
 
-include "header.php";
-$xoopsOption['template_main'] = 'smartpartner_join.html';
-include XOOPS_ROOT_PATH . "/header.php";
-include "footer.php";
+include __DIR__ . '/header.php';
+$xoopsOption['template_main'] = 'smartpartner_join.tpl';
+include XOOPS_ROOT_PATH . '/header.php';
+include __DIR__ . '/footer.php';
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $op = isset($_POST['op']) ? $_POST['op'] : 'form';
 
 switch ($op) {
 
-    case "submitPartner" :
+    case 'submitPartner':
+        include XOOPS_ROOT_PATH . '/class/xoopsmailer.php';
 
-        include XOOPS_ROOT_PATH . "/class/xoopsmailer.php";
-
-        $partnerObj = $smartpartner_partner_handler->create();
+        $partnerObj = $smartPartnerPartnerHandler->create();
         // Uploading the logo, if any
         // Retreive the filename to be uploaded
 
-        if ($_FILES['logo_file']['name'] != "") {
-            $filename = $_POST["xoops_upload_file"][0];
-            if (!empty($filename) || $filename != "") {
+        if ($_FILES['logo_file']['name'] !== '') {
+            $filename = $_POST['xoops_upload_file'][0];
+            if (!empty($filename) || $filename !== '') {
                 global $xoopsModuleConfig;
 
-                $max_size = 10000000;
-                $max_imgwidth = $xoopsModuleConfig['img_max_width'];
-                $max_imgheight = $xoopsModuleConfig['img_max_height'];
+                $max_size          = 10000000;
+                $max_imgwidth      = $xoopsModuleConfig['img_max_width'];
+                $max_imgheight     = $xoopsModuleConfig['img_max_height'];
                 $allowed_mimetypes = smartpartner_getAllowedImagesTypes();
 
-                include_once(XOOPS_ROOT_PATH . "/class/uploader.php");
+                include_once(XOOPS_ROOT_PATH . '/class/uploader.php');
 
-                if ($_FILES[$filename]['tmp_name'] == "" || !is_readable($_FILES[$filename]['tmp_name'])) {
+                if ($_FILES[$filename]['tmp_name'] === '' || !is_readable($_FILES[$filename]['tmp_name'])) {
                     redirect_header('javascript:history.go(-1)', 2, _CO_SPARTNER_FILE_UPLOAD_ERROR);
                     exit;
                 }
@@ -46,9 +45,7 @@ switch ($op) {
                 $uploader = new XoopsMediaUploader(smartpartner_getImageDir(), $allowed_mimetypes, $max_size, $max_imgwidth, $max_imgheight);
 
                 if ($uploader->fetchMedia($filename) && $uploader->upload()) {
-
                     $partnerObj->setVar('image', $uploader->getSavedFileName());
-
                 } else {
                     redirect_header('javascript:history.go(-1)', 2, _CO_SPARTNER_FILE_UPLOAD_ERROR . $uploader->getErrors());
                     exit;
@@ -57,7 +54,7 @@ switch ($op) {
         }
 
         // Putting the values in the partner object
-        $partnerObj->setVar('id', (isset($_POST['id'])) ? intval($_POST['id']) : 0);
+        $partnerObj->setVar('id', isset($_POST['id']) ? (int)$_POST['id'] : 0);
         $partnerObj->setVar('title', $_POST['title']);
         $partnerObj->setVar('summary', $_POST['summary']);
         $partnerObj->setVar('description', $_POST['description']);
@@ -67,11 +64,11 @@ switch ($op) {
         $partnerObj->setVar('adress', $_POST['adress']);
         $partnerObj->setVar('url', $_POST['url']);
         $partnerObj->setVar('image_url', $_POST['image_url']);
-        $partnerObj->setVar('weight', (isset($_POST['weight'])) ? intval($_POST['weight']) : 0);
+        $partnerObj->setVar('weight', isset($_POST['weight']) ? (int)$_POST['weight'] : 0);
         $partnerObj->setVar('status', _SPARTNER_STATUS_SUBMITTED);
-        $partnerObj->setVar('email_priv', (isset($_POST['email_priv'])) ? intval($_POST['email_priv']) : 0);
-        $partnerObj->setVar('phone_priv', (isset($_POST['phone_priv'])) ? intval($_POST['phone_priv']) : 0);
-        $partnerObj->setVar('adress_priv', (isset($_POST['adress_priv'])) ? intval($_POST['adress_priv']) : 0);
+        $partnerObj->setVar('email_priv', isset($_POST['email_priv']) ? (int)$_POST['email_priv'] : 0);
+        $partnerObj->setVar('phone_priv', isset($_POST['phone_priv']) ? (int)$_POST['phone_priv'] : 0);
+        $partnerObj->setVar('adress_priv', isset($_POST['adress_priv']) ? (int)$_POST['adress_priv'] : 0);
 
         if ($xoopsModuleConfig['autoapprove_submitted']) {
             $partnerObj->setVar('status', _SPARTNER_STATUS_ACTIVE);
@@ -80,31 +77,30 @@ switch ($op) {
         }
 
         // Storing the partner
-        If (!$partnerObj->store()) {
-            redirect_header("javascript:history.go(-1)", 3, _MD_SPARTNER_SUBMIT_ERROR . smartpartner_formatErrors($partnerObj->getErrors()));
+        if (!$partnerObj->store()) {
+            redirect_header('javascript:history.go(-1)', 3, _MD_SPARTNER_SUBMIT_ERROR . smartpartner_formatErrors($partnerObj->getErrors()));
             exit;
         }
 
-        if (isset($_POST['notifypub']) && $_POST['notifypub'] == 1) {
+        if (isset($_POST['notifypub']) && $_POST['notifypub'] === 1) {
             include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
-            $notification_handler = &xoops_gethandler('notification');
-            $notification_handler->subscribe('partner', $partnerObj->id(), 'approved', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE);
+            $notificationHandler = xoops_getHandler('notification');
+            $notificationHandler->subscribe('partner', $partnerObj->id(), 'approved', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE);
         }
 
         $partnerObj->sendNotifications(array(_SPARTNER_NOT_PARTNER_SUBMITTED));
-        redirect_header("index.php", 3, _MD_SPARTNER_SUBMIT_SUCCESS);
+        redirect_header('index.php', 3, _MD_SPARTNER_SUBMIT_SUCCESS);
         exit;
         break;
 
-    case "form" :
-
-        If (($xoopsModuleConfig['allowsubmit'] != 1) || (!$xoopsUser) && $xoopsModuleConfig['anonpost'] != 1) {
-            redirect_header("index.php", 2, _NOPERM);
+    case 'form':
+        if (($xoopsModuleConfig['allowsubmit'] !== 1) || (!$xoopsUser) && $xoopsModuleConfig['anonpost'] !== 1) {
+            redirect_header('index.php', 2, _NOPERM);
         }
 
-        include XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
-        include XOOPS_ROOT_PATH . "/modules/smartobject/class/form/elements/smartformhidden.php";
-        $form = new XoopsThemeForm(_MD_SPARTNER_JOIN, "joinform", "join.php");
+        include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        include XOOPS_ROOT_PATH . '/modules/smartobject/class/form/elements/smartformhidden.php';
+        $form = new XoopsThemeForm(_MD_SPARTNER_JOIN, 'joinform', 'join.php');
         $form->setExtra('enctype="multipart/form-data"');
 
         // TITLE
@@ -114,7 +110,7 @@ switch ($op) {
 
         // LOGO UPLOAD
         $max_size = 5000000;
-        $file_box = new XoopsFormFile(_CO_SPARTNER_LOGO_UPLOAD, "logo_file", $max_size);
+        $file_box = new XoopsFormFile(_CO_SPARTNER_LOGO_UPLOAD, 'logo_file', $max_size);
         $file_box->setExtra("size ='45'");
         $file_box->setDescription(sprintf(_CO_SPARTNER_LOGO_UPLOAD_DSC, $xoopsModuleConfig['img_max_width'], $xoopsModuleConfig['img_max_height']));
         $form->addElement($file_box);
@@ -162,7 +158,7 @@ switch ($op) {
         // PHONE_PRIV
         $phone_priv_radio = new XoopsFormRadioYN(_CO_SPARTNER_CONTACT_PHONEPRIV, 'phone_priv', 0);
         $phone_priv_radio->setDescription(_CO_SPARTNER_CONTACT_PHONEPRIV_DSC);
-        $form -> addElement($phone_priv_radio);
+        $form->addElement($phone_priv_radio);
 
         // ADRESS
         $adress_text = new XoopsFormTextArea(_CO_SPARTNER_ADRESS, 'adress', '', 4, 60);
@@ -172,7 +168,7 @@ switch ($op) {
         // ADRESS_PRIV
         $adress_priv_radio = new XoopsFormRadioYN(_CO_SPARTNER_CONTACT_ADRESSPRIV, 'adress_priv', 0);
         $adress_priv_radio->setDescription(_CO_SPARTNER_CONTACT_ADRESSPRIV_DSC);
-        $form -> addElement($adress_priv_radio);
+        $form->addElement($adress_priv_radio);
 
         // NOTIFY ON PUBLISH
         if (is_object($xoopsUser) && ($xoopsModuleConfig['autoapprove_submitted'] != 1)) {
@@ -185,7 +181,7 @@ switch ($op) {
 
         // BUTTONS
         $button_tray = new XoopsFormElementTray('', '');
-        $hidden = new XoopsFormHidden('op', 'submitPartner');
+        $hidden      = new XoopsFormHidden('op', 'submitPartner');
         $button_tray->addElement($hidden);
 
         $butt_create = new XoopsFormButton('', '', _CO_SPARTNER_SUBMIT, 'submit');
@@ -202,10 +198,10 @@ switch ($op) {
         $form->addElement($button_tray, true);
 
         $form->assign($xoopsTpl);
-        $xoopsTpl->assign(array("lang_main_partner" => _MD_SPARTNER_PARTNERS, "lang_join" => _MD_SPARTNER_JOIN));
+        $xoopsTpl->assign(array('lang_main_partner' => _MD_SPARTNER_PARTNERS, 'lang_join' => _MD_SPARTNER_JOIN));
         $xoopsTpl->assign('lang_intro_title', _MD_SPARTNER_JOIN);
         $xoopsTpl->assign('lang_intro_text', sprintf(_MD_SPARTNER_INTRO_JOIN, $xoopsConfig['sitename']));
-        $xoopsTpl->assign('xoops_pagetitle', $myts->makeTboxData4Show($xoopsModule->name()) . ' - ' . _MD_SPARTNER_JOIN);
+        $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->name()) . ' - ' . _MD_SPARTNER_JOIN);
         break;
 }
 include_once XOOPS_ROOT_PATH . '/footer.php';

@@ -10,36 +10,33 @@
  *
  * This class highlight the chosen keywords in the current output buffer
  *
- * @package keyhighlighter
- * @author Setec Astronomy
- * @version 1.0
- * @abstract Highlight specific keywords.
+ * @package   keyhighlighter
+ * @author    Setec Astronomy
+ * @abstract  Highlight specific keywords.
  * @copyright 2004
- * @example sample.php A sample code.
- * @link http://setecastronomy.stufftoread.com
+ * @example   sample.php A sample code.
+ * @link      http://setecastronomy.stufftoread.com
  */
-
 class SmartpartnerKeyhighlighter
 {
+    /**
+     * @access private
+     */
+    public $preg_keywords = '';
+    /**
+     * @access private
+     */
+    public $keywords = '';
+    /**
+     * @access private
+     */
+    public $singlewords = false;
+    /**
+     * @access private
+     */
+    public $replace_callback = null;
 
-    /**
-     * @access private
-     */
-    var $preg_keywords = '';
-    /**
-     * @access private
-     */
-    var $keywords = '';
-    /**
-     * @access private
-     */
-    var $singlewords = false;
-    /**
-     * @access private
-     */
-    var $replace_callback = null;
-
-    var $content;
+    public $content;
 
     /**
      * Main constructor
@@ -63,19 +60,20 @@ class SmartpartnerKeyhighlighter
      * </code>
      */
     // public function __construct ()
-    function SmartpartnerKeyhighlighter($keywords, $singlewords = false, $replace_callback = null)
+    public function __construct($keywords, $singlewords = false, $replace_callback = null)
     {
-        $this->keywords = $keywords;
-        $this->singlewords = $singlewords;
+        $this->keywords         = $keywords;
+        $this->singlewords      = $singlewords;
         $this->replace_callback = $replace_callback;
     }
 
     /**
      * @access private
+     * @param $replace_matches
+     * @return mixed
      */
-    function replace($replace_matches)
+    public function replace($replace_matches)
     {
-
         $patterns = array();
         if ($this->singlewords) {
             $keywords = explode(' ', $this->preg_keywords);
@@ -89,7 +87,7 @@ class SmartpartnerKeyhighlighter
         $result = $replace_matches[0];
 
         foreach ($patterns as $pattern) {
-            if (!is_null($this->replace_callback)) {
+            if (null !== $this->replace_callback) {
                 $result = preg_replace_callback($pattern, $this->replace_callback, $result);
             } else {
                 $result = preg_replace($pattern, '<span class="highlightedkey">\\0</span>', $result);
@@ -101,13 +99,15 @@ class SmartpartnerKeyhighlighter
 
     /**
      * @access private
+     * @param $buffer
+     * @return mixed|string
      */
-    function highlight($buffer)
+    public function highlight($buffer)
     {
-        $buffer = '>' . $buffer . '<';
+        $buffer              = '>' . $buffer . '<';
         $this->preg_keywords = preg_replace('/[^\w ]/si', '', $this->keywords);
-        $buffer = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(&$this, 'replace'), $buffer);
-        $buffer = substr($buffer, 1, -1);
+        $buffer              = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(&$this, 'replace'), $buffer);
+        $buffer              = substr($buffer, 1, -1);
 
         return $buffer;
     }

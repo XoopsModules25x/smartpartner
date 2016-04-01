@@ -1,10 +1,10 @@
 Hello {X_UNAME},
 
-The following partner has been submitted in the {MODULE_NAME} module of {X_SITENAME} :
+The following partner has been submitted in the {MODULE_NAME} module of {X_SITENAME}:
 
 "{PARTNER_NAME}"
 
-You can review this item here :
+You can review this item here:
 {WAITINGFILES_URL}
 
 -----------
@@ -18,6 +18,6 @@ Please do not reply to this message.
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 The Webmaster
 {X_ADMINMAIL}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $Id: index.php 9889 2012-07-16 12:08:42Z beckmi $
+ *
  * Module: SmartPartner
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
@@ -27,14 +27,16 @@
  *
  *param $categoryid - id of the current category
  *return array of partners for the current category
+ * @param $categoryid
+ * @return array
  */
 function get_partners_array($categoryid)
 {
     global $every_partners_array, $count, $xoopsModuleConfig, $view_category_id;
     $partners = array();
     foreach ($every_partners_array as $partnerObj) {
-        if (in_array($categoryid, explode('|', $partnerObj->categoryid())) && ($view_category_id || (!$view_category_id && sizeof($partners) < $xoopsModuleConfig['percat_user']))) {
-            $partner = $partnerObj->toArray('index');
+        if (in_array($categoryid, explode('|', $partnerObj->categoryid())) && ($view_category_id || (!$view_category_id && count($partners) < $xoopsModuleConfig['percat_user']))) {
+            $partner    = $partnerObj->toArray('index');
             $partners[] = $partner;
         }
     }
@@ -49,16 +51,19 @@ function get_partners_array($categoryid)
  *
  *param $categoryid - id of the current category
  *return array of subcats for the current category
+ * @param $every_categories_array
+ * @param $categoryid
+ * @param $level
+ * @return array
  */
 function get_subcats($every_categories_array, $categoryid, $level)
 {
 
     //global $every_categories_array;
     $subcatArray = array();
-    $level++;
+    ++$level;
 
     foreach ($every_categories_array as $subcatObj) {
-
         if ($subcatObj->parentid() == $categoryid) {
             $subcatArray[] = get_cat_content($every_categories_array, $subcatObj, $level);
         }
@@ -72,47 +77,50 @@ function get_subcats($every_categories_array, $categoryid, $level)
  *
  *param $categoryid - id of the current category
  *return array of content for the current category
+ * @param $every_categories_array
+ * @param $categoryObj
+ * @param $level
+ * @return array
  */
 function get_cat_content($every_categories_array, $categoryObj, $level)
 {
     $category = array();
     $decalage = '';
-    /*for($i=0;$i<$level;$i++){
+    /*for ($i=0;$i<$level;++$i) {
          $decalage .= '--';
      }*/
     $decalage .= ' ';
-    $category['title'] = $decalage . '' . $categoryObj->name();
-    $category['categoryid'] = $categoryObj->categoryid();
+    $category['title']       = $decalage . '' . $categoryObj->name();
+    $category['categoryid']  = $categoryObj->categoryid();
     $category['description'] = $categoryObj->description();
-    $category['link_view'] = $categoryObj->getCategoryUrl();
-    $category['partners'] = get_partners_array($categoryObj->categoryid());
-    $category['image_url'] = $categoryObj->getImageUrl(true);
-    $category['subcats'] = get_subcats($every_categories_array, $categoryObj->categoryid(), $level);
+    $category['link_view']   = $categoryObj->getCategoryUrl();
+    $category['partners']    = get_partners_array($categoryObj->categoryid());
+    $category['image_url']   = $categoryObj->getImageUrl(true);
+    $category['subcats']     = get_subcats($every_categories_array, $categoryObj->categoryid(), $level);
 
     return $category;
 }
 
-include "header.php";
-$xoopsOption['template_main'] = 'smartpartner_index.html';
-include XOOPS_ROOT_PATH . "/header.php";
-include "footer.php";
+include __DIR__ . '/header.php';
+$xoopsOption['template_main'] = 'smartpartner_index.tpl';
+include XOOPS_ROOT_PATH . '/header.php';
+include __DIR__ . '/footer.php';
 
 // At which record shall we start
-$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
-$view_category_id = isset($_GET['view_category_id']) ? intval($_GET['view_category_id']) : 0;
+$view_category_id = isset($_GET['view_category_id']) ? (int)$_GET['view_category_id'] : 0;
 
-$partners_total = $smartpartner_partner_handler->getPartnerCount();
+$partners_total = $smartPartnerPartnerHandler->getPartnerCount();
 
-if ($xoopsModuleConfig['index_sortby'] == 'title' || $xoopsModuleConfig['index_sortby'] == 'weight') {
+if ($xoopsModuleConfig['index_sortby'] === 'title' || $xoopsModuleConfig['index_sortby'] === 'weight') {
     $order = 'ASC';
-}
-else {
+} else {
     $order = 'DESC';
 }
 //Retreive all records from database
-$every_categories_array = $smartpartner_category_handler->getCategories(0, 0, -1, 'weight', 'ASC', true);
-$every_partners_array = $smartpartner_partner_handler->getPartnersForIndex(-1, _SPARTNER_STATUS_ACTIVE, $xoopsModuleConfig['index_sortby'], $order);
+$every_categories_array = $smartPartnerCategoryHandler->getCategories(0, 0, -1, 'weight', 'ASC', true);
+$every_partners_array   = $smartPartnerPartnerHandler->getPartnersForIndex(-1, _SPARTNER_STATUS_ACTIVE, $xoopsModuleConfig['index_sortby'], $order);
 
 $partnersArray = array();
 
@@ -136,12 +144,10 @@ if (!$view_category_id) {
     }
 
     $categoryPath = '';
-}
-
-    //viewing a specific category
+} //viewing a specific category
 else {
     $currentCategoryObj = $every_categories_array[$view_category_id];
-    $partnersArray[] = get_cat_content($every_categories_array, $currentCategoryObj, 0);
+    $partnersArray[]    = get_cat_content($every_categories_array, $currentCategoryObj, 0);
 
     if (!$partnersArray[0]['partners'] && !$partnersArray[0]['subcats']) {
         redirect_header(SMARTPARTNER_URL, 3, _MD_SPARTNER_CATEGORY_EMPTY);
@@ -161,9 +167,9 @@ $xoopsTpl->assign('partners', $partnersArray);
 $xoopsTpl->assign('view_deteils_cat', _MD_SPARTNER_DETAIL_CAT);
 $xoopsTpl->assign('on_index_page', $view_category_id == 0);
 $xoopsTpl->assign('sitename', $xoopsConfig['sitename']);
-$xoopsTpl->assign("displayjoin", $xoopsModuleConfig['allowsubmit'] && (is_object($xoopsUser) || $xoopsModuleConfig['anonpost']));
-$xoopsTpl->assign("img_max_width", $xoopsModuleConfig['img_max_width']);
-$xoopsTpl->assign('module_home', '<a href="' . SMARTPARTNER_URL . '">' . $smartpartner_moduleName . '</a>');
+$xoopsTpl->assign('displayjoin', $xoopsModuleConfig['allowsubmit'] && (is_object($xoopsUser) || $xoopsModuleConfig['anonpost']));
+$xoopsTpl->assign('img_max_width', $xoopsModuleConfig['img_max_width']);
+$xoopsTpl->assign('module_home', '<a href="' . SMARTPARTNER_URL . '">' . $smartPartnerModuleName . '</a>');
 $xoopsTpl->assign('categoryPath', $categoryPath);
 $xoopsTpl->assign('lang_intro_text', $myts->displayTarea($xoopsModuleConfig['welcomemsg']));
 $xoopsTpl->assign('lang_partner', _MD_SPARTNER_PARTNER);

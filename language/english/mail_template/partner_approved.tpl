@@ -4,7 +4,7 @@ We are please to inform you that the following partner submitted on {X_SITENAME}
 
 "{PARTNER_NAME}"
 
-You can view this item here :
+You can view this item here:
 
 {PARTNER_URL}
 
@@ -19,6 +19,6 @@ Please do not reply to this message.
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 The Webmaster
 {X_ADMINMAIL}

@@ -1,37 +1,40 @@
 <?php
 
 /**
- * $Id: import.php 9889 2012-07-16 12:08:42Z beckmi $
+ *
  * Module: SmartPartner
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
 
-include_once("admin_header.php");
+include_once __DIR__ . '/admin_header.php';
 
 $op = 'none';
 
-if (isset($_GET['op'])) $op = $_GET['op'];
-if (isset($_POST['op'])) $op = $_POST['op'];
+if (isset($_GET['op'])) {
+    $op = $_GET['op'];
+}
+if (isset($_POST['op'])) {
+    $op = $_POST['op'];
+}
 
 global $xoopsDB, $xoopsModule;
 
 switch ($op) {
 
-    case "importExecute":
-
-        $importfile = (isset($_POST['importfile'])) ? $_POST['importfile'] : 'nonselected';
-        $importfile_path = XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/admin/" . $importfile . ".php";
+    case 'importExecute':
+        $importfile      = isset($_POST['importfile']) ? $_POST['importfile'] : 'nonselected';
+        $importfile_path = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/' . $importfile . '.php';
         if (!file_exists($importfile_path)) {
             $errs[] = sprintf(_AM_SPARTNER_IMPORT_FILE_NOT_FOUND, $importfile_path);
-            $error = true;
+            $error  = true;
         } else {
             include_once($importfile_path);
         }
         foreach ($msgs as $m) {
             echo $m . '<br />';
         }
-        echo "<br />";
+        echo '<br />';
         if ($error == true) {
             $endMsg = _AM_SPARTNER_IMPORT_ERROR;
         } else {
@@ -39,18 +42,19 @@ switch ($op) {
         }
 
         echo $endMsg;
-        echo "<br /><br />";
-        echo "<a href='import.php'>" . _AM_SPARTNER_IMPORT_BACK . "</a>";
-        echo "<br /><br />";
+        echo '<br /><br />';
+        echo "<a href='import.php'>" . _AM_SPARTNER_IMPORT_BACK . '</a>';
+        echo '<br /><br />';
         break;
 
-    case "default":
+    case 'default':
     default:
 
         $importfile = 'none';
 
         smartpartner_xoops_cp_header();
-        smartpartner_adminMenu(-1, _AM_SPARTNER_IMPORT);
+        $indexAdmin = new ModuleAdmin();
+        echo $indexAdmin->addNavigation(basename(__FILE__));
 
         smartpartner_collapsableBar('bottomtable', 'bottomtableicon', _AM_SPARTNER_IMPORT_TITLE, _AM_SPARTNER_IMPORT_INFO);
 
@@ -58,14 +62,13 @@ switch ($op) {
 
         include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-        $module_handler =& xoops_gethandler('module');
-        If ($module_handler->getByDirname('xoopspartners')) {
-            $importfile_select_array["xoopspartners"] = _AM_SPARTNER_IMPORT_XOOPSPARTNERS_110;
+        $moduleHandler = xoops_getHandler('module');
+        if ($moduleHandler->getByDirname('xoopspartners')) {
+            $importfile_select_array['xoopspartners'] = _AM_SPARTNER_IMPORT_XOOPSPARTNERS_110;
         }
 
-        If (isset($importfile_select_array) && count($importfile_select_array) > 0) {
-
-            $sform = new XoopsThemeForm(_AM_SPARTNER_IMPORT_SELECTION, "op", xoops_getenv('PHP_SELF'));
+        if (isset($importfile_select_array) && count($importfile_select_array) > 0) {
+            $sform = new XoopsThemeForm(_AM_SPARTNER_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'));
             $sform->setExtra('enctype="multipart/form-data"');
 
             // Partners to import
@@ -78,7 +81,7 @@ switch ($op) {
 
             // Buttons
             $button_tray = new XoopsFormElementTray('', '');
-            $hidden = new XoopsFormHidden('op', 'importExecute');
+            $hidden      = new XoopsFormHidden('op', 'importExecute');
             $button_tray->addElement($hidden);
 
             $butt_import = new XoopsFormButton('', '', _AM_SPARTNER_IMPORT, 'submit');
@@ -93,7 +96,7 @@ switch ($op) {
             $sform->display();
             unset($hidden);
         } else {
-            echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-weight: bold; font-size: small; display: block; \">" . _AM_SPARTNER_IMPORT_NO_MODULE . "</span>";
+            echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-weight: bold; font-size: small; display: block; \">" . _AM_SPARTNER_IMPORT_NO_MODULE . '</span>';
         }
 
         // End of collapsable bar
@@ -102,5 +105,6 @@ switch ($op) {
         break;
 }
 
-smart_modFooter();
-xoops_cp_footer();
+//smart_modFooter();
+//xoops_cp_footer();
+include_once __DIR__ . '/admin_footer.php';

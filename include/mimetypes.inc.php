@@ -1,232 +1,219 @@
 <?php
 
-// $Id: mimetypes.inc.php,v 1.1 2007/09/19 17:53:35 felix Exp $
+// 
 
 /**
-
  * Extension to mimetype lookup table
-
  *
-
  * This file is provided as an helper for objects who need to perform filename to mimetype translations.
-
  * Common types have been provided, but feel free to add your own one if you need it.
-
  * <br /><br />
-
  * See the enclosed file LICENSE for licensing information.
-
  * If you did not receive this file, get it at http://www.fsf.org/copyleft/gpl.html
-
  *
-
- * @copyright    The Xoops project http://www.xoops.org/
-
+ * @copyright    XOOPS Project (http://xoops.org)
  * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
-
  * @author       Skalpa Keo <skalpa@xoops.org>
-
  * @since        2.0.9.3
-
  */
 
 return array(
 
-    "hqx" => "application/mac-binhex40",
+    'hqx' => 'application/mac-binhex40',
 
-    "doc" => "application/msword",
+    'doc' => 'application/msword',
 
-    "dot" => "application/msword",
+    'dot' => 'application/msword',
 
-    "bin" => "application/octet-stream",
+    'bin' => 'application/octet-stream',
 
-    "lha" => "application/octet-stream",
+    'lha' => 'application/octet-stream',
 
-    "lzh" => "application/octet-stream",
+    'lzh' => 'application/octet-stream',
 
-    "exe" => "application/octet-stream",
+    'exe' => 'application/octet-stream',
 
-    "class" => "application/octet-stream",
+    'class' => 'application/octet-stream',
 
-    "so" => "application/octet-stream",
+    'so' => 'application/octet-stream',
 
-    "dll" => "application/octet-stream",
+    'dll' => 'application/octet-stream',
 
-    "pdf" => "application/pdf",
+    'pdf' => 'application/pdf',
 
-    "ai" => "application/postscript",
+    'ai' => 'application/postscript',
 
-    "eps" => "application/postscript",
+    'eps' => 'application/postscript',
 
-    "ps" => "application/postscript",
+    'ps' => 'application/postscript',
 
-    "smi" => "application/smil",
+    'smi' => 'application/smil',
 
-    "smil" => "application/smil",
+    'smil' => 'application/smil',
 
-    "wbxml" => "application/vnd.wap.wbxml",
+    'wbxml' => 'application/vnd.wap.wbxml',
 
-    "wmlc" => "application/vnd.wap.wmlc",
+    'wmlc' => 'application/vnd.wap.wmlc',
 
-    "wmlsc" => "application/vnd.wap.wmlscriptc",
+    'wmlsc' => 'application/vnd.wap.wmlscriptc',
 
-    "xla" => "application/vnd.ms-excel",
+    'xla' => 'application/vnd.ms-excel',
 
-    "xls" => "application/vnd.ms-excel",
+    'xls' => 'application/vnd.ms-excel',
 
-    "xlt" => "application/vnd.ms-excel",
+    'xlt' => 'application/vnd.ms-excel',
 
-    "ppt" => "application/vnd.ms-powerpoint",
+    'ppt' => 'application/vnd.ms-powerpoint',
 
-    "csh" => "application/x-csh",
+    'csh' => 'application/x-csh',
 
-    "dcr" => "application/x-director",
+    'dcr' => 'application/x-director',
 
-    "dir" => "application/x-director",
+    'dir' => 'application/x-director',
 
-    "dxr" => "application/x-director",
+    'dxr' => 'application/x-director',
 
-    "spl" => "application/x-futuresplash",
+    'spl' => 'application/x-futuresplash',
 
-    "gtar" => "application/x-gtar",
+    'gtar' => 'application/x-gtar',
 
-    "php" => "application/x-httpd-php",
+    'php' => 'application/x-httpd-php',
 
-    "php3" => "application/x-httpd-php",
+    'php3' => 'application/x-httpd-php',
 
-    "php5" => "application/x-httpd-php",
+    'php5' => 'application/x-httpd-php',
 
-    "phtml" => "application/x-httpd-php",
+    'phtml' => 'application/x-httpd-php',
 
-    "js" => "application/x-javascript",
+    'js' => 'application/x-javascript',
 
-    "sh" => "application/x-sh",
+    'sh' => 'application/x-sh',
 
-    "swf" => "application/x-shockwave-flash",
+    'swf' => 'application/x-shockwave-flash',
 
-    "sit" => "application/x-stuffit",
+    'sit' => 'application/x-stuffit',
 
-    "tar" => "application/x-tar",
+    'tar' => 'application/x-tar',
 
-    "tcl" => "application/x-tcl",
+    'tcl' => 'application/x-tcl',
 
-    "xhtml" => "application/xhtml+xml",
+    'xhtml' => 'application/xhtml+xml',
 
-    "xht" => "application/xhtml+xml",
+    'xht' => 'application/xhtml+xml',
 
-    "xhtml" => "application/xml",
+    //    'xhtml' => 'application/xml',
 
-    "ent" => "application/xml-external-parsed-entity",
+    'ent' => 'application/xml-external-parsed-entity',
 
-    "dtd" => "application/xml-dtd",
+    'dtd' => 'application/xml-dtd',
 
-    "mod" => "application/xml-dtd",
+    'mod' => 'application/xml-dtd',
 
-    "gz" => "application/x-gzip",
+    'gz' => 'application/x-gzip',
 
-    "zip" => "application/zip",
+    'zip' => 'application/zip',
 
-    "au" => "audio/basic",
+    'au' => 'audio/basic',
 
-    "snd" => "audio/basic",
+    'snd' => 'audio/basic',
 
-    "mid" => "audio/midi",
+    'mid' => 'audio/midi',
 
-    "midi" => "audio/midi",
+    'midi' => 'audio/midi',
 
-    "kar" => "audio/midi",
+    'kar' => 'audio/midi',
 
-    "mp1" => "audio/mpeg",
+    'mp1' => 'audio/mpeg',
 
-    "mp2" => "audio/mpeg",
+    'mp2' => 'audio/mpeg',
 
-    "mp3" => "audio/mpeg",
+    'mp3' => 'audio/mpeg',
 
-    "aif" => "audio/x-aiff",
+    'aif' => 'audio/x-aiff',
 
-    "aiff" => "audio/x-aiff",
+    'aiff' => 'audio/x-aiff',
 
-    "m3u" => "audio/x-mpegurl",
+    'm3u' => 'audio/x-mpegurl',
 
-    "ram" => "audio/x-pn-realaudio",
+    'ram' => 'audio/x-pn-realaudio',
 
-    "rm" => "audio/x-pn-realaudio",
+    'rm' => 'audio/x-pn-realaudio',
 
-    "rpm" => "audio/x-pn-realaudio-plugin",
+    'rpm' => 'audio/x-pn-realaudio-plugin',
 
-    "ra" => "audio/x-realaudio",
+    'ra' => 'audio/x-realaudio',
 
-    "wav" => "audio/x-wav",
+    'wav' => 'audio/x-wav',
 
-    "bmp" => "image/bmp",
+    'bmp' => 'image/bmp',
 
-    "gif" => "image/gif",
+    'gif' => 'image/gif',
 
-    "jpeg" => "image/jpeg",
+    'jpeg' => 'image/jpeg',
 
-    "jpg" => "image/jpeg",
+    'jpg' => 'image/jpeg',
 
-    "jpe" => "image/jpeg",
+    'jpe' => 'image/jpeg',
 
-    "png" => "image/png",
+    'png' => 'image/png',
 
-    "tiff" => "image/tiff",
+    'tiff' => 'image/tiff',
 
-    "tif" => "image/tif",
+    'tif' => 'image/tif',
 
-    "wbmp" => "image/vnd.wap.wbmp",
+    'wbmp' => 'image/vnd.wap.wbmp',
 
-    "pnm" => "image/x-portable-anymap",
+    'pnm' => 'image/x-portable-anymap',
 
-    "pbm" => "image/x-portable-bitmap",
+    'pbm' => 'image/x-portable-bitmap',
 
-    "pgm" => "image/x-portable-graymap",
+    'pgm' => 'image/x-portable-graymap',
 
-    "ppm" => "image/x-portable-pixmap",
+    'ppm' => 'image/x-portable-pixmap',
 
-    "xbm" => "image/x-xbitmap",
+    'xbm' => 'image/x-xbitmap',
 
-    "xpm" => "image/x-xpixmap",
+    'xpm' => 'image/x-xpixmap',
 
-    "ics" => "text/calendar",
+    'ics' => 'text/calendar',
 
-    "ifb" => "text/calendar",
+    'ifb' => 'text/calendar',
 
-    "css" => "text/css",
+    'css' => 'text/css',
 
-    "html" => "text/html",
+    'html' => 'text/html',
 
-    "htm" => "text/html",
+    'htm' => 'text/html',
 
-    "asc" => "text/plain",
+    'asc' => 'text/plain',
 
-    "txt" => "text/plain",
+    'txt' => 'text/plain',
 
-    "rtf" => "text/rtf",
+    'rtf' => 'text/rtf',
 
-    "sgml" => "text/x-sgml",
+    'sgml' => 'text/x-sgml',
 
-    "sgm" => "text/x-sgml",
+    'sgm' => 'text/x-sgml',
 
-    "tsv" => "text/tab-seperated-values",
+    'tsv' => 'text/tab-seperated-values',
 
-    "wml" => "text/vnd.wap.wml",
+    'wml' => 'text/vnd.wap.wml',
 
-    "wmls" => "text/vnd.wap.wmlscript",
+    'wmls' => 'text/vnd.wap.wmlscript',
 
-    "xsl" => "text/xml",
+    'xsl' => 'text/xml',
 
-    "mpeg" => "video/mpeg",
+    'mpeg' => 'video/mpeg',
 
-    "mpg" => "video/mpeg",
+    'mpg' => 'video/mpeg',
 
-    "mpe" => "video/mpeg",
+    'mpe' => 'video/mpeg',
 
-    "qt" => "video/quicktime",
+    'qt' => 'video/quicktime',
 
-    "mov" => "video/quicktime",
+    'mov' => 'video/quicktime',
 
-    "avi" => "video/x-msvideo",
+    'avi' => 'video/x-msvideo',
 
-    "csv" => "text/csv",
+    'csv' => 'text/csv'
 );
