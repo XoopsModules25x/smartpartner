@@ -1,9 +1,9 @@
 <?php
-// $Id: makepdf.php 9889 2012-07-16 12:08:42Z beckmi $
+// 
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                  Copyright (c) 2000-2016 XOOPS.org                        //
+//                       <http://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -25,50 +25,47 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 // Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
-// Project: The XOOPS Project                                                //
+// URL: http://www.myweb.ne.jp/, http://xoops.org/, http://jp.xoops.org/ //
+// Project: XOOPS Project                                                    //
 // ------------------------------------------------------------------------- //
 
-include "header.php";
+include_once __DIR__ . '/header.php';
 //error_reporting(0);
 //error_reporting(0);
-include_once 'header.php';
-$myts =& MyTextSanitizer::getInstance();
+
+$myts = MyTextSanitizer::getInstance();
 require_once SMARTPARTNER_ROOT_PATH . 'fpdf/fpdf.inc.php';
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-If ($id == 0) {
-    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-    exit();
+if ($id == 0) {
+    redirect_header('javascript:history.go(-1)', 2, _MD_SPARTNER_NOPARTNERSELECTED);
 }
 
 // Creating the Partner object for the selected FAQ
 $partnerObj = new SmartpartnerPartner($id);
 
 // If the selected partner was not found, exit
-If ($partnerObj->notLoaded()) {
-    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-    exit();
+if ($partnerObj->notLoaded()) {
+    redirect_header('javascript:history.go(-1)', 2, _MD_SPARTNER_NOPARTNERSELECTED);
 }
 
 // Chech the status
-If ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE) {
-    redirect_header("javascript:history.go(-1)", 2, _NOPERM);
-    exit();
+if ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE) {
+    redirect_header('javascript:history.go(-1)', 2, _NOPERM);
 }
 
-$pdf_data['title'] = $partnerObj->title();
-$pdf_data['subtitle'] = "subtitle...";
-$pdf_data['subsubtitle'] = "subsubtitle...";
-$pdf_data['date'] = "date...";
-$pdf_data['filename'] = "filename..."; //preg_replace("/[^0-9a-z\-_\.]/i",'', $myts->htmlSpecialChars($article->topic_title()).' - '.$article->title());
-$pdf_data['content'] = $partnerObj->description();
-$pdf_data['author'] = "author...";
+$pdf_data['title']       = $partnerObj->title();
+$pdf_data['subtitle']    = 'subtitle...';
+$pdf_data['subsubtitle'] = 'subsubtitle...';
+$pdf_data['date']        = 'date...';
+$pdf_data['filename']    = 'filename...'; //preg_replace("/[^0-9a-z\-_\.]/i",'', $myts->htmlSpecialChars($article->topic_title()).' - '.$article->title());
+$pdf_data['content']     = $partnerObj->description();
+$pdf_data['author']      = 'author...';
 
-echo "test";
+echo 'test';
 //Other stuff
-$puff = '<br />';
+$puff   = '<br />';
 $puffer = '<br /><br /><br />';
 
 //create the A4-PDF...

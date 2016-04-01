@@ -1,43 +1,40 @@
 <?php
 
 /**
- * $Id: partner.php 9889 2012-07-16 12:08:42Z beckmi $
+ *
  * Module: SmartPartner
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
 
-include_once("header.php");
-$xoopsOption['template_main'] = 'smartpartner_partner.html';
-include_once(XOOPS_ROOT_PATH . "/header.php");
-include_once("footer.php");
+include_once __DIR__ . '/header.php';
+$xoopsOption['template_main'] = 'smartpartner_partner.tpl';
+include_once(XOOPS_ROOT_PATH . '/header.php');
+include_once __DIR__ . '/footer.php';
 
 global $xoopsUser, $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-If ($id == 0) {
-    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-    exit();
+if ($id == 0) {
+    redirect_header('javascript:history.go(-1)', 2, _MD_SPARTNER_NOPARTNERSELECTED);
 }
 
 // Creating the Partner object for the selected FAQ
 $partnerObj = new SmartpartnerPartner($id);
 
 // If the selected partner was not found, exit
-If ($partnerObj->notLoaded()) {
-    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-    exit();
+if ($partnerObj->notLoaded()) {
+    redirect_header('javascript:history.go(-1)', 2, _MD_SPARTNER_NOPARTNERSELECTED);
 }
 include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectpermission.php';
-$smartpermissions_handler = new SmartobjectPermissionHandler($smartpartner_partner_handler);
-$grantedItems = $smartpermissions_handler->getGrantedItems('full_view');
-$grantedItems = array_merge($grantedItems, $smartpermissions_handler->getGrantedItems('partial_view'));
+$smartPermissionsHandler = new SmartobjectPermissionHandler($smartPartnerPartnerHandler);
+$grantedItems            = $smartPermissionsHandler->getGrantedItems('full_view');
+$grantedItems            = array_merge($grantedItems, $smartPermissionsHandler->getGrantedItems('partial_view'));
 
 // Chech the status
-If ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE || (!in_array($id, $grantedItems))) {
-    redirect_header("javascript:history.go(-1)", 2, _NOPERM);
-    exit();
+if ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE || (!in_array($id, $grantedItems))) {
+    redirect_header('javascript:history.go(-1)', 2, _NOPERM);
 }
 
 // Updating the counter
@@ -48,12 +45,11 @@ $partner = $partnerObj->toArray();
 // Creating the files object associated with this item
 $filesObj = $partnerObj->getFiles();
 
-$files = array();
+$files         = array();
 $embeded_files = array();
 
-foreach ($filesObj as $fileObj)
-{
-    if ($fileObj->mimetype() == 'application/x-shockwave-flash') {
+foreach ($filesObj as $fileObj) {
+    if ($fileObj->mimetype() === 'application/x-shockwave-flash') {
         $file['content'] = $fileObj->displayFlash();
 
         if (strpos($partner['maintext'], '[flash-' . $fileObj->getVar('fileid') . ']')) {
@@ -63,19 +59,18 @@ foreach ($filesObj as $fileObj)
         }
         unset($file);
     } else {
-        $file['fileid'] = $fileObj->fileid();
-        $file['name'] = $fileObj->name();
+        $file['fileid']      = $fileObj->fileid();
+        $file['name']        = $fileObj->name();
         $file['description'] = $fileObj->description();
-        $file['name'] = $fileObj->name();
-        $file['type'] = $fileObj->mimetype();
-        $file['datesub'] = $fileObj->datesub();
-        $file['hits'] = $fileObj->counter();
-        $files[] = $file;
+        $file['name']        = $fileObj->name();
+        $file['type']        = $fileObj->mimetype();
+        $file['datesub']     = $fileObj->datesub();
+        $file['hits']        = $fileObj->counter();
+        $files[]             = $file;
         unset($file);
     }
-
 }
-$partner['files'] = $files;
+$partner['files']         = $files;
 $partner['embeded_files'] = $embeded_files;
 $xoopsTpl->assign('partner', $partner);
 
@@ -86,25 +81,25 @@ $criteria->add(new Criteria('date_pub', time(), '<'));
 $criteria->add(new Criteria('date_end', time(), '>'));
 $criteria->add(new Criteria('status', _SPARTNER_STATUS_ONLINE));
 
-$offersObj =& $smartpartner_offer_handler->getObjects($criteria);
-$offers = array();
+$offersObj = $smartPartnerOfferHandler->getObjects($criteria);
+$offers    = array();
 foreach ($offersObj as $offerObj) {
     $offers[] = $offerObj->toArray();
 }
 $xoopsTpl->assign('offers', $offers);
 $categoryPath = '';
 if (isset($_GET['cid'])) {
-    $categoryObj = $smartpartner_category_handler->get($_GET['cid']);
+    $categoryObj = $smartPartnerCategoryHandler->get($_GET['cid']);
 } else {
-    $categoryObj = $smartpartner_category_handler->get($partnerObj->categoryid());
+    $categoryObj = $smartPartnerCategoryHandler->get($partnerObj->categoryid());
 }
 
 if (!$categoryObj->isNew()) {
-    $categoryPath = $categoryObj->getCategoryPath() . " > ";
+    $categoryPath = $categoryObj->getCategoryPath() . ' > ';
 }
 $categoryPath .= $partnerObj->title();
 $xoopsTpl->assign('categoryPath', $categoryPath);
-$xoopsTpl->assign('module_home', '<a href="' . SMARTPARTNER_URL . '">' . $smartpartner_moduleName . '</a>');
+$xoopsTpl->assign('module_home', '<a href="' . SMARTPARTNER_URL . '">' . $smartPartnerModuleName . '</a>');
 
 // Lanugage constants
 $xoopsTpl->assign('lang_offers', _CO_SPARTNER_OFFERS);

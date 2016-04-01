@@ -1,0 +1,17 @@
+LANGUAGE DIFFERENCES
+=====================
+
+Below are language differences from a version to next version.
+
+Legend:
++ Added
+- Removed
+* Modified
+x renamed
+
+---------------------------------------
+2.01 Beta 1  2012-07-23
+---------------------------------------
+
+__modinfo.php__
++ _MI_SPARTNER_IMPORT

@@ -1,5 +1,4 @@
-function smartpartnerPageWrap(id, page)
-{
+function smartpartnerPageWrap(id, page) {
     var revisedMessage;
     var textareaDom = xoopsGetElementById(id);
     xoopsInsertText(textareaDom, page);
@@ -7,15 +6,13 @@ function smartpartnerPageWrap(id, page)
     return;
 }
 
-function addSelectedItemsToParent()
-{
+function addSelectedItemsToParent() {
     self.opener.addToParentList(window.document.forms[0].destList);
     window.close();
 }
 
 // Fill the selcted item list with the items already present in parent.
-function fillInitialDestList()
-{
+function fillInitialDestList() {
     var destList = window.document.forms[0].destList;
     var srcList = self.opener.window.document.forms[0].elements['moderators[]'];
     for (var count = destList.options.length - 1; count >= 0; count--) {
@@ -29,8 +26,7 @@ function fillInitialDestList()
 }
 
 // Add the selected items from the source to destination list
-function addSrcToDestList()
-{
+function addSrcToDestList() {
     destList = window.document.forms[0].destList;
     srcList = window.document.forms[0].srcList;
     var len = destList.length;
@@ -56,8 +52,7 @@ function addSrcToDestList()
 }
 
 // Deletes from the destination list.
-function deleteFromDestList()
-{
+function deleteFromDestList() {
     var destList = window.document.forms[0].destList;
     var len = destList.options.length;
     for (var i = (len - 1); i >= 0; i--) {
@@ -68,8 +63,7 @@ function deleteFromDestList()
 }
 
 
-function small_window(myurl, w, h)
-{
+function small_window(myurl, w, h) {
     // La ventana se llama "Add_from_Src_to_Dest"
     var newWindow;
     LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
@@ -78,9 +72,8 @@ function small_window(myurl, w, h)
 }
 
 // Adds the list of selected items selected in the child
-// window to its list. It is called by child window to do so.  
-function addToParentList(sourceList)
-{
+// window to its list. It is called by child window to do so.
+function addToParentList(sourceList) {
     destinationList = window.document.forms[0].elements['moderators[]'];
     for (var count = destinationList.options.length - 1; count >= 0; count--) {
         destinationList.options[count] = null;
@@ -92,9 +85,8 @@ function addToParentList(sourceList)
     }
 }
 
-// Marks all the items as selected for the submit button.  
-function selectList(sourceList)
-{
+// Marks all the items as selected for the submit button.
+function selectList(sourceList) {
     sourceList = window.document.forms[0].elements['moderators[]'];
     for (var i = 0; i < sourceList.options.length; i++) {
         if (sourceList.options[i] != null) {
@@ -105,8 +97,7 @@ function selectList(sourceList)
 }
 
 // Deletes the selected items of supplied list.
-function deleteSelectedItemsFromList(sourceList)
-{
+function deleteSelectedItemsFromList(sourceList) {
     var maxCnt = sourceList.options.length;
     for (var i = maxCnt - 1; i >= 0; i--) {
         if ((sourceList.options[i] != null) && (sourceList.options[i].selected == true)) {
@@ -115,13 +106,11 @@ function deleteSelectedItemsFromList(sourceList)
     }
 }
 
-function goto_URL(object)
-{
+function goto_URL(object) {
     window.location.href = object.options[object.selectedIndex].value;
 }
 
-function toggle(id)
-{
+function toggle(id) {
     if (document.getElementById) {
         obj = document.getElementById(id);
     }
@@ -149,12 +138,11 @@ function toggle(id)
 }
 
 var iconClose = new Image();
-iconClose.src = '../images/icon/close12.gif';
+iconClose.src = '../assets/images/icon/close12.gif';
 var iconOpen = new Image();
-iconOpen.src = '../images/icon/open12.gif';
+iconOpen.src = '../assets/images/icon/open12.gif';
 
-function toggleIcon(iconName)
-{
+function toggleIcon(iconName) {
     if (document.images[iconName].src == window.iconOpen.src) {
         document.images[iconName].src = window.iconClose.src;
     } else {

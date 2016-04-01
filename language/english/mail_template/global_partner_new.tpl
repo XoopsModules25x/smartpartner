@@ -1,10 +1,10 @@
 Hello {X_UNAME},
 
-The following partner has been published in the {MODULE_NAME} module of {X_SITENAME} :
+The following partner has been published in the {MODULE_NAME} module of {X_SITENAME}:
 
 "{PARTNER_NAME}"
 
-You can review this item here :
+You can review this item here:
 {PARTNER_URL}
 
 -----------
