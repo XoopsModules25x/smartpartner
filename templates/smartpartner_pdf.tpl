@@ -147,6 +147,6 @@
                     </table>
 
                     <{$wiwimod.body}>
-                    <div style="text-align: right; padding: 3px; margin: 0px; color: #8090B1;"><span style="border-top: 1px solid #8090B1; padding: 3px; font-style:italic; font-size:small;">
+                    <div style="text-align: right; padding: 3px; margin: 0; color: #8090B1;"><span style="border-top: 1px solid #8090B1; padding: 3px; font-style:italic; font-size:small;">
 <{$_MD_WIWI_MODIFIED_TXT}> <{$wiwimod.lastmodified}> <{$_MD_WIWI_BY}> <span class="itemPoster"><{$wiwimod.author}></span>
 </span></div>

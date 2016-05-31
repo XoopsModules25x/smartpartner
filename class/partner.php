@@ -754,7 +754,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param object $db reference to a xoops_db object
+     * @param XoopsDatabase $db reference to a xoops_db object
      */
 
     public function __construct(XoopsDatabase $db)
@@ -775,7 +775,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     public function getInstance(XoopsDatabase $db)
     {
         static $instance;
-        if (!isset($instance)) {
+        if (null === $instance) {
             $instance = new static($db);
         }
 
@@ -862,7 +862,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
 
         if ($partner->isNew()) {
             $sql =
-                sprintf("INSERT INTO %s (id,  weight, hits, hits_page, url, image, image_url, title, datesub, summary, description, contact_name, contact_email, contact_phone, adress, `status`, `last_update`, `email_priv`, `phone_priv`, `adress_priv`, `showsummary`) VALUES (null, %u, %u, %u, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %u, %u, %u, %u, %u, %u)",
+                sprintf('INSERT INTO %s (id,  weight, hits, hits_page, url, image, image_url, title, datesub, summary, description, contact_name, contact_email, contact_phone, adress, `status`, `last_update`, `email_priv`, `phone_priv`, `adress_priv`, `showsummary`) VALUES (null, %u, %u, %u, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %u, %u, %u, %u, %u, %u)',
                         $this->table, $weight, $hits, $hits_page, $this->db->quoteString($url), $this->db->quoteString($image), $this->db->quoteString($image_url), $this->db->quoteString($title),
                         time(), $this->db->quoteString($summary), $this->db->quoteString($description), $this->db->quoteString($contact_name), $this->db->quoteString($contact_email),
                         $this->db->quoteString($contact_phone), $this->db->quoteString($adress), $status, time(), $email_priv, $phone_priv, $adress_priv, $showsummary);

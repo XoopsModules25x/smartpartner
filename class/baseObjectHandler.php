@@ -310,7 +310,7 @@ class SmartpartnerBaseObjectHandler extends XoopsObjectHandler
     public function getInstance(XoopsDatabase $db)
     {
         static $instance;
-        if (!isset($instance)) {
+        if (null === $instance) {
             $classname = $this->classname . 'Handler';
             $instance  = new $classname($db);
         }
