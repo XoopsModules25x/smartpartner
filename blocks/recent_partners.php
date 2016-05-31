@@ -19,7 +19,7 @@ function b_recent_partners_show($options)
     $smartPartnerCategoryHandler = smartpartner_gethandler('category');
 
     // Randomize
-    $partnersObj =& $smartPartnerPartnerHandler->getPartners($options[2], 0, _SPARTNER_STATUS_ACTIVE, 'datesub', 'DESC');
+    $partnersObj = $smartPartnerPartnerHandler->getPartners($options[2], 0, _SPARTNER_STATUS_ACTIVE, 'datesub', 'DESC');
 
     include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectpermission.php';
     $smartPermissionsHandler = new SmartobjectPermissionHandler($smartPartnerPartnerHandler);

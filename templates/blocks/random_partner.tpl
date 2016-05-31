@@ -32,13 +32,13 @@
                 </script>
             <{/literal}> <{/if}>
             <div align='center'>
-                <br/>
+                <br>
 
                 <{$partner.urllink}> <{if $partner.image != ""}>
                     <img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> />
-                    <br/>
+                    <br>
                 <{/if}> <{$partner.title}></a><{if $block.insertBr != ""}>
-            <br/><br/> <{/if}>
+            <br><br> <{/if}>
 
             </div>
         </td>

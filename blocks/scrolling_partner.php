@@ -19,7 +19,7 @@ function b_scrolling_partner_show($options)
     //$smartPartnerCategoryHandler = smartpartner_gethandler('category');
 
     // Randomize
-    $partnersObj =& $smartPartnerPartnerHandler->getPartners(0, 0, _SPARTNER_STATUS_ACTIVE);
+    $partnersObj = $smartPartnerPartnerHandler->getPartners(0, 0, _SPARTNER_STATUS_ACTIVE);
     if (count($partnersObj) > 1) {
         $key_arr  = array_keys($partnersObj);
         $key_rand = array_rand($key_arr, count($key_arr));
@@ -46,7 +46,7 @@ function b_scrolling_partner_show($options)
                 $partner['urllink']  = $partnersObj[$i]->getUrlLink('block');
                 $partner['image']    = $partnersObj[$i]->getImageUrl();
                 $partner['title']    = $partnersObj[$i]->title();
-                $smartConfig         =& smartpartner_getModuleConfig();
+                $smartConfig         = smartpartner_getModuleConfig();
                 $image_info          = smartpartner_imageResize($partnersObj[$i]->getImagePath(), $smartConfig['img_max_width'], $smartConfig['img_max_height']);
                 $block['partners'][] = $partner;
             }

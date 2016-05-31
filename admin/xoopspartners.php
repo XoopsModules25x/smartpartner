@@ -29,7 +29,8 @@ if ($op === 'start') {
 
     $result = $xoopsDB->query('select count(*) from ' . $xoopsDB->prefix('partners'));
     list($totalpartners) = $xoopsDB->fetchRow($result);
-    smartpartner_collapsableBar('bottomtable', 'bottomtableicon', sprintf(_AM_SPARTNER_IMPORT_FROM, $importFromModuleName), sprintf(_AM_SPARTNER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalpartners));
+    smartpartner_collapsableBar('bottomtable', 'bottomtableicon', sprintf(_AM_SPARTNER_IMPORT_FROM, $importFromModuleName),
+                                sprintf(_AM_SPARTNER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalpartners));
 
     $form = new XoopsThemeForm(_AM_SPARTNER_IMPORT_SETTINGS, 'import_form', XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/' . $scriptname);
 
@@ -57,7 +58,7 @@ if ($op === 'go') {
         extract($arrPartners, EXTR_PREFIX_ALL, 'xpartner');
 
         // insert partner into SmartPartner
-        $partnerObj =& $smartPartnerPartnerHandler->create();
+        $partnerObj = $smartPartnerPartnerHandler->create();
 
         if ($xpartner_status == 0) {
             $xpartner_status = _SPARTNER_STATUS_INACTIVE;
@@ -74,18 +75,18 @@ if ($op === 'go') {
         $partnerObj->setVar('status', $xpartner_status);
 
         if (!$partnerObj->store(false)) {
-            echo sprintf('  ' . _AM_SPARTNER_IMPORT_PARTNER_ERROR, $xpartner_title) . '<br/>';
+            echo sprintf('  ' . _AM_SPARTNER_IMPORT_PARTNER_ERROR, $xpartner_title) . '<br>';
             continue;
         } else {
-            echo '&nbsp;&nbsp;' . sprintf(_AM_SPARTNER_IMPORTED_PARTNER, $partnerObj->title()) . '<br />';
+            echo '&nbsp;&nbsp;' . sprintf(_AM_SPARTNER_IMPORTED_PARTNER, $partnerObj->title()) . '<br>';
             ++$cnt_imported_partner;
         }
 
-        echo '<br/>';
+        echo '<br>';
     }
 
-    echo 'Done.<br/>';
-    echo sprintf(_AM_SPARTNER_IMPORTED_PARTNERS, $cnt_imported_partner) . '<br/>';
+    echo 'Done.<br>';
+    echo sprintf(_AM_SPARTNER_IMPORTED_PARTNERS, $cnt_imported_partner) . '<br>';
 
     //exit ();
 }

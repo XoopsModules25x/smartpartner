@@ -32,7 +32,8 @@ define('_AM_SPARTNER_ACTIVE_EDITING', 'Editing an active partner');
 define('_AM_SPARTNER_ACTIVE_EDITING_INFO', 'You can edit this active partner. Modifications will immediatly take effect in the user side.');
 define('_AM_SPARTNER_ACTIVE_EXP', '<b>Active partners</b>: Actual active partners of this site.');
 define('_AM_SPARTNER_ACTIVE_PARTNERS', 'Active partners');
-define('_AM_SPARTNER_ACTIVE_PARTNERS_DSC', 'Here is a list of active partners. These partners are displayed in the user side. You can edit or delete each partners by clicking on the related button in the <b>Action</b> column.');
+define('_AM_SPARTNER_ACTIVE_PARTNERS_DSC',
+       'Here is a list of active partners. These partners are displayed in the user side. You can edit or delete each partners by clicking on the related button in the <b>Action</b> column.');
 define('_AM_SPARTNER_ALL', 'All');
 define('_AM_SPARTNER_ALL_EXP', '<b>All status</b>: All partners of the module, whatever their status.');
 define('_AM_SPARTNER_ALLITEMS', 'All partners of the module');
@@ -135,7 +136,8 @@ define('_AM_SPARTNER_IMPORT_SELECT_FILE_DSC', 'Choose the module from which to i
 define('_AM_SPARTNER_INACTIVATE_PARTNER', 'Deactivate partner');
 define('_AM_SPARTNER_INACTIVE', _CO_SPARTNER_INACTIVE);
 define('_AM_SPARTNER_INACTIVE_EDITING', 'Editing an inactive partner');
-define('_AM_SPARTNER_INACTIVE_EDITING_INFO', "You can edit this inactive partner. Modifications will be saved for this partner. However, if you would like to display this partner in the user side, you will need to set the <b>Status</b> field to 'Active'.");
+define('_AM_SPARTNER_INACTIVE_EDITING_INFO',
+       "You can edit this inactive partner. Modifications will be saved for this partner. However, if you would like to display this partner in the user side, you will need to set the <b>Status</b> field to 'Active'.");
 define('_AM_SPARTNER_INACTIVE_EXP', '<b>Inactive partners</b>: Active partners that has become, for some reason, inactive. An inactive partner is not displayed in the user side.');
 define('_AM_SPARTNER_INACTIVE_FIELD', 'Inactive');
 define('_AM_SPARTNER_INACTIVE_PARTNERS', 'Inactive partners');
@@ -178,7 +180,8 @@ define('_AM_SPARTNER_REJECTED', _CO_SPARTNER_REJECTED);
 define('_AM_SPARTNER_REJECTED_EXP', '<b>Rejected partners</b>: Submitted partners that have been rejected. A rejected partner is not displayed in the user side.');
 define('_AM_SPARTNER_REJECTED_PARTNERS', 'Rejected partners');
 define('_AM_SPARTNER_REJECTED_EDITING', 'Editing a rejected partner');
-define('_AM_SPARTNER_REJECTED_EDITING_INFO', "You can edit this rejected partner. Modifications will be saved for this partner. However, if you would like to display this partner in the user side, you will need to set the <b>Status</b> field to 'Active'.");
+define('_AM_SPARTNER_REJECTED_EDITING_INFO',
+       "You can edit this rejected partner. Modifications will be saved for this partner. However, if you would like to display this partner in the user side, you will need to set the <b>Status</b> field to 'Active'.");
 define('_AM_SPARTNER_SELECT_SORT', 'Select sort order:');
 define('_AM_SPARTNER_SELECT_STATUS', 'Select a status');
 define('_AM_SB_SETMPERM', 'Set the permission');
@@ -195,7 +198,8 @@ define('_AM_SPARTNER_SUMMARY_DSC', _CO_SPARTNER_SUMMARY_DSC);
 define('_AM_SPARTNER_SUBMITTED', _CO_SPARTNER_SUBMITTED);
 define('_AM_SPARTNER_SUBMITTED_APPROVE_SUCCESS', 'The submitted partner has been approved.');
 define('_AM_SPARTNER_SUBMITTED_EXP', '<b>Submitted partners</b>: Potential partners that have submitted their organisation to become a partner of this site.');
-define('_AM_SPARTNER_SUBMITTED_INFO', "This partner have been submitted on your site. You can edit it as you like. You can make some modifications if you'd like. Upon approval, this partner will be displayed in the user side of this site.");
+define('_AM_SPARTNER_SUBMITTED_INFO',
+       "This partner have been submitted on your site. You can edit it as you like. You can make some modifications if you'd like. Upon approval, this partner will be displayed in the user side of this site.");
 define('_AM_SPARTNER_SUBMITTED_PARTNERS', 'Submitted partners');
 define('_AM_SPARTNER_SUBMITTED_TITLE', 'Submitted partner');
 define('_AM_SPARTNER_TITLE', "Partner's name");
@@ -250,12 +254,14 @@ define('_AM_SPARTNER_CATEGORY_CREATING', 'Creating new');
 define('_AM_SPARTNER_CATEGORY_PARENT', 'Parent category');
 define('_AM_SPARTNER_CATEGORY_PARENT_DSC', 'Select a parent to make this a sub-category.');
 define('_AM_SPARTNER_CATEGORY_SUBCATS_CREATE', 'Create subcategories');
-define('_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC', "Fill the text box with the names of sub categories to create.<br>Leave blank to not create subcategory. To create more, enter the how much more to create then press 'Add'");
+define('_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC',
+       "Fill the text box with the names of sub categories to create.<br>Leave blank to not create subcategory. To create more, enter the how much more to create then press 'Add'");
 define('_AM_SPARTNER_ADD_OPT', 'Add %s  more sub categories');
 define('_AM_SPARTNER_ADD_OPT_SUBMIT', 'Add');
 define('_AM_SPARTNER_CATEGORY_CREATED', 'New category was created and saved!');
 define('_AM_SPARTNER_CATEGORY_SUBCAT_SAVE_ERROR', 'An error occured while saving the category. Here is a list of error(s):');
-define('_AM_SPARTNER_CATEGORY_DELETE_CONFIRM', 'Please note that by deleting a category, all the sub-categories and the partners of this category will be deleted as well, along with any comments that may have been posted related to ces articles. Are you sure you wish to delete this category?');
+define('_AM_SPARTNER_CATEGORY_DELETE_CONFIRM',
+       'Please note that by deleting a category, all the sub-categories and the partners of this category will be deleted as well, along with any comments that may have been posted related to ces articles. Are you sure you wish to delete this category?');
 define('_AM_SPARTNER_CATEGORY_DELETE_ERROR', 'An error occured while deleting this category.');
 define('_AM_SPARTNER_CATEGORY_NONE', 'There is no category in the module.');
 
@@ -286,6 +292,7 @@ define('_AM_SPARTNER_OFFERS_DSC', 'Here is the list of offers.');
 define('_AM_SPARTNER_OFFER_EDIT', 'Edit an offer');
 define('_AM_SPARTNER_OFFER_EDIT_INFO', '');
 define('_AM_SPARTNER_SHOW_SUMMARY', 'Show summary on partner page');
-define('_AM_SPARTNER_SHOW_SUMMARY_DSC', "Note: if any users have partial view permissions, you should set this to 'yes.' Otherwise a partner detail page displayed in partial view mode will have no info at all other than the logo and name.");
-define('_SMARTPARTNER_MESSAGE_FILE_ERROR', 'Error: Unable to store uploaded file for the following reasons:<br />%s');
+define('_AM_SPARTNER_SHOW_SUMMARY_DSC',
+       "Note: if any users have partial view permissions, you should set this to 'yes.' Otherwise a partner detail page displayed in partial view mode will have no info at all other than the logo and name.");
+define('_SMARTPARTNER_MESSAGE_FILE_ERROR', 'Error: Unable to store uploaded file for the following reasons:<br>%s');
 define('_SMARTPARTNER_MESSAGE_WRONG_MIMETYPE', 'Error: filetype is not allowed. Please re-submit.');

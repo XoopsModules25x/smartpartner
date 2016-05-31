@@ -36,10 +36,10 @@
                     <div style="border: 1px solid grey; padding: 3px; margin-bottom: 10px;"><{$category.link}></div>
                 <{/if}> <{foreach item=partner from=$category.partners}> <{$partner.urllink}> <{if $partner.image != ""}>
                     <img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> />
-                    <br/>
+                    <br>
                 <{/if}> <{$partner.title}>        </a>        <{if $block.insertBr != ""}>
-                    <br/>
-                    <br/>
+                    <br>
+                    <br>
                 <{/if}> <{/foreach}> <{/foreach}>
 
 

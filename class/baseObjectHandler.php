@@ -210,7 +210,7 @@ class SmartpartnerBaseObjectHandler extends XoopsObjectHandler
      * @return bool   deletion successful?
      * @access public
      */
-    public function delete(&$obj, $force = false)
+    public function delete($obj, $force = false)
     {
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
             return false;

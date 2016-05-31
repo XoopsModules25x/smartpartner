@@ -8,7 +8,7 @@
 class SmartpartnerSession
 {
     /**
-     * Session constructor<br />
+     * Session constructor<br>
      * Starts the session with session_start()
      * <b>Note:</b> that if the session has already started,
      * session_start() does nothing
@@ -71,14 +71,13 @@ class SmartpartnerSession
     /**
      * @return SmartpartnerSession
      */
-    public static function singleton()
+    public static function getInstance()
     {
-        static $_sess;
-
-        if (!isset($_sess)) {
-            $_sess = new SmartpartnerSession();
+        static $instance;
+        if (!isset($instance)) {
+            $instance = new static();
         }
 
-        return $_sess;
+        return $instance;
     }
 }

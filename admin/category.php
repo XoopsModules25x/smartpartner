@@ -18,8 +18,28 @@ function displayCategory($categoryObj, $level = 0)
             $description = substr($description, 0, 100 - 1) . '...';
         }
     }
-    $modify = "<a href='category.php?op=mod&categoryid=" . $categoryObj->categoryid() . '&parentid=' . $categoryObj->parentid() . "'><img src='" . $pathIcon16 . '/edit.png' . "' title='" . _AM_SPARTNER_CATEGORY_EDIT . "' alt='" . _AM_SPARTNER_CATEGORY_EDIT . "' /></a>";
-    $delete = "<a href='category.php?op=del&categoryid=" . $categoryObj->categoryid() . "'><img src='" . $pathIcon16 . '/delete.png' . "' title='" . _AM_SPARTNER_CATEGORY_DELETE . "' alt='" . _AM_SPARTNER_CATEGORY_DELETE . "' /></a>";
+    $modify = "<a href='category.php?op=mod&categoryid="
+              . $categoryObj->categoryid()
+              . '&parentid='
+              . $categoryObj->parentid()
+              . "'><img src='"
+              . $pathIcon16
+              . '/edit.png'
+              . "' title='"
+              . _AM_SPARTNER_CATEGORY_EDIT
+              . "' alt='"
+              . _AM_SPARTNER_CATEGORY_EDIT
+              . "' /></a>";
+    $delete = "<a href='category.php?op=del&categoryid="
+              . $categoryObj->categoryid()
+              . "'><img src='"
+              . $pathIcon16
+              . '/delete.png'
+              . "' title='"
+              . _AM_SPARTNER_CATEGORY_DELETE
+              . "' alt='"
+              . _AM_SPARTNER_CATEGORY_DELETE
+              . "' /></a>";
 
     $spaces = '';
     for ($j = 0; $j < $level; ++$j) {
@@ -27,7 +47,15 @@ function displayCategory($categoryObj, $level = 0)
     }
 
     echo '<tr>';
-    echo "<td class='even' align='lefet'>" . $spaces . "<a href='" . $categoryObj->getCategoryUrl() . "'><img src='" . XOOPS_URL . "/modules/smartpartner/assets/images/icon/subcat.gif' alt='' />&nbsp;" . $categoryObj->name() . '</a></td>';
+    echo "<td class='even' align='lefet'>"
+         . $spaces
+         . "<a href='"
+         . $categoryObj->getCategoryUrl()
+         . "'><img src='"
+         . XOOPS_URL
+         . "/modules/smartpartner/assets/images/icon/subcat.gif' alt='' />&nbsp;"
+         . $categoryObj->name()
+         . '</a></td>';
     echo "<td class='even' align='center'>" . $categoryObj->weight() . '</td>';
     echo "<td class='even' align='center'> $modify $delete </td>";
     echo '</tr>';
@@ -59,7 +87,7 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
         //$categoryObj = new SmartpartnerCategory($categoryid);
         $categoryObj = $smartPartnerCategoryHandler->get($categoryid);
 
-        echo "<br />\n";
+        echo "<br>\n";
         if ($categoryObj->notLoaded()) {
             redirect_header('category.php', 1, _AM_SPARTNER_NOCOLTOEDIT);
         }
@@ -69,7 +97,7 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
             $categoryObj = $smartPartnerCategoryHandler->create();
         }
 
-        //echo "<br />\n";
+        //echo "<br>\n";
         smartpartner_collapsableBar('createtable', 'createtableicon', _AM_SPARTNER_CATEGORY_CREATE, _AM_SPARTNER_CATEGORY_CREATE_INFO);
     }
     // Start category form
@@ -88,10 +116,10 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
     $image_select = new XoopsFormSelect('', 'image', $categoryObj->image());
     $image_select->addOption('-1', '---------------');
     $image_select->addOptionArray($image_array);
-    $image_select->setExtra("onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/smartpartner/images/category/' . "\", \"\", \"" . XOOPS_URL . "\")'");
+    $image_select->setExtra("onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/smartpartner/assets/images/category/' . "\", \"\", \"" . XOOPS_URL . "\")'");
     $image_tray = new XoopsFormElementTray(_AM_SPARTNER_CATEGORY_IMAGE, '&nbsp;');
     $image_tray->addElement($image_select);
-    $image_tray->addElement(new XoopsFormLabel('', "<br /><br /><img src='" . smartpartner_getImageDir('category', false) . $categoryObj->image() . "' name='image3' id='image3' alt='' />"));
+    $image_tray->addElement(new XoopsFormLabel('', "<br><br><img src='" . smartpartner_getImageDir('category', false) . $categoryObj->image() . "' name='image3' id='image3' alt='' />"));
     $image_tray->setDescription(_AM_SPARTNER_CATEGORY_IMAGE_DSC);
     $sform->addElement($image_tray);
 
@@ -122,7 +150,7 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
     // Added by fx2024
     // sub Categories
 
-    $cat_tray = new XoopsFormElementTray(_AM_SPARTNER_CATEGORY_SUBCATS_CREATE, '<br /><br />');
+    $cat_tray = new XoopsFormElementTray(_AM_SPARTNER_CATEGORY_SUBCATS_CREATE, '<br><br>');
     $cat_tray->setDescription(_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC);
     for ($i = 0; $i < $nb_subcats; ++$i) {
         if ($i < (isset($_POST['scname']) ? count($_POST['scname']) : 0)) {
@@ -362,7 +390,7 @@ switch ($op) {
 
         smartpartner_xoops_cp_header();
 
-        $categoryObj =& $smartPartnerCategoryHandler->create();
+        $categoryObj = $smartPartnerCategoryHandler->create();
         $categoryObj->setVar('name', $_POST['name']);
         $categoryObj->setVar('description', $_POST['description']);
         $categoryObj->setVar('weight', $_POST['weight']);
@@ -402,7 +430,8 @@ switch ($op) {
             // no confirm: show deletion condition
             $categoryid = isset($_GET['categoryid']) ? (int)$_GET['categoryid'] : 0;
             xoops_cp_header();
-            xoops_confirm(array('op' => 'del', 'categoryid' => $categoryObj->categoryid(), 'confirm' => 1, 'name' => $categoryObj->name()), 'category.php', _AM_SPARTNER_CATEGORY_DELETE . " '" . $categoryObj->name() . "'. <br /> <br />" . _AM_SPARTNER_CATEGORY_DELETE_CONFIRM, _AM_SPARTNER_DELETE);
+            xoops_confirm(array('op' => 'del', 'categoryid' => $categoryObj->categoryid(), 'confirm' => 1, 'name' => $categoryObj->name()), 'category.php',
+                          _AM_SPARTNER_CATEGORY_DELETE . " '" . $categoryObj->name() . "'. <br> <br>" . _AM_SPARTNER_CATEGORY_DELETE_CONFIRM, _AM_SPARTNER_DELETE);
             xoops_cp_footer();
         }
         exit();
@@ -422,7 +451,7 @@ switch ($op) {
         echo $indexAdmin->renderButton('left', '');
 
         /*
-                echo "<br />\n";
+                echo "<br>\n";
                 echo "<form><div style=\"margin-bottom: 12px;\">";
                 echo "<input type='button' name='button' onclick=\"location='category.php?op=mod'\" value='" . _AM_SPARTNER_CATEGORY_CREATE . "'>&nbsp;&nbsp;";
                 //echo "<input type='button' name='button' onclick=\"location='partner.php?op=mod'\" value='" . _AM_SPARTNER_CREATEITEM . "'>&nbsp;&nbsp;";
@@ -454,7 +483,7 @@ switch ($op) {
         include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
         $pagenav = new XoopsPageNav($totalCategories, $xoopsModuleConfig['perpage_admin'], $startcategory, 'startcategory');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
-        echo '<br />';
+        echo '<br>';
         smartpartner_close_collapsable('createdcategories', 'createdcategoriesicon');
         echo '<br>';
         //editcat(false);

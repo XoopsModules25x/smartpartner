@@ -104,24 +104,24 @@ class SmartpartnerFile extends XoopsObject
         $text = str_replace(';', '', $text);
         $text = str_replace('!', ' ', $text);
         $text = str_replace('?', ' ', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'a', $text);
-        $text = str_replace('�', 'a', $text);
-        $text = str_replace('�', 'u', $text);
-        $text = str_replace('�', 'u', $text);
-        $text = str_replace('�', 'o', $text);
-        $text = str_replace('�', 'n', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'e', $text);
-        $text = str_replace('�', 'A', $text);
-        $text = str_replace('�', 'A', $text);
-        $text = str_replace('�', 'U', $text);
-        $text = str_replace('�', 'U', $text);
-        $text = str_replace('�', 'O', $text);
-        $text = str_replace('�', 'N', $text);
+        $text = str_replace('é', 'e', $text);
+        $text = str_replace('è', 'e', $text);
+        $text = str_replace('ê', 'e', $text);
+        $text = str_replace('â', 'a', $text);
+        $text = str_replace('à', 'a', $text);
+        $text = str_replace('ù', 'u', $text);
+        $text = str_replace('û', 'u', $text);
+        $text = str_replace('ô', 'o', $text);
+        $text = str_replace('ñ', 'n', $text);
+        $text = str_replace('É', 'e', $text);
+        $text = str_replace('È', 'e', $text);
+        $text = str_replace('Ê', 'e', $text);
+        $text = str_replace('Â', 'A', $text);
+        $text = str_replace('À', 'A', $text);
+        $text = str_replace('Ù', 'U', $text);
+        $text = str_replace('Û', 'U', $text);
+        $text = str_replace('Ô', 'O', $text);
+        $text = str_replace('Ñ', 'N', $text);
         $text = str_replace("'", '', $text);
         $text = str_replace("\\", '', $text);
         $text = strip_tags($text);
@@ -143,7 +143,7 @@ class SmartpartnerFile extends XoopsObject
         global $xoopsUser, $xoopsDB, $xoopsModule;
         include_once(SMARTPARTNER_ROOT_PATH . 'class/uploader.php');
 
-        $config =& smartpartner_getModuleConfig();
+        $config = smartpartner_getModuleConfig();
 
         $id = $this->getVar('id');
 
@@ -393,7 +393,7 @@ class SmartpartnerFile extends XoopsObject
     {
         $ret     = $this->filename();
         $sep_pos = strpos($ret, '_');
-        $ret     = substr($ret, $sep_pos + 1, - $sep_pos);
+        $ret     = substr($ret, $sep_pos + 1, -$sep_pos);
 
         return $ret;
     }
@@ -476,12 +476,16 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         }
 
         if ($fileObj->isNew()) {
-            $sql = sprintf('INSERT INTO %s (fileid, id, name, description, filename, mimetype, uid, datesub, `status`, notifypub, counter) VALUES (NULL, %u, %s, %s, %s, %s, %u, %u, %u, %u, %u)', $this->db->prefix('smartpartner_files'), $id, $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename), $this->db->quoteString($mimetype), $uid, time(), $status, $notifypub, $counter);
+            $sql = sprintf('INSERT INTO %s (fileid, id, name, description, filename, mimetype, uid, datesub, `status`, notifypub, counter) VALUES (NULL, %u, %s, %s, %s, %s, %u, %u, %u, %u, %u)',
+                           $this->db->prefix('smartpartner_files'), $id, $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename),
+                           $this->db->quoteString($mimetype), $uid, time(), $status, $notifypub, $counter);
         } else {
-            $sql = sprintf('UPDATE %s SET id = %u, name = %s, description = %s, filename = %s, mimetype = %s, uid = %u, datesub = %u, status = %u, notifypub = %u, counter = %u WHERE fileid = %u', $this->db->prefix('smartpartner_files'), $id, $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename), $this->db->quoteString($mimetype), $uid, $datesub, $status, $notifypub, $counter, $fileid);
+            $sql = sprintf('UPDATE %s SET id = %u, name = %s, description = %s, filename = %s, mimetype = %s, uid = %u, datesub = %u, status = %u, notifypub = %u, counter = %u WHERE fileid = %u',
+                           $this->db->prefix('smartpartner_files'), $id, $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename),
+                           $this->db->quoteString($mimetype), $uid, $datesub, $status, $notifypub, $counter, $fileid);
         }
 
-        //echo "<br />$sql<br />";
+        //echo "<br>$sql<br>";
 
         if (false != $force) {
             $result = $this->db->queryF($sql);
@@ -577,7 +581,7 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
         }
-        //echo "<br />" . $sql . "<br />";
+        //echo "<br>" . $sql . "<br>";
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
             return $ret;
@@ -699,7 +703,7 @@ class SmartpartnerFileHandler extends XoopsObjectHandler
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        //echo "<br />" . $sql . "<br />";
+        //echo "<br>" . $sql . "<br>";
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }

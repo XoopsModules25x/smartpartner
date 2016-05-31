@@ -3,7 +3,7 @@
 <{if $on_index_page && $lang_intro_text}>
     <div class="smartpartner_infotitle"><{$lang_partnerstitle}></div>
     <div class="smartpartner_infotext"><{$lang_intro_text}></div>
-    <br/>
+    <br>
 <{/if}>
 
 <{if count($partners) > 0}><{foreach item=category from=$partners}><{if $category.title}>
@@ -28,7 +28,8 @@
         <{foreach item=partner from=$category.partners}> <{if $partner.display_type == 'part' || $partner.display_type == 'full'}>
             <tr valign="top">
                 <td valign="top" width="<{$img_max_width}>" class="smartpartner_leftcol" align='center'>
-                    <a href='<{$smartPartner_url}>partner.php?id=<{$partner.id}>&cid=<{$category.categoryid}>'><img src='<{$partner.image}>' alt='<{$partner.title}>' title='<{$partner.title}>'/></a><br><br> <{if $partner.update_status == 'new'}>
+                    <a href='<{$smartPartner_url}>partner.php?id=<{$partner.id}>&cid=<{$category.categoryid}>'><img src='<{$partner.image}>' alt='<{$partner.title}>'
+                                                                                                                    title='<{$partner.title}>'/></a><br><br> <{if $partner.update_status == 'new'}>
                         <img src='<{$smartPartner_url}>assets/images/icon/new_icon.gif'/>
                     <{elseif $partner.update_status == 'updated'}>
                         <img src='<{$smartPartner_url}>assets/images/icon/updated_icon.gif'/>
@@ -62,8 +63,8 @@
         </tr>
     </table>
 <{/foreach}><{else}><{$lang_no_partners}>
-    <br/>
-    <br/>
+    <br>
+    <br>
 <{/if}>
 <table cellspacing='0' border='0' width='98%'>
     <tr>

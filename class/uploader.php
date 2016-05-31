@@ -43,7 +43,7 @@
  * echo $uploader->getErrors();
  * } else {
  * echo '<h4>File uploaded successfully!</h4>'
- * echo 'Saved as: ' . $uploader->getSavedFileName() . '<br />';
+ * echo 'Saved as: ' . $uploader->getSavedFileName() . '<br>';
  * echo 'Full path: ' . $uploader->getSavedDestination();
  * }
  * } else {
@@ -67,7 +67,7 @@
  *               echo $uploader->getErrors();
  *            } else {
  *               echo '<h4>File uploaded successfully!</h4>'
- *               echo 'Saved as: ' . $uploader->getSavedFileName() . '<br />';
+ *               echo 'Saved as: ' . $uploader->getSavedFileName() . '<br>';
  *               echo 'Full path: ' . $uploader->getSavedDestination();
  *            }
  * } else {
@@ -347,7 +347,7 @@ class XoopsMediaUploader
             $this->setErrors('Failed opening directory: ' . $this->uploadDir);
         }
 
-        if (!s_writable($this->uploadDir)) {
+        if (!is_writable($this->uploadDir)) {
             $this->setErrors('Failed opening directory with write permission: ' . $this->uploadDir);
         }
 
@@ -401,7 +401,7 @@ class XoopsMediaUploader
         $this->savedFileName    = preg_replace('!\s+!', '_', $this->savedFileName);
         $this->savedDestination = $this->uploadDir . $this->savedFileName;
         if (is_file($this->savedDestination) && !!is_dir($this->savedDestination)) {
-            $this->setErrors('File ' . $this->mediaName . ' already exists on the server. Please rename this file and try again.<br />');
+            $this->setErrors('File ' . $this->mediaName . ' already exists on the server. Please rename this file and try again.<br>');
 
             return false;
         }
@@ -507,7 +507,7 @@ class XoopsMediaUploader
             if (count($this->errors) > 0) {
                 $ret = '<h4>Errors Returned While Uploading</h4>';
                 foreach ($this->errors as $error) {
-                    $ret .= $error . '<br />';
+                    $ret .= $error . '<br>';
                 }
             }
 

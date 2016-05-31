@@ -3,7 +3,7 @@
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 global $modversion;
-if (!empty($_POST['fct']) && !empty($_POST['op']) && $_POST['fct'] === 'modulesadmin' && $_POST['op'] === 'update_ok' && $_POST['dirname'] === $modversion['dirname']) {
+if (!empty($_POST['fct']) && !empty($_POST['op']) && $_POST['fct'] === 'modulesadmin' && $_POST['op'] === 'update_ok' && $_POST['dirname'] == $modversion['dirname']) {
     // referer check
     $ref = xoops_getenv('HTTP_REFERER');
     if ($ref == '' || strpos($ref, XOOPS_URL . '/modules/system/admin.php') === 0) {
@@ -33,14 +33,14 @@ function xoops_module_update_smartpartner($module)
 
     $dbupdater = new SmartobjectDbupdater();
 
-    echo '<code>' . _SDU_UPDATE_UPDATING_DATABASE . '<br />';
+    echo '<code>' . _SDU_UPDATE_UPDATING_DATABASE . '<br>';
 
     //smartpartner_create_upload_folders();
 
     // db migrate version = 3
     $newDbVersion = 3;
     if ($dbVersion < $newDbVersion) {
-        echo 'Database migrate to version ' . $newDbVersion . '<br />';
+        echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         $table = new SmartDbTable('smartpartner_partner');
         $table->addNewField('email_priv', " tinyint(1) NOT NULL default '0'");
@@ -57,7 +57,7 @@ function xoops_module_update_smartpartner($module)
     // db migrate version =4
     $newDbVersion = 4;
     if ($dbVersion < $newDbVersion) {
-        echo 'Database migrate to version ' . $newDbVersion . '<br />';
+        echo 'Database migrate to version ' . $newDbVersion . '<br>';
         //create new tables
         // Create table smartpartner_categories
         $table = new SmartDbTable('smartpartner_categories');
@@ -148,9 +148,9 @@ function xoops_module_update_smartpartner($module)
             }
         }
         //loop in partners to insert cat_links in partner_cat_link table
-        $smartpartnerPartnerHandler          = xoops_getModuleHandler('partner', 'smartpartner');
-//        $smartpartnerPartnerCatLinkHandler = xoops_getModuleHandler('partner_cat_link', 'smartpartner');
-        $smartpartnerPartnerCatLinkHandler = xoops_getModuleHandler('partnerCatLink', 'smartpartner');
+        $smartpartnerPartnerHandler = xoops_getModuleHandler('partner', 'smartpartner');
+        //        $smartpartnerPartnerCatLinkHandler = xoops_getModuleHandler('partner_cat_link', 'smartpartner');
+        $smartpartnerPartnerCatLinkHandler = xoops_getModuleHandler('partner_cat_link', 'smartpartner');
 
         $modulepermHandler = xoops_getHandler('groupperm');
         $moduleHandler     = xoops_getHandler('module');

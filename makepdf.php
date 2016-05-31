@@ -65,8 +65,8 @@ $pdf_data['author']      = 'author...';
 
 echo 'test';
 //Other stuff
-$puff   = '<br />';
-$puffer = '<br /><br /><br />';
+$puff   = '<br>';
+$puffer = '<br><br><br>';
 
 //create the A4-PDF...
 $pdf_config['slogan'] = $xoopsConfig['sitename'] . ' - ' . $xoopsConfig['slogan'];

@@ -38,7 +38,7 @@ function b_recent_offers_show($options)
             foreach ($offersObj as $offerObj) {
                 $block['offers'][] = $offerObj->toArray('e');
             }
-            $smartConfig =& smartpartner_getModuleConfig();
+            $smartConfig = smartpartner_getModuleConfig();
             //$image_info = smartpartner_imageResize($partnerObj->getImagePath(), $smartConfig['img_max_width'], $smartConfig['img_max_height']);
 
             if ($options[0] == 1) {

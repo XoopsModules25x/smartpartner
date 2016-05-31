@@ -32,9 +32,9 @@ switch ($op) {
             include_once($importfile_path);
         }
         foreach ($msgs as $m) {
-            echo $m . '<br />';
+            echo $m . '<br>';
         }
-        echo '<br />';
+        echo '<br>';
         if ($error == true) {
             $endMsg = _AM_SPARTNER_IMPORT_ERROR;
         } else {
@@ -42,9 +42,9 @@ switch ($op) {
         }
 
         echo $endMsg;
-        echo '<br /><br />';
+        echo '<br><br>';
         echo "<a href='import.php'>" . _AM_SPARTNER_IMPORT_BACK . '</a>';
-        echo '<br /><br />';
+        echo '<br><br>';
         break;
 
     case 'default':

@@ -35,11 +35,39 @@ echo '</tr>';
 if ($totalsubs > 0) {
     global $pathIcon16;
     foreach ($subcatsObj as $subcat) {
-        $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . $pathIcon16 . '/edit.png' . "'  title='" . _AM_SPARTNER_MODIFY . "' alt='" . _AM_SPARTNER_MODIFY . "' /></a>";
-        $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . $pathIcon16 . '/delete.png' . "'  title='" . _AM_SPARTNER_DELETE . "' alt='" . _AM_SPARTNER_DELETE . "'/></a>";
+        $modify = "<a href='category.php?op=mod&amp;categoryid="
+                  . $subcat->categoryid()
+                  . "'><img src='"
+                  . $pathIcon16
+                  . '/edit.png'
+                  . "'  title='"
+                  . _AM_SPARTNER_MODIFY
+                  . "' alt='"
+                  . _AM_SPARTNER_MODIFY
+                  . "' /></a>";
+        $delete = "<a href='category.php?op=del&amp;categoryid="
+                  . $subcat->categoryid()
+                  . "'><img src='"
+                  . $pathIcon16
+                  . '/delete.png'
+                  . "'  title='"
+                  . _AM_SPARTNER_DELETE
+                  . "' alt='"
+                  . _AM_SPARTNER_DELETE
+                  . "'/></a>";
         echo '<tr>';
         echo "<td class='head' align='left'>" . $subcat->categoryid() . '</td>';
-        echo "<td class='even' align='left'><a href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/category.php?categoryid=' . $subcat->categoryid() . '&parentid=' . $subcat->parentid() . "'>" . $subcat->name() . '</a></td>';
+        echo "<td class='even' align='left'><a href='"
+             . XOOPS_URL
+             . '/modules/'
+             . $xoopsModule->dirname()
+             . '/category.php?categoryid='
+             . $subcat->categoryid()
+             . '&parentid='
+             . $subcat->parentid()
+             . "'>"
+             . $subcat->name()
+             . '</a></td>';
         echo "<td class='even' align='left'>" . $subcat->description() . '</td>';
         echo "<td class='even' align='right'> $modify $delete </td>";
         echo '</tr>';
@@ -50,5 +78,5 @@ if ($totalsubs > 0) {
     echo '</tr>';
 }
 echo "</table>\n";
-echo "<br />\n";
+echo "<br>\n";
 smartpartner_close_collapsable('subcatstable', 'subcatsicon');
