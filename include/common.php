@@ -49,7 +49,7 @@ $smartPartnerPartnerHandler = smartpartner_gethandler('partner');
 $smartPartnerCategoryHandler = smartpartner_gethandler('category');
 
 // Creating the category link handler object
-$smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partnercatlink');
+$smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partner_cat_link');
 
 // Creating the offer handler object
 $smartPartnerOfferHandler = smartpartner_gethandler('offer');

@@ -121,7 +121,7 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
         }
-        //echo "<br />$sql<br />";exit;
+        //echo "<br>$sql<br>";exit;
         $result = $this->_db->query($sql, $limit, $start);
         // if no records from db, return empty array
         if (!$result) {
@@ -241,7 +241,7 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
      * @param $obj
      * @return string
      */
-    public function _insertQuery(&$obj)
+    public function _insertQuery($obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
@@ -249,7 +249,8 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
         }
 
         $sql = sprintf('INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
-               (%u, %s, %s, %s, %u, %u)', $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext), $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+               (%u, %s, %s, %s, %u, %u)', $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext), $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name),
+                       $mime_admin, $mime_user);
 
         return $sql;
     }
@@ -258,7 +259,7 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
      * @param $obj
      * @return string
      */
-    public function _updateQuery(&$obj)
+    public function _updateQuery($obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
@@ -266,7 +267,8 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
         }
 
         $sql = sprintf('UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
-               mime_id = %u', $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext), $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+               mime_id = %u', $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext), $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin,
+                       $mime_user, $mime_id);
 
         return $sql;
     }
@@ -275,10 +277,11 @@ class smartpartnerMimetypeHandler extends SmartpartnerBaseObjectHandler
      * @param $obj
      * @return string
      */
-    public function _deleteQuery(&$obj)
+    public function _deleteQuery($obj)
     {
         $sql = sprintf('DELETE FROM %s WHERE mime_id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('mime_id'));
 
         return $sql;
     }
 } // end class
+

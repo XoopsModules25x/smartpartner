@@ -17,7 +17,8 @@ function get_content($cat_id, $catsObj, $displaysubs)
     $i       = 0;
     foreach ($catsObj as $catObj) {
         if ($catObj->getVar('parentid') == $cat_id) {
-            $content[$catObj->getVar('categoryid')]['link']        = "<a href='" . XOOPS_URL . '/modules/smartpartner/index.php?view_category_id=' . $catObj->getVar('categoryid') . "'>" . $catObj->getVar('name') . '</a>';
+            $content[$catObj->getVar('categoryid')]['link']        =
+                "<a href='" . XOOPS_URL . '/modules/smartpartner/index.php?view_category_id=' . $catObj->getVar('categoryid') . "'>" . $catObj->getVar('name') . '</a>';
             $content[$catObj->getVar('categoryid')]['categories']  = get_content($catObj->getVar('categoryid'), $catsObj, $displaysubs);
             $content[$catObj->getVar('categoryid')]['displaysubs'] = $displaysubs;
         }
@@ -41,7 +42,7 @@ function b_categories_list_show($options)
     $criteria->setSort(isset($options[0]) ? $options[0] : 'name');
     $criteria->setOrder(isset($options[1]) ? $options[1] : 'ASC');
 
-    $catsObj  =& $smartPartnerCategoryHandler->getobjects($criteria, true);
+    $catsObj  = $smartPartnerCategoryHandler->getObjects($criteria, true);
     $catArray = get_content(0, $catsObj, $options[2]);
 
     $block                = array();

@@ -41,7 +41,7 @@ class SmartpartnerKeyhighlighter
     /**
      * Main constructor
      *
-     * This is the main constructor of keyhighlighter class. <br />
+     * This is the main constructor of keyhighlighter class. <br>
      * It's the only public method of the class.
      * @param string   $keywords         the keywords you want to highlight
      * @param boolean  $singlewords      specify if it has to highlight also the single words.

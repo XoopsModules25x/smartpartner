@@ -103,7 +103,7 @@ function smartpartner_SetMeta($key, $value)
 function smartpartner_highlighter($matches)
 {
     //$color=getmoduleoption('highlightcolor');
-    $smartConfig =& smartpartner_getModuleConfig();
+    $smartConfig = smartpartner_getModuleConfig();
     $color       = $smartConfig['highlight_color'];
     if (0 !== strpos($color, '#')) {
         $color = '#' . $color;
@@ -126,7 +126,7 @@ function smartpartner_getAllowedImagesTypes()
  * @author      Aidan Lister <aidan@php.net>
  * @param  string $source The source
  * @param  string $dest   The destination
- * @return bool Returns true on success, false on failure
+ * @return bool   Returns true on success, false on failure
  * @throws
  */
 function smartpartner_copyr($source, $dest)
@@ -138,7 +138,7 @@ function smartpartner_copyr($source, $dest)
 
     // Make destination directory
     if (!is_dir($dest)) {
-//        mkdir($dest);
+        //        mkdir($dest);
         if (!@mkdir($dest) && !is_dir($dest)) {
             throw Exception("Couldn't create this directory: " . $dest);
         }
@@ -171,7 +171,7 @@ function smartpartner_copyr($source, $dest)
  */
 function smartpartner_getHelpPath()
 {
-    $smartConfig =& smartpartner_getModuleConfig();
+    $smartConfig = smartpartner_getModuleConfig();
     switch ($smartConfig['helppath_select']) {
         case 'docs.xoops.org':
             return 'http://docs.xoops.org/help/spartnerh/index.htm';
@@ -279,7 +279,7 @@ function smartpartner_gethandler($name, $optional = false)
         }
     }
     if (!isset($handlers[$name]) && !$optional) {
-        trigger_error('Class <b>' . $class . '</b> does not exist<br />Handler Name: ' . $name . ' | Module path: ' . SMARTPARTNER_ROOT_PATH, E_USER_ERROR);
+        trigger_error('Class <b>' . $class . '</b> does not exist<br>Handler Name: ' . $name . ' | Module path: ' . SMARTPARTNER_ROOT_PATH, E_USER_ERROR);
     }
     $ret = isset($handlers[$name]) ? $handlers[$name] : false;
 
@@ -441,12 +441,20 @@ function smartpartner_modFooter()
     $versioninfo  = &$hModule->get($smartModule->getVar('mid'));
     $modfootertxt = 'Module ' . $versioninfo->getInfo('name') . ' - Version ' . $versioninfo->getInfo('version') . '';
     if (!defined('_AM_SPARTNER_XOOPS_PRO')) {
-        define('_AM_SPARTNER_XOOPS_PRO', 'Do you need help with this module ?<br />Do you need new features not yet availale?');
+        define('_AM_SPARTNER_XOOPS_PRO', 'Do you need help with this module ?<br>Do you need new features not yet availale?');
     }
 
-    echo "<div style='padding-top: 8px; padding-bottom: 10px; text-align: center;'><a href='" . $versioninfo->getInfo('support_site_url') . "' target='_blank'><img src='" . XOOPS_URL . "/modules/smartpartner/assets/images/spcssbutton.gif' title='" . $modfootertxt . "' alt='" . $modfootertxt . "'/></a></div>";
+    echo "<div style='padding-top: 8px; padding-bottom: 10px; text-align: center;'><a href='"
+         . $versioninfo->getInfo('support_site_url')
+         . "' target='_blank'><img src='"
+         . XOOPS_URL
+         . "/modules/smartpartner/assets/images/spcssbutton.gif' title='"
+         . $modfootertxt
+         . "' alt='"
+         . $modfootertxt
+         . "'/></a></div>";
     echo '<div style="border: 2px solid #C2CDD6;">';
-    echo '<div style="font-weight:bold; padding-top: 5px; text-align: center;">' . _AM_SPARTNER_XOOPS_PRO . '<br /><a href="http://inboxinternational.com/modules/smartcontent/page.php?pageid=10"><img src="http://inboxinternational.com/images/INBOXsign150_noslogan.gif" alt="Need XOOPS Professional Services?" title="Need XOOPS Professional Services?"></a>
+    echo '<div style="font-weight:bold; padding-top: 5px; text-align: center;">' . _AM_SPARTNER_XOOPS_PRO . '<br><a href="http://inboxinternational.com/modules/smartcontent/page.php?pageid=10"><img src="http://inboxinternational.com/images/INBOXsign150_noslogan.gif" alt="Need XOOPS Professional Services?" title="Need XOOPS Professional Services?"></a>
 <a href="http://inboxinternational.com/modules/smartcontent/page.php?pageid=10"><img src="http://inboxinternational.com/images/xoops_services_pro_english.gif" alt="Need XOOPS Professional Services?" title="Need XOOPS Professional Services?"></a>
 </div>';
     echo '</div>';
@@ -572,7 +580,7 @@ function smartpartner_formatErrors($errors = array())
 {
     $ret = '';
     foreach ($errors as $key => $value) {
-        $ret .= '<br /> - ' . $value;
+        $ret .= '<br> - ' . $value;
     }
 
     return $ret;
@@ -592,7 +600,7 @@ function smartpartner_upload_file($another = false, $withRedirect = true, $itemO
 
     $id      = isset($_POST['id']) ? (int)$_POST['id'] : 0;
     $uid     = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
-    $session = SmartpartnerSession::singleton();
+    $session = SmartpartnerSession::getInstance();
     $session->set('smartpartner_file_filename', isset($_POST['name']) ? $_POST['name'] : '');
     $session->set('smartpartner_file_description', isset($_POST['description']) ? $_POST['description'] : '');
     $session->set('smartpartner_file_status', $_POST['file_status']);
@@ -625,7 +633,7 @@ function smartpartner_upload_file($another = false, $withRedirect = true, $itemO
         */
     if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
         if (!$ret = $fileObj->checkUpload('userfile', $allowed_mimetypes, $errors)) {
-            $errorstxt = implode('<br />', $errors);
+            $errorstxt = implode('<br>', $errors);
 
             $message = sprintf(_SMARTPARTNER_MESSAGE_FILE_ERROR, $errorstxt);
             if ($withRedirect) {

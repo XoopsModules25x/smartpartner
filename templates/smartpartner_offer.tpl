@@ -2,7 +2,7 @@
     <div><{$lang_offer_intro}></div><{/if}><{foreach item=category from=$offers}>
     <b><{$category.name}></b>
     :
-    <br/>
+    <br>
     <{foreach key=key item=partner from=$category.partners}><{foreach item=offer from=$partner.offers}>
         <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$key}>"><{$offer.title}></a>
         <table>
@@ -19,7 +19,7 @@
             </td>
         </tr>
         </table><{/foreach}>
-        <br/>
+        <br>
     <{/foreach}><{if $category.subcats}>
         <div style="padding-left:15px;">
         <{include file='db:smartpartner_offer.html' offers=$category.subcats nointro=1}>

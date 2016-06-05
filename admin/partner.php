@@ -12,9 +12,9 @@ function showfiles($partnerObj)
     // UPLOAD FILES
     //include_once XOOPS_ROOT_PATH . '/modules/smartpartner/include/functions.php';
     global $xoopsModule, $smartPartnerFileHandler;
-
+    $pathIcon16 = '../' . $xoopsModule->getInfo('icons16');
     smartpartner_collapsableBar('filetable', 'filetableicon', _AM_SPARTNER_FILES_LINKED);
-    $filesObj =& $smartPartnerFileHandler->getAllFiles($partnerObj->id());
+    $filesObj = $smartPartnerFileHandler->getAllFiles($partnerObj->id());
     if (count($filesObj) > 0) {
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo '<tr>';
@@ -27,8 +27,26 @@ function showfiles($partnerObj)
         echo '</tr>';
 
         for ($i = 0, $iMax = count($filesObj); $i < $iMax; ++$i) {
-            $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . $pathIcon16 . '/edit.png' . "'  title='" . _AM_SPARTNER_EDITFILE . "' alt='" . _AM_SPARTNER_EDITFILE . "' /></a>";
-            $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . $pathIcon16 . '/delete.png' . "'  title='" . _AM_SPARTNER_DELETEFILE . "' alt='" . _AM_SPARTNER_DELETEFILE . "'/></a>";
+            $modify = "<a href='file.php?op=mod&fileid="
+                      . $filesObj[$i]->fileid()
+                      . "'><img src='"
+                      . $pathIcon16
+                      . '/edit.png'
+                      . "'  title='"
+                      . _AM_SPARTNER_EDITFILE
+                      . "' alt='"
+                      . _AM_SPARTNER_EDITFILE
+                      . "' /></a>";
+            $delete = "<a href='file.php?op=del&fileid="
+                      . $filesObj[$i]->fileid()
+                      . "'><img src='"
+                      . $pathIcon16
+                      . '/delete.png'
+                      . "'  title='"
+                      . _AM_SPARTNER_DELETEFILE
+                      . "' alt='"
+                      . _AM_SPARTNER_DELETEFILE
+                      . "'/></a>";
             if ($filesObj[$i]->status() == 0) {
                 $not_visible = "<img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/no.gif'/>";
             } else {
@@ -119,16 +137,16 @@ function editpartner($showmenu = false, $id = 0)
                 break;
         }
 
-        echo "<br />\n";
+        echo "<br>\n";
         smartpartner_collapsableBar('editpartner', 'editpartmericon', $page_title, $page_info);
     } else {
         // there's no parameter, so we're adding a partner
-        $partnerObj         =& $smartPartnerPartnerHandler->create();
+        $partnerObj         = $smartPartnerPartnerHandler->create();
         $breadcrumb_action1 = _AM_SPARTNER_PARTNERS;
         $breadcrumb_action2 = _AM_SPARTNER_CREATE;
         $button_caption     = _AM_SPARTNER_CREATE;
         $new_status         = _SPARTNER_STATUS_ACTIVE;
-        smartpartner_collapsableBar('addpartner', 'addpartmericon', _AM_SPARTNER_PARTNER_CREATING, _AM_SPARTNER_PARTNER_CREATING_DSC);
+        smartpartner_collapsableBar('addpartner', 'addpartnericon', _AM_SPARTNER_PARTNER_CREATING, _AM_SPARTNER_PARTNER_CREATING_DSC);
     }
 
     // PARTNER FORM
@@ -157,7 +175,7 @@ function editpartner($showmenu = false, $id = 0)
     $logo_select->setExtra("onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/' . SMARTPARTNER_DIRNAME . '/images' . "\", \"\", \"" . XOOPS_URL . "\")'");
     $logo_tray = new XoopsFormElementTray(_AM_SPARTNER_LOGO, '&nbsp;');
     $logo_tray->addElement($logo_select);
-    $logo_tray->addElement(new XoopsFormLabel('', "<br /><br /><img src='" . smartpartner_getImageDir('', false) . $partnerObj->image() . "' name='image3' id='image3' alt='' />"));
+    $logo_tray->addElement(new XoopsFormLabel('', "<br><br><img src='" . smartpartner_getImageDir('', false) . $partnerObj->image() . "' name='image3' id='image3' alt='' />"));
     $logo_tray->setDescription(_AM_SPARTNER_LOGO_DSC);
     $sform->addElement($logo_tray);
 
@@ -428,7 +446,6 @@ switch ($op) {
         // Storing the partner
         if (!$partnerObj->store()) {
             redirect_header('javascript:history.go(-1)', 3, $redirect_msgs['error'] . smartpartner_formatErrors($partnerObj->getErrors()));
-            exit;
         }
 
         if (($_POST['original_status'] == _SPARTNER_STATUS_SUBMITTED) || ($_POST['status'] == _SPARTNER_STATUS_ACTIVE)) {
@@ -466,7 +483,8 @@ switch ($op) {
             // no confirm: show deletion condition
             $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
             xoops_cp_header();
-            xoops_confirm(array('op' => 'del', 'id' => $partnerObj->id(), 'confirm' => 1, 'name' => $partnerObj->title()), 'partner.php', _AM_SPARTNER_DELETETHISP . " <br />'" . $partnerObj->title() . "' <br /> <br />", _AM_SPARTNER_DELETE);
+            xoops_confirm(array('op' => 'del', 'id' => $partnerObj->id(), 'confirm' => 1, 'name' => $partnerObj->title()), 'partner.php',
+                          _AM_SPARTNER_DELETETHISP . " <br>'" . $partnerObj->title() . "' <br> <br>", _AM_SPARTNER_DELETE);
             xoops_cp_footer();
         }
 
@@ -480,9 +498,9 @@ switch ($op) {
         echo $indexAdmin->addNavigation(basename(__FILE__));
 
         $indexAdmin->addItemButton(_AM_SPARTNER_PARTNER_CREATE, 'partner.php?op=add', 'add', '');
-        echo $indexAdmin->renderButton('left', '');        
+        echo $indexAdmin->renderButton('left', '');
 
-        //        echo "<br />\n";
+        //        echo "<br>\n";
         //        echo "<form><div style=\"margin-bottom: 12px;\">";
         //        echo "<input type='button' name='button' onclick=\"location='partner.php?op=mod'\" value='" . _AM_SPARTNER_PARTNER_CREATE . "'>&nbsp;&nbsp;";
         //        echo "</div></form>";
@@ -510,11 +528,37 @@ switch ($op) {
         echo '</tr>';
         if ($totalpartners > 0) {
             for ($i = 0; $i < $totalPartnersOnPage; ++$i) {
-                $modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . $pathIcon16 . '/edit.png' . "'  title='" . _AM_SPARTNER_EDITPARTNER . "' alt='" . _AM_SPARTNER_EDITPARTNER . "' /></a>&nbsp;";
-                $delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . $pathIcon16 . '/delete.png' . "'  title='" . _AM_SPARTNER_DELETEPARTNER . "' alt='" . _AM_SPARTNER_DELETEPARTNER . "'/></a>&nbsp;";
+                $modify = "<a href='partner.php?op=mod&id="
+                          . $partnersObj[$i]->id()
+                          . "'><img src='"
+                          . $pathIcon16
+                          . '/edit.png'
+                          . "'  title='"
+                          . _AM_SPARTNER_EDITPARTNER
+                          . "' alt='"
+                          . _AM_SPARTNER_EDITPARTNER
+                          . "' /></a>&nbsp;";
+                $delete = "<a href='partner.php?op=del&id="
+                          . $partnersObj[$i]->id()
+                          . "'><img src='"
+                          . $pathIcon16
+                          . '/delete.png'
+                          . "'  title='"
+                          . _AM_SPARTNER_DELETEPARTNER
+                          . "' alt='"
+                          . _AM_SPARTNER_DELETEPARTNER
+                          . "'/></a>&nbsp;";
 
                 echo '<tr>';
-                echo "<td class='head' align='left'><a href='" . SMARTPARTNER_URL . 'partner.php?id=' . $partnersObj[$i]->id() . "'><img src='" . SMARTPARTNER_URL . "assets/images/links/partner.gif' alt=''/>&nbsp;" . $partnersObj[$i]->title() . '</a></td>';
+                echo "<td class='head' align='left'><a href='"
+                     . SMARTPARTNER_URL
+                     . 'partner.php?id='
+                     . $partnersObj[$i]->id()
+                     . "'><img src='"
+                     . SMARTPARTNER_URL
+                     . "assets/images/links/partner.gif' alt=''/>&nbsp;"
+                     . $partnersObj[$i]->title()
+                     . '</a></td>';
                 echo "<td class='even' align='left'>" . $partnersObj[$i]->summary(100) . '</td>';
                 echo "<td class='even' align='center'>" . $partnersObj[$i]->hits() . '</td>';
                 echo "<td class='even' align='center'>" . $partnersObj[$i]->getStatusName() . '</td>';
@@ -528,7 +572,7 @@ switch ($op) {
             echo '</tr>';
         }
         echo "</table>\n";
-        echo "<br />\n";
+        echo "<br>\n";
 
         $pagenav = new XoopsPageNav($totalpartners, $xoopsModuleConfig['perpage_admin'], $startpartner, 'startpartner');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';

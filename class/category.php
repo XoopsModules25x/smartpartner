@@ -151,7 +151,7 @@ class SmartpartnerCategory extends XoopsObject
         $parentid = $this->parentid();
         global $smartPartnerCategoryHandler;
         if ($parentid != 0) {
-            $parentObj =& $smartPartnerCategoryHandler->get($parentid);
+            $parentObj = $smartPartnerCategoryHandler->get($parentid);
             if ($parentObj->notLoaded()) {
                 exit;
             }
@@ -249,7 +249,7 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
      * SmartpartnerCategoryHandler constructor.
      * @param object|XoopsDatabase $db
      */
-    public function __construct($db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'smartpartner_categories', 'SmartpartnerCategory', 'categoryid', 'name');
     }
@@ -280,7 +280,7 @@ class SmartpartnerCategoryHandler extends smartpartner_PersistableObjectHandler
             $smartPartnerPartnerHandler = smartpartner_gethandler('partner');
         }
         $criteria = new Criteria('category', $category->categoryid());
-        $partners =& $smartPartnerPartnerHandler->getObjects($criteria);
+        $partners = $smartPartnerPartnerHandler->getObjects($criteria);
         if ($partners) {
             foreach ($partners as $partner) {
                 $smartPartnerPartnerHandler->delete($partner);

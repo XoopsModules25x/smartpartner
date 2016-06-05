@@ -28,7 +28,8 @@ $modversion['dirname'] = basename(__DIR__);
 // Added by marcan for the About page in admin section
 $modversion['modFooter']              = 'smartpartner_modFooter';
 $modversion['developer_lead']         = 'marcan [Marc-Andre Lanciault]';
-$modversion['developer_contributor']  = 'Andy Cleff, Raul Recio, chapi, Marco, Mariuss, outch, M0nty, Christian, Philou, M4d3L, solo, GiJOE, Predator, phppp, AmiCalmant, hsalazar, Aidan Lister, fx2024, Zabou';
+$modversion['developer_contributor']  =
+    'Andy Cleff, Raul Recio, chapi, Marco, Mariuss, outch, M0nty, Christian, Philou, M4d3L, solo, GiJOE, Predator, phppp, AmiCalmant, hsalazar, Aidan Lister, fx2024, Zabou';
 $modversion['developer_website_url']  = 'http://www.smartfactory.ca';
 $modversion['developer_website_name'] = 'SmartFactory.ca';
 $modversion['developer_email']        = 'marcan@smartfactory';
@@ -74,16 +75,16 @@ $modversion['submit_bug']        = 'http://dev.xoops.org/modules/xfmod/tracker/?
 $modversion['submit_feature']    = 'http://dev.xoops.org/modules/xfmod/tracker/?func=add&group_id=1109&atid=584';
 
 $modversion['author_word'] = "
-<b>The SmartFactory</b> would like to thank everyone involved in this project.<br />
-<br />
-A big thanks to chapi, Marco, Mariuss, oucth, Christian, Philou, solo, yoyo2021 and AmiCalmant for their feedback on the module.<br />
-<br />
-Thanks to hsalazar who originally created the admin interface the SmartModules are using. A lot of modules are now using it and it's because of your work. Thank you Horacio !<br />
-<br />
-Thanks to GiJoe for the blocks and groups management pages. Your code is very usefull to a lot of developers !<br />
-<br />
-Thanks to Zabou for supporting me ;-)<br />
-<br />
+<b>The SmartFactory</b> would like to thank everyone involved in this project.<br>
+<br>
+A big thanks to chapi, Marco, Mariuss, oucth, Christian, Philou, solo, yoyo2021 and AmiCalmant for their feedback on the module.<br>
+<br>
+Thanks to hsalazar who originally created the admin interface the SmartModules are using. A lot of modules are now using it and it's because of your work. Thank you Horacio !<br>
+<br>
+Thanks to GiJoe for the blocks and groups management pages. Your code is very usefull to a lot of developers !<br>
+<br>
+Thanks to Zabou for supporting me ;-)<br>
+<br>
 Enjoy <b>SmartPartner</b> !
 ";
 
@@ -291,7 +292,8 @@ $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 86400;
-$modversion['config'][$i]['options']     = array('_MI_SPARTNER_HOUR' => '3600', '_MI_SPARTNER_3HOURS' => '10800', '_MI_SPARTNER_5HOURS' => '18000', '_MI_SPARTNER_10HOURS' => '36000', '_MI_SPARTNER_DAY' => '86400');
+$modversion['config'][$i]['options']     =
+    array('_MI_SPARTNER_HOUR' => '3600', '_MI_SPARTNER_3HOURS' => '10800', '_MI_SPARTNER_5HOURS' => '18000', '_MI_SPARTNER_10HOURS' => '36000', '_MI_SPARTNER_DAY' => '86400');
 $modversion['config'][$i]['category']    = 'other';
 
 ++$i;

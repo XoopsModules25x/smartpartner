@@ -32,15 +32,15 @@
                 </script>
             <{/literal}> <{/if}>
             <div align='center'>
-                <br/> <{foreach item=offer from=$block.offers}>
+                <br> <{foreach item=offer from=$block.offers}>
                     <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$offer.partnerid}>"> <{if $offer.image != ""}>
                             <img src="<{$xoops_url}>/uploads/smartpartner/offer/<{$offer.image}>" border="0" alt="<{$offer.title}>" <{$block.fadeImage}> />
-                            <br/>
+                            <br>
                         <{/if}> <{$offer.title}>
                     </a>
                     <{if $block.insertBr != ""}>
-                        <br/>
-                        <br/>
+                        <br>
+                        <br>
                     <{/if}> <{/foreach}>
             </div>
         </td>

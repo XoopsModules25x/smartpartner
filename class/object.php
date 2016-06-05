@@ -97,7 +97,7 @@ class smartpartner_PersistableObjectHandler extends XoopsObjectHandler
      * @param  bool  $as_object whether to return an object or an array
      * @return mixed reference to the object, FALSE if failed
      */
-    public function &get($id, $as_object = true)
+    public function get($id, $as_object = true)
     {
         if (is_array($this->keyName)) {
             $criteria = new CriteriaCompo();

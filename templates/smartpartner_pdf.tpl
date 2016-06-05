@@ -5,7 +5,8 @@
     <meta http-equiv="content-language" content="fr"/>
     <meta name="robots" content="index,follow"/>
     <meta name="keywords" content="InBox, Solutions"/>
-    <meta name="description" content="InBox Solutions propose une gamme complète de solutions pour sites web dentreprises. De la simple conception de site au développement dapplications web performantes, InBox Solutions est votre seul arrêt pour tout vos besoins web !"/>
+    <meta name="description"
+          content="InBox Solutions propose une gamme complète de solutions pour sites web dentreprises. De la simple conception de site au développement dapplications web performantes, InBox Solutions est votre seul arrêt pour tout vos besoins web !"/>
     <meta name="rating" content="general"/>
     <meta name="author" content="XOOPS"/>
     <meta name="copyright" content="Copyright &copy; 2001-2003"/>
@@ -38,9 +39,11 @@
     <tr>
         <td width="60%" valign="top">
             <div class="smartpartner_partnertitle">
-                <{$partner.urllink}><img style='float: right; padding: 10px;' src='<{$partner.image}>' alt='<{$partner.clean_title}>' title='<{$partner.clean_title}>' align='right' border='5px'/></a><{$partner.title}> <{if $isAdmin}>
+                <{$partner.urllink}><img style='float: right; padding: 10px;' src='<{$partner.image}>' alt='<{$partner.clean_title}>' title='<{$partner.clean_title}>' align='right'
+                                         border='5px'/></a><{$partner.title}> <{if $isAdmin}>
                     <a href="<{$xoops_url}>/modules/smartpartner/admin/partner.php?op=mod&id=<{$partner.id}>"><img src="<{xoModuleIcons16 edit.png}>" title="<{$lang_edit}>" alt="<{$lang_edit}>"/></a>
-                    <a href="<{$xoops_url}>/modules/smartpartner/admin/partner.php?op=del&id=<{$partner.id}>"><img src="<{xoModuleIcons16 delete.png}>" title="<{$lang_delete}>" alt="<{$lang_delete}>"/></a>
+                    <a href="<{$xoops_url}>/modules/smartpartner/admin/partner.php?op=del&id=<{$partner.id}>"><img src="<{xoModuleIcons16 delete.png}>" title="<{$lang_delete}>"
+                                                                                                                   alt="<{$lang_delete}>"/></a>
                 <{/if}>
             </div>
             <div class="smartpartner_partnersummary">
@@ -50,7 +53,7 @@
     </tr>
 </table>
 
-<br/>
+<br>
 
 <table width="100%">
     <tr>
@@ -144,6 +147,6 @@
                     </table>
 
                     <{$wiwimod.body}>
-                    <div style="text-align: right; padding: 3px; margin: 0px; color: #8090B1;"><span style="border-top: 1px solid #8090B1; padding: 3px; font-style:italic; font-size:small;">
+                    <div style="text-align: right; padding: 3px; margin: 0; color: #8090B1;"><span style="border-top: 1px solid #8090B1; padding: 3px; font-style:italic; font-size:small;">
 <{$_MD_WIWI_MODIFIED_TXT}> <{$wiwimod.lastmodified}> <{$_MD_WIWI_BY}> <span class="itemPoster"><{$wiwimod.author}></span>
 </span></div>

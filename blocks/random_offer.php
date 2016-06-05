@@ -30,7 +30,7 @@ function b_random_offer_show($options)
         $criteria->add(new Criteria('status', _SPARTNER_STATUS_ONLINE));
 
         // Randomize
-        $offersObj =& $smartPartnerOfferHandler->getObjects($criteria);
+        $offersObj = $smartPartnerOfferHandler->getObjects($criteria);
         if (count($offersObj) > 0) {
             $key_arr  = array_keys($offersObj);
             $key_rand = array_rand($key_arr, 1);
@@ -41,7 +41,7 @@ function b_random_offer_show($options)
         if (isset($offerObj) && is_object($offerObj)) {
             $block['offers'][] = $offerObj->toArray('e');
 
-            $smartConfig =& smartpartner_getModuleConfig();
+            $smartConfig = smartpartner_getModuleConfig();
             //$image_info = smartpartner_imageResize($partnerObj->getImagePath(), $smartConfig['img_max_width'], $smartConfig['img_max_height']);
 
             if ($options[0] == 1) {

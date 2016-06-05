@@ -38,7 +38,7 @@ function editoffer($showmenu = false, $offerid = 0, $fct = '')
     if ($showmenu) {
         //smart_adminMenu($menuTab, $breadcrumb);
     }
-    echo "<br />\n";
+    echo "<br>\n";
     smart_collapsableBar($collaps_name, $title, $info);
 
     $sform = $offerObj->getForm($form_name, 'addoffer', false, $submit_button_caption);
@@ -110,7 +110,7 @@ switch ($op) {
 
         //smart_adminMenu(3, _AM_SPARTNER_OFFERS);
 
-        //        echo "<br />\n";
+        //        echo "<br>\n";
         //        echo "<form><div style=\"margin-bottom: 12px;\">";
         //        echo "<input type='button' name='button' onclick=\"location='offer.php?op=mod'\" value='" . _AM_SPARTNER_OFFER_CREATE . "'>&nbsp;&nbsp;";
         //        echo "</div></form>";
@@ -126,7 +126,7 @@ switch ($op) {
         $objectTable->addColumn(new SmartObjectColumn('status', 'center', 100));
         $objectTable->render();
 
-        echo '<br />';
+        echo '<br>';
         smart_close_collapsable('createdoffers');
         echo '<br>';
 

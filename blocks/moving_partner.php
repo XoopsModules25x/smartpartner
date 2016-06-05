@@ -36,7 +36,7 @@ function b_random_partner_show($options)
         } else {
             $partner['title'] = '';
         }
-        $smartConfig             =& smartpartner_getModuleConfig();
+        $smartConfig             = smartpartner_getModuleConfig();
         $image_info              = smartpartner_imageResize($partnerObj->getImagePath(), $smartConfig['img_max_width'], $smartConfig['img_max_height']);
         $partner['img_attr']     = $image_info[3];
         $partner['extendedInfo'] = $partnerObj->extentedInfo();

@@ -36,10 +36,10 @@
                     <div>
                         <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$offer.partnerid}>">
                             <!--offer images turned off by ampersand      <{if $offer.image != ""}>
-                        <img src="<{$xoops_url}>/uploads/smartpartner/offer/<{$offer.image}>"  border="0" alt="<{$offer.title}>" <{$block.fadeImage}> /><br />
-                        <{/if}>--><{$offer.title}> </a><br/><br/ > <{if $block.insertBr != ""}>
-                            <br/>
-                            <br/>
+                        <img src="<{$xoops_url}>/uploads/smartpartner/offer/<{$offer.image}>"  border="0" alt="<{$offer.title}>" <{$block.fadeImage}> /><br>
+                        <{/if}>--><{$offer.title}> </a><br><br/ > <{if $block.insertBr != ""}>
+                            <br>
+                            <br>
                         <{/if}>
                     </div>
                 <{/foreach}>

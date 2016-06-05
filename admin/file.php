@@ -39,13 +39,13 @@ function editfile($showmenu = false, $fileid = 0, $id = 0)
             redirect_header('javascript:history.go(-1)', 1, _AM_SPARTNER_NOFILESELECTED);
         }
 
-        echo "<br />\n";
+        echo "<br>\n";
         echo "<span style='color: #2F5376; font-weight: bold; font-size: 16px; margin: 6px 6px 0 0; '>" . _AM_SPARTNER_FILE_EDITING . '</span>';
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_SPARTNER_FILE_EDITING_DSC . '</span>';
         smartpartner_collapsableBar('editfile', 'editfileicon', _AM_SPARTNER_FILE_INFORMATIONS);
     } else {
         // there's no parameter, so we're adding an item
-        $fileObj =& $smartPartnerFileHandler->create();
+        $fileObj = $smartPartnerFileHandler->create();
         $fileObj->setVar('id', $id);
 
         echo "<span style='color: #2F5376; font-weight: bold; font-size: 16px; margin: 6px 6px 0 0; '>" . _AM_SPARTNER_FILE_ADDING . '</span>';
@@ -201,7 +201,8 @@ switch ($op) {
             $fileid = isset($_GET['fileid']) ? (int)$_GET['fileid'] : 0;
 
             smartpartner_xoops_cp_header();
-            xoops_confirm(array('op' => 'del', 'fileid' => $fileObj->fileid(), 'confirm' => 1, 'name' => $fileObj->name()), 'file.php', _AM_SPARTNER_DELETETHISFILE . ' <br />' . $fileObj->name() . ' <br /> <br />', _AM_SPARTNER_DELETE);
+            xoops_confirm(array('op' => 'del', 'fileid' => $fileObj->fileid(), 'confirm' => 1, 'name' => $fileObj->name()), 'file.php',
+                          _AM_SPARTNER_DELETETHISFILE . ' <br>' . $fileObj->name() . ' <br> <br>', _AM_SPARTNER_DELETE);
             xoops_cp_footer();
         }
 
@@ -218,7 +219,7 @@ switch ($op) {
 
         global $xoopsUser, $xoopsUser, $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $xoopsModule;
 
-        echo "<br />\n";
+        echo "<br>\n";
 
         smartpartner_collapsableBar('toptable', 'toptableicon', _AM_SPARTNER_PUBLISHEDITEMS, _AM_SPARTNER_PUBLISHED_DSC);
 
@@ -241,13 +242,39 @@ switch ($op) {
             for ($i = 0; $i < $totalItemsOnPage; ++$i) {
                 $categoryObj =& $itemsObj[$i]->category();
 
-                $modify = "<a href='partner.php?op=mod&id=" . $itemsObj[$i]->id() . "'><img src='" . $pathIcon16 . '/edit.png' . "' title='" . _AM_SPARTNER_EDITITEM . "' alt='" . _AM_SPARTNER_EDITITEM . "' /></a>";
-                $delete = "<a href='partner.php?op=del&id=" . $itemsObj[$i]->id() . "'><img src='" . $pathIcon16 . '/delete.png' . "' title='" . _AM_SPARTNER_EDITITEM . "' alt='" . _AM_SPARTNER_DELETEITEM . "'/></a>";
+                $modify = "<a href='partner.php?op=mod&id="
+                          . $itemsObj[$i]->id()
+                          . "'><img src='"
+                          . $pathIcon16
+                          . '/edit.png'
+                          . "' title='"
+                          . _AM_SPARTNER_EDITITEM
+                          . "' alt='"
+                          . _AM_SPARTNER_EDITITEM
+                          . "' /></a>";
+                $delete = "<a href='partner.php?op=del&id="
+                          . $itemsObj[$i]->id()
+                          . "'><img src='"
+                          . $pathIcon16
+                          . '/delete.png'
+                          . "' title='"
+                          . _AM_SPARTNER_EDITITEM
+                          . "' alt='"
+                          . _AM_SPARTNER_DELETEITEM
+                          . "'/></a>";
 
                 echo '<tr>';
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->id() . '</td>';
                 echo "<td class='even' align='left'>" . $categoryObj->name() . '</td>';
-                echo "<td class='even' align='left'><a href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/partner.php?id=' . $itemsObj[$i]->id() . "'>" . $itemsObj[$i]->title() . '</a></td>';
+                echo "<td class='even' align='left'><a href='"
+                     . XOOPS_URL
+                     . '/modules/'
+                     . $xoopsModule->dirname()
+                     . '/partner.php?id='
+                     . $itemsObj[$i]->id()
+                     . "'>"
+                     . $itemsObj[$i]->title()
+                     . '</a></td>';
                 echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . '</td>';
                 echo "<td class='even' align='center'> $modify $delete </td>";
                 echo '</tr>';
@@ -259,7 +286,7 @@ switch ($op) {
             echo '</tr>';
         }
         echo "</table>\n";
-        echo "<br />\n";
+        echo "<br>\n";
 
         $pagenav = new XoopsPageNav($totalitems, $xoopsModuleConfig['perpage'], $startitem, 'startitem');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';

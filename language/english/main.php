@@ -49,7 +49,7 @@ define('_MD_SPARTNER_ERROR2', "<div style=\"text-align: center;\">Image size is 
 define('_MD_SPARTNER_ERROR3', "<div style=\"text-align: center;\">The image file doesn't exist. <a href='javascript:history.back(1)'>Try with another image</a></div>");
 define('_MD_SPARTNER_GOBACK', "<a href='javascript:history.back(1)'>Back</a>");
 define('_MD_SPARTNER_NEWPARTNER', '%s Partners Request');
-define('_MD_SPARTNER_SENDMAIL', "Request mail sent to the administrator.<br /><a href='index.php'>Return to index</a>");
+define('_MD_SPARTNER_SENDMAIL', "Request mail sent to the administrator.<br><a href='index.php'>Return to index</a>");
 define('_MD_SPARTNER_CATEGORY_EMPTY', 'This category is empty.');
 
 // Hack by marcan: More information on the SmartPartner module

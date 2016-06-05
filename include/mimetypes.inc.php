@@ -7,7 +7,7 @@
  *
  * This file is provided as an helper for objects who need to perform filename to mimetype translations.
  * Common types have been provided, but feel free to add your own one if you need it.
- * <br /><br />
+ * <br><br>
  * See the enclosed file LICENSE for licensing information.
  * If you did not receive this file, get it at http://www.fsf.org/copyleft/gpl.html
  *

@@ -36,9 +36,9 @@
                     <div>
                         <!--simply display text link by ampersand         <{if $partner.image != ""}>
                    <{if $partner.display_type == "full"}>
-                       <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$partner.id}>"><img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> /></a><br />
+                       <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$partner.id}>"><img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> /></a><br>
                    <{elseif $partner.display_type != "none"}>
-                       <img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> /><br/>
+                       <img src="<{$partner.image}>" <{$partner.img_attr}> border="0" alt="<{$partner.title}>" <{$block.fadeImage}> /><br>
                    <{/if}>
                <{/if}>
                <{if $partner.display_type == "full"}>
@@ -50,7 +50,7 @@
 
 
                <{if $block.insertBr != ""}>
-               <br /><br />
+               <br><br>
                <{/if}>-->
                         <a href="<{$xoops_url}>/modules/smartpartner/partner.php?id=<{$partner.id}>"><{$partner.title}></a>
                     </div>

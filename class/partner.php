@@ -64,7 +64,7 @@ class SmartpartnerPartner extends SmartObject
 
         if (isset($id)) {
             $smartPartnerPartnerHandler = new SmartpartnerPartnerHandler($this->db);
-            $partner                    =& $smartPartnerPartnerHandler->get($id);
+            $partner                    = $smartPartnerPartnerHandler->get($id);
             foreach ($partner->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
             }
@@ -754,10 +754,10 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param object $db reference to a xoops_db object
+     * @param XoopsDatabase $db reference to a xoops_db object
      */
 
-    public function __construct($db)
+    public function __construct(XoopsDatabase $db)
     {
         xoops_loadLanguage('common', 'smartpartner');
         parent::__construct($db, 'partner', 'id', 'title', false, 'smartpartner');
@@ -775,8 +775,8 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     public function getInstance(XoopsDatabase $db)
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new SmartpartnerCategoryHandler($db);
+        if (null === $instance) {
+            $instance = new static($db);
         }
 
         return $instance;
@@ -786,7 +786,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
      * @param  bool $isNew
      * @return SmartpartnerPartner
      */
-    public function &create($isNew = true)
+    public function create($isNew = true)
     {
         $partner = new SmartpartnerPartner();
         if ($isNew) {
@@ -799,12 +799,12 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * retrieve a Partner
      *
-     * @param  int $id partnerid of the user
-     * @param bool $as_object
-     * @param bool $debug
-     * @param bool $criteria
+     * @param  int  $id        partnerid of the user
+     * @param  bool $as_object
+     * @param  bool $debug
+     * @param  bool $criteria
      * @return mixed reference to the <a href='psi_element://SmartpartnerPartner'>SmartpartnerPartner</a> object, FALSE if failed
-     *                 object, FALSE if failed
+     *                         object, FALSE if failed
      */
     public function get($id, $as_object = true, $debug = false, $criteria = false)
     {
@@ -820,7 +820,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
                 $partner->assignVars($this->db->fetchArray($result));
                 global $smartpartnerPartnerCatLinkHandler;
                 if (!$smartpartnerPartnerCatLinkHandler) {
-                    $smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partnercatlink');
+                    $smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partner_cat_link');
                 }
                 $partner->setVar('categoryid', $smartpartnerPartnerCatLinkHandler->getParentIds($partner->getVar('id')));
 
@@ -835,14 +835,14 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * insert a new Partner in the database
      *
-     * @param XoopsObject $obj
-     * @param  bool       $force
-     * @param bool        $checkObject
-     * @param bool        $debug
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     * @param  XoopsObject $partner
+     * @param  bool        $force
+     * @param  bool        $checkObject
+     * @param  bool        $debug
+     * @return bool        FALSE if failed, TRUE if already present and unchanged or successful
      * @internal param XoopsObject $partner reference to the <a href='psi_element://SmartpartnerPartner'>SmartpartnerPartner</a> object object
      */
-    public function insert(XoopsObject $obj, $force = false, $checkObject = true, $debug = false)
+    public function insert(XoopsObject $partner, $force = false, $checkObject = true, $debug = false)
     {
         if (strtolower(get_class($partner)) != strtolower($this->className)) {
             return false;
@@ -861,12 +861,21 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         }
 
         if ($partner->isNew()) {
-            $sql = sprintf("INSERT INTO %s (id,  weight, hits, hits_page, url, image, image_url, title, datesub, summary, description, contact_name, contact_email, contact_phone, adress, `status`, `last_update`, `email_priv`, `phone_priv`, `adress_priv`, `showsummary`) VALUES ('', %u, %u, %u, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %u, %u, %u, %u, %u, %u)", $this->table, $weight, $hits, $hits_page, $this->db->quoteString($url), $this->db->quoteString($image), $this->db->quoteString($image_url), $this->db->quoteString($title), time(), $this->db->quoteString($summary), $this->db->quoteString($description), $this->db->quoteString($contact_name), $this->db->quoteString($contact_email), $this->db->quoteString($contact_phone), $this->db->quoteString($adress), $status, time(), $email_priv, $phone_priv, $adress_priv, $showsummary);
+            $sql =
+                sprintf('INSERT INTO %s (id,  weight, hits, hits_page, url, image, image_url, title, datesub, summary, description, contact_name, contact_email, contact_phone, adress, `status`, `last_update`, `email_priv`, `phone_priv`, `adress_priv`, `showsummary`) VALUES (null, %u, %u, %u, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %u, %u, %u, %u, %u, %u)',
+                        $this->table, $weight, $hits, $hits_page, $this->db->quoteString($url), $this->db->quoteString($image), $this->db->quoteString($image_url), $this->db->quoteString($title),
+                        time(), $this->db->quoteString($summary), $this->db->quoteString($description), $this->db->quoteString($contact_name), $this->db->quoteString($contact_email),
+                        $this->db->quoteString($contact_phone), $this->db->quoteString($adress), $status, time(), $email_priv, $phone_priv, $adress_priv, $showsummary);
         } else {
-            $sql = sprintf('UPDATE %s SET  weight = %u, hits = %u, hits_page = %u, url = %s, image = %s, image_url = %s, title = %s, datesub = %s, summary = %s, description = %s, contact_name = %s, contact_email = %s, contact_phone = %s, adress = %s, `status` = %u, `last_update` = %u, `email_priv` = %u, `phone_priv` = %u, `adress_priv` = %u, `showsummary` = %u WHERE id = %u', $this->table, $weight, $hits, $hits_page, $this->db->quoteString($url), $this->db->quoteString($image), $this->db->quoteString($image_url), $this->db->quoteString($title), $this->db->quoteString($datesub), $this->db->quoteString($summary), $this->db->quoteString($description), $this->db->quoteString($contact_name), $this->db->quoteString($contact_email), $this->db->quoteString($contact_phone), $this->db->quoteString($adress), $status, time(), $email_priv, $phone_priv, $adress_priv, $showsummary, $id);
+            $sql =
+                sprintf('UPDATE %s SET  weight = %u, hits = %u, hits_page = %u, url = %s, image = %s, image_url = %s, title = %s, datesub = %s, summary = %s, description = %s, contact_name = %s, contact_email = %s, contact_phone = %s, adress = %s, `status` = %u, `last_update` = %u, `email_priv` = %u, `phone_priv` = %u, `adress_priv` = %u, `showsummary` = %u WHERE id = %u',
+                        $this->table, $weight, $hits, $hits_page, $this->db->quoteString($url), $this->db->quoteString($image), $this->db->quoteString($image_url), $this->db->quoteString($title),
+                        $this->db->quoteString($datesub), $this->db->quoteString($summary), $this->db->quoteString($description), $this->db->quoteString($contact_name),
+                        $this->db->quoteString($contact_email), $this->db->quoteString($contact_phone), $this->db->quoteString($adress), $status, time(), $email_priv, $phone_priv, $adress_priv,
+                        $showsummary, $id);
         }
 
-        //echo "<br />" . $sql . "<br />";exit;
+        //echo "<br>" . $sql . "<br>";exit;
 
         if (false != $force) {
             $result = $this->db->queryF($sql);
@@ -954,15 +963,15 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * retrieve Partners from the database
      *
-     * @param  object $criteria  {@link CriteriaElement} conditions to be met
-     * @param  bool   $id_as_key use the partnerid as key for the array?
-     * @param bool    $as_object
-     * @param bool    $sql
-     * @param bool    $debug
-     * @return array array of <a href='psi_element://SmartpartnerPartner'>SmartpartnerPartner</a> objects
-     *                           objects
+     * @param  CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param  bool            $id_as_key use the partnerid as key for the array?
+     * @param  bool            $as_object
+     * @param  bool            $sql
+     * @param  bool            $debug
+     * @return array  array of <a href='psi_element://SmartpartnerPartner'>SmartpartnerPartner</a> objects
+     *                                    objects
      */
-    public function getObjects($criteria = null, $id_as_key = false, $as_object = true, $sql = false, $debug = false)//&getObjects($criteria = null, $id_as_key = false)
+    public function getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true, $sql = false, $debug = false)//&getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = array();
         $limit = $start = 0;
@@ -981,7 +990,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             }
         }
 
-        //echo "<br />" . $sql . "<br />";exit;
+        //echo "<br>" . $sql . "<br>";exit;
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
             return $ret;
@@ -992,7 +1001,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         }
         global $smartpartnerPartnerCatLinkHandler;
         if (!isset($smartpartnerPartnerCatLinkHandler)) {
-            $smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partnercatlink');
+            $smartpartnerPartnerCatLinkHandler = smartpartner_gethandler('partner_cat_link');
         }
         while ($myrow = $this->db->fetchArray($result)) {
             $partner = new SmartpartnerPartner();
@@ -1013,10 +1022,10 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * count Partners matching a condition
      *
-     * @param  object $criteria {@link CriteriaElement} to match
+     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
      * @return int    count of partners
      */
-    public function getCount($criteria = null)
+    public function getCount(CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -1026,7 +1035,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             }
         }
 
-        //echo "<br />" . $sql . "<br />";
+        //echo "<br>" . $sql . "<br>";
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
@@ -1110,7 +1119,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             }
         }
 
-        //echo "<br />$sql<br />";
+        //echo "<br>$sql<br>";
 
         $result = $this->db->query($sql, $limit, $offset);
         // If no records from db, return empty array
@@ -1203,7 +1212,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         if ($totalPartners > 0) {
             --$totalPartners;
             mt_srand((double)microtime() * 1000000);
-            $entrynumber = random_int(0, $totalPartners);
+            $entrynumber = mt_rand(0, $totalPartners);
             $partner     = $this->getPartners(1, $entrynumber, $status);
             if ($partner) {
                 $ret =& $partner[0];
@@ -1216,10 +1225,10 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * delete Partners matching a set of conditions
      *
-     * @param  object $criteria {@link CriteriaElement}
+     * @param  CriteriaElement $criteria {@link CriteriaElement}
      * @return bool   FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(CriteriaElement $criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('smartpartner_partner');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -1235,14 +1244,14 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
     /**
      * Change a value for a Partner with a certain criteria
      *
-     * @param string $fieldname  Name of the field
-     * @param string $fieldvalue Value to write
-     * @param object $criteria   {@link CriteriaElement}
+     * @param string          $fieldname  Name of the field
+     * @param string          $fieldvalue Value to write
+     * @param CriteriaElement $criteria   {@link CriteriaElement}
      *
-     * @param bool   $force
+     * @param  bool           $force
      * @return bool
      */
-    public function updateAll($fieldname, $fieldvalue, $criteria = null, $force = false)
+    public function updateAll($fieldname, $fieldvalue, CriteriaElement $criteria = null, $force = false)
     {
         $set_clause = is_numeric($fieldvalue) ? $fieldname . ' = ' . $fieldvalue : $fieldname . ' = ' . $this->db->quoteString($fieldvalue);
         $sql        = 'UPDATE ' . $this->db->prefix('smartpartner_partner') . ' SET ' . $set_clause;
@@ -1267,7 +1276,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
         $sql = 'SELECT id FROM ' . $this->db->prefix('smartpartner_partner') . ' ';
         $sql .= 'WHERE status=' . $status;
 
-        //echo "<br />" . $sql . "<br />";
+        //echo "<br>" . $sql . "<br>";
 
         $result = $this->db->query($sql);
 
@@ -1393,7 +1402,7 @@ class SmartpartnerPartnerHandler extends SmartPersistableObjectHandler
             }
         }
 
-        //echo "<br />" . $sql . "<br />";
+        //echo "<br>" . $sql . "<br>";
 
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {

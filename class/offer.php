@@ -84,7 +84,7 @@ class SmartpartnerOffer extends SmartObject
     public function getVar($key, $format = 's')
     {
         if ($format === 's' && in_array($key, array('partnerid', 'status'))) {
-//            return call_user_func(array($this, $key));
+            //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
 
@@ -175,9 +175,9 @@ class SmartpartnerOfferHandler extends SmartPersistableObjectHandler
 {
     /**
      * SmartpartnerOfferHandler constructor.
-     * @param object|XoopsDatabase $db
+     * @param XoopsDatabase $db
      */
-    public function __construct($db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'offer', 'offerid', 'title', false, 'smartpartner');
     }

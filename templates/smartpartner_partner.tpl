@@ -9,7 +9,8 @@
         <{elseif $partner.update_status == 'updated'}>
             <img src='<{$smartPartner_url}>assets/images/icon/updated_icon.gif'/>
         <{/if}> <{$partner.urllink}>
-        <img style='float: right; padding: 10px;' src='<{$partner.image}>' alt='<{$partner.clean_title}>' title='<{$partner.clean_title}>' align='right' border='5px'/></a><{$partner.title}> <{if $isAdmin}>
+        <img style='float: right; padding: 10px;' src='<{$partner.image}>' alt='<{$partner.clean_title}>' title='<{$partner.clean_title}>' align='right'
+             border='5px'/></a><{$partner.title}> <{if $isAdmin}>
             <a href="<{$smartPartner_url}>admin/partner.php?op=mod&id=<{$partner.id}>"><img src="<{xoModuleIcons16 edit.png}>" title="<{$lang_edit}>" alt="<{$lang_edit}>"/></a>
             <a href="<{$smartPartner_url}>admin/partner.php?op=del&id=<{$partner.id}>"><img src="<{xoModuleIcons16 delete.png}>" title="<{$lang_delete}>" alt="<{$lang_delete}>"/></a>
         <{/if}>
@@ -47,7 +48,7 @@
     <{/if}>
 </div>
 
-<br/><{if $partner.display_type == 'full' && ($partner.contact_name || $partner.contact_email || $partner.contact_phone || $partner.adress || $partner.url)}>
+<br><{if $partner.display_type == 'full' && ($partner.contact_name || $partner.contact_email || $partner.contact_phone || $partner.adress || $partner.url)}>
 <table width="100%">
     <tr>
         <th colspan="2"><b><{$lang_partner_informations}></b></th>
@@ -103,8 +104,8 @@
 <div><b><{$partview_msg}></b></div><{/if}>
 
 <{if $show_stats_block}>
-    <br/>
-    <br/>
+    <br>
+    <br>
     <div class="item" ;
     <div class="itemHead"><b><{$lang_stats}></b></div>
     <div class="itemInfo"><{$lang_page_been_seen}> <{$partner.hits_page}>
@@ -125,7 +126,9 @@
         <!-- BEGIN DYNAMIC BLOCK --> <{foreach item=file from=$partner.files}>
             <tr>
                 <td valign="middle" class="odd" align="left">
-                    <a href="<{$xoops_url}>/modules/smartpartner/visit.php?fileid=<{$file.fileid}>" target="_blank"><img src="<{$smartsection_url}>assets/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$lang_download_file}>"/>&nbsp;<b><{$file.name}></b></a>
+                    <a href="<{$xoops_url}>/modules/smartpartner/visit.php?fileid=<{$file.fileid}>" target="_blank"><img src="<{$smartsection_url}>assets/images/icon/file.gif"
+                                                                                                                         title="<{$lang_download_file}>"
+                                                                                                                         alt="<{$lang_download_file}>"/>&nbsp;<b><{$file.name}></b></a>
 
                     <div><{$file.description}></div>
                 <td valign="middle" class="odd" align="center"><{$file.datesub}></td>
@@ -134,7 +137,7 @@
         <{/foreach}> <!-- END DYNAMIC BLOCK -->
         <tr></tr>
     </table>
-    <br/>
+    <br>
 <{/if}>
 
 <{include file='db:smartpartner_footer.tpl'}>
