@@ -32,7 +32,7 @@ function b_recent_offers_show($options)
         $criteria->setOrder('DESC');
         $criteria->setLimit($options[2]);
 
-        $offersObj =& $offerHandler->getObjects($criteria);
+        $offersObj = $offerHandler->getObjects($criteria);
         $block     = array();
         if ($offersObj) {
             foreach ($offersObj as $offerObj) {

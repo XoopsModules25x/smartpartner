@@ -628,7 +628,7 @@ function smartpartner_upload_file($another = false, $withRedirect = true, $itemO
         } else {
             $crit = new Criteria('mime_user', 1);
         }
-        $mimetypes =& $hMime->getObjects($crit);
+        $mimetypes = $hMime->getObjects($crit);
         // TODO: display the available mimetypes to the user
         */
     if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
